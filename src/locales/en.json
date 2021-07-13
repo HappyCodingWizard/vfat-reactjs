@@ -1,0 +1,108 @@
+{
+  "PAGE": {
+    "LANDING": {
+      "HEADER": {
+        "LINKS": [
+          "HOME",
+          "RESOURCES",
+          "ROADMAP",
+          "BLOG"
+        ]
+      },
+      "TITLE": "Decentralized\nStablecoin Hub",
+      "DESCRIPTION": "Decentralized Stablecoin and DEX Liquidity Pool. Built on Cardano.",
+      "LAUNCH_PLATFORM": "LAUNCH PLATFORM",
+      "ARDANA": {
+        "QUESTION": "What is Ardana?",
+        "DESC": "Ardana is a decentralized financial hub and services provider built on Cardano that provides key DeFi primitives including a decentralized stablecoin exchange, stablecoins, a foreign exchange protocol and a multisignature protocol to power users and open finance applications on Cardano and beyond.",
+        "FEATURES": [
+          {
+            "TITLE": "Fully\nDecentralized",
+            "CONTENT": "Unbiased, multi-collateral backed pegged to the US Dollar and other currencies."
+          },
+          {
+            "TITLE": "Borrow\n& Lend",
+            "CONTENT": "Allow holders to borrow and lend the asset for use on exchanges like any other crypto asset."
+          },
+          {
+            "TITLE": "Store of\nValue",
+            "CONTENT": "Designed to function as a secure store of value that accrues value even in a volatile market."
+          },
+          {
+            "TITLE": "Powered by\nCardano",
+            "CONTENT": "Ardana stablecoins are designed to function as a store of value even in a volatile market."
+          }
+        ]
+      },
+      "DANASWAP": {
+        "TITLE": "Danaswap",
+        "CONTENT": "Ardana is a decentralized financial hub and services provider built on Cardano that provides key DeFi primitives including a decentralized stablecoin exchange, stablecoins, a foreign exchange protocol and a multisignature protocol to power users and open finance applications on Cardano and beyond."
+      },
+      "STABLECOIN": {
+        "TITLE": "Stablecoin",
+        "CONTENT": "The Ardana Dollar (dUSD) is a decentralized, unbiased, on-chain, collateral, backed cryptocurrency soft-pegged to the US dollar. dUSD is held in cryptocurrency wallets or within platforms, and is supported on Cardano.",
+        "FEATURES": [
+          {
+            "TITLE": "Ultra-low\nSlippage",
+            "CONTENT": "Unbiased, multi-collateral backed pegged to the US Dollar and other currencies."
+          },
+          {
+            "TITLE": "Savings\nAccount",
+            "CONTENT": "Allow holders to borrow and lend the asset for use on exchanges like any other crypto asset."
+          },
+          {
+            "TITLE": "Earn Market\nMaking Fees",
+            "CONTENT": "Allow holders to borrow and lend the asset for use on exchanges like any other crypto asset."
+          },
+          {
+            "TITLE": "Foreign\nExchange",
+            "CONTENT": "Unbiased, multi-collateral backed pegged to the US Dollar and other currencies."
+          },
+          {
+            "TITLE": "DANA Token\n\n",
+            "CONTENT": "Allow holders to borrow and lend the asset for use on exchanges like any other crypto asset."
+          },
+          {
+            "TITLE": "Governance\n\n",
+            "CONTENT": "Allow holders to borrow and lend the asset for use on exchanges like any other crypto asset."
+          }
+        ]
+      },
+      "TOP-NOTCH": {
+        "TITLE": "Ardana with our top-notch team",
+        "CONTENT": "Our team is led by accomplished entrepreneurs and top-notch engineers from well-known companies such as Apple, Microsoft, Barclays, Cardano, Emurgo, and IG Index."
+      },
+      "PARTNERS": "Partners",
+      "FOOTER": {
+        "RESOURCES": {
+          "LABEL": "Resources",
+          "LIST": [
+            "Whitepaper",
+            "Pitch Deek",
+            "Roadmap",
+            "Docs"
+          ]
+        },
+        "PRODUCTS": {
+          "LABEL": "Products",
+          "LIST": [
+            "DEX",
+            "Stablecoin",
+            "Multisig"
+          ]
+        },
+        "FOUNDATION": {
+          "LABEL": "Foundation",
+          "LIST": [
+            "Contact Us",
+            "Careers"
+          ]
+        },
+        "SOCIAL": {
+          "LABEL": "Our Socials",
+          "CONTENT": "Follow us to hear about Ardana updates and events"
+        }
+      }
+    }
+  }
+}

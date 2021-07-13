@@ -1,0 +1,13 @@
+export { tableData as HomeTableData } from "./home";
+export { tableData as AllTableData } from "./all";
+export { tableData as BSCTableData } from "./bsc";
+export { tableData as HecoTableData } from "./heco";
+export { tableData as PolygonTableData } from "./polygon";
+export { tableData as xDAITableData } from "./xdai";
+export { tableData as AvaxTableData } from "./avax";
+export { tableData as FantomTableData } from "./fantom";
+export { tableData as HarmonyTableData } from "./harmony";
+export { tableData as FuseTableData } from "./fuse";
+export { tableData as ThunderCoreTableData } from "./thundercore";
+export { tableData as OkexTableData } from "./okex";
+export { tableData as KucoinTableData } from "./kucoin";

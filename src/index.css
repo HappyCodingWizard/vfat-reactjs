@@ -1,0 +1,7 @@
+@import url('http://fonts.cdnfonts.com/css/mark-pro');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css");
+
+* {
+  transition: all .2s ease-in;
+  font-family: 'Mark Pro', sans-serif, Arial;
+}
