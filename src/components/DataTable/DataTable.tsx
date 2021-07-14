@@ -21,6 +21,7 @@ const useStyles = makeStyles(({ palette }) => ({
     captionSide: "top!important" as "top",
     textAlign: "center!important" as "center",
     fontSize: "32px!important" as "32px",
+    color: palette.text.primary + "!important",
   },
   poolLogo: {
     height: "30px",

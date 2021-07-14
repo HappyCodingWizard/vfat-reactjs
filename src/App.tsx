@@ -16,6 +16,7 @@ import store from "./state";
 import Layout from "layouts/Layout";
 
 import * as config from "config";
+import { PoolDetailInfoPage } from "pages";
 
 const ThemeProvider: React.FC = ({ children }) => {
   const darkMode = useIsDarkMode();
@@ -70,7 +71,8 @@ const App: React.FC = () => {
           })}
 
           <Route path="*">
-            <Redirect to="/" />
+            {/* <Redirect to="/" /> */}
+            <PoolDetailInfoPage />
           </Route>
         </Switch>
       </Layout>

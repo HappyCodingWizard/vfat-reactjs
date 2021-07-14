@@ -348,7 +348,7 @@ const _print_inline = function (message: any) {
   }
 };
 
-const _print = function (message: any) {
+export const _print = function (message: any) {
   if (!logger) {
     logger = document.getElementById("log");
   }
@@ -365,7 +365,7 @@ const _print = function (message: any) {
   }
 };
 
-const _print_bold = function (message: any) {
+export const _print_bold = function (message: any) {
   if (!logger) {
     logger = document.getElementById("log");
   }
@@ -3711,7 +3711,7 @@ async function loadSynthetixPool(
   return await printSynthetixPool(App, info);
 }
 
-async function loadMultipleSynthetixPools(
+export async function loadMultipleSynthetixPools(
   App: any,
   tokens: any,
   prices: any,

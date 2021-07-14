@@ -1,5 +1,6 @@
 export * from "./lang";
 export * from "./fetchLogo";
-export * from "./getAppTable";
+export * from "./getNetworkInfo";
+export * from "./getPoolInfo";
 export * from "./useDeviceWidth";
 export * from "./utils";
