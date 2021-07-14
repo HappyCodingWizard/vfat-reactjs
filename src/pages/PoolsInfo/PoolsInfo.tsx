@@ -1,23 +1,14 @@
 import React from "react";
 import cx from "classnames";
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Box, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useIsDarkMode } from "state/user/hooks";
 
-import { fetchLogo, getAppTable } from "hooks";
+import { getAppTable } from "hooks";
+import { DataTable } from "components";
 
 const useStyles = makeStyles(({ palette }) => ({
-  root: {
-  },
+  root: {},
   caption: {
     captionSide: "top!important" as "top",
     textAlign: "center!important" as "center",
@@ -39,42 +30,7 @@ const PoolsInfo: React.FC = () => {
 
   return (
     <Box className={cx(classes.root)}>
-      <TableContainer component={Box}>
-        <Table aria-label="simple table">
-          <caption className={cx(classes.caption)}>{title}</caption>
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Logo</TableCell>
-              {heading.map((column: any, i: any) => (
-                <TableCell key={i}>
-                  {column}
-                  &nbsp;
-                  <i className="fas fa-sort" />
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row: any, i: any) => (
-              <TableRow key={i}>
-                <TableCell align="center">
-                  <img
-                    className={cx(classes.poolLogo)}
-                    src={fetchLogo(row[0])}
-                    alt="pool-logo"
-                  />
-                </TableCell>
-                {row.map((cell: any, j: any) => (
-                  <TableCell
-                    key={j}
-                    dangerouslySetInnerHTML={{ __html: cell }}
-                  ></TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <DataTable logo title={title} heading={heading} rows={rows} />
     </Box>
   );
 };
