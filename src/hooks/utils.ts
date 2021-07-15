@@ -1,7 +1,7 @@
 import * as ethcall from "ethcall";
 import { ethers } from "ethers";
 
-import { getTWAP, getVTDtwap } from "./dollar_helper";
+import { getTWAP, getVTDtwap } from "../config/pools/dollar_helper";
 import * as BCData from "../config/BCData";
 
 const { ABI } = BCData;

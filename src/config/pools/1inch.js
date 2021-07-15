@@ -4,7 +4,7 @@ import {
   _print,
   _print_bold,
   loadMultipleSynthetixPools,
-} from "../../hooks/ethers_helper";
+} from "./ethers_helper";
 
 import { _1INCH_FARMING_ABI } from "../BCData";
 

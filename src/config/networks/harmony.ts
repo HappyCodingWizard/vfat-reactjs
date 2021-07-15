@@ -4,37 +4,37 @@ export const tableData = {
   "rows": [
     [
       "Mochi",
-      `<a href='mochi'>Various</a>`,
+      `<a href='harmony/mochi'>Various</a>`,
       "hMOCHI",
       "https://harmony.mochiswap.io"
     ],
     [
       "Viper",
-      `<a href='viper'>Various</a>`,
+      `<a href='harmony/viper'>Various</a>`,
       "VIPER",
       "https://viper.exchange"
     ],
     [
       "Open Swap",
-      `<a href='oswap'>Various</a>`,
+      `<a href='harmony/oswap'>Various</a>`,
       "oSWAP",
       "https://app.openswap.one"
     ],
     [
       "Loot",
-      `<a href='loot'>Various</a>`,
+      `<a href='harmony/loot'>Various</a>`,
       "LOOT",
       "https://lootswap.finance"
     ],
     [
       "Daikiri",
-      `<a href='daikiri'>Various</a>`,
+      `<a href='harmony/daikiri'>Various</a>`,
       "DAIKI",
       "https://daikiri.finance/#"
     ],
     [
       "Sushi",
-      `<a href='sushi'>Various</a>`,
+      `<a href='harmony/sushi'>Various</a>`,
       "SUSHI",
       "N/A"
     ]

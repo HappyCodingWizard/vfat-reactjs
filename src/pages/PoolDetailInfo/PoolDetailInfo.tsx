@@ -7,7 +7,7 @@ import { ImgButton, Typography } from "components";
 
 import IMG_connect_wallet from "assets/img/bsc.svg";
 import IMG_clear_browser from "assets/img/bsc.svg";
-import { consoleInit } from "../../hooks/ethers_helper";
+import { consoleInit } from "../../config/pools/ethers_helper";
 import { getPoolInfo } from "hooks";
 
 const useStyles = makeStyles(({ palette }) => ({

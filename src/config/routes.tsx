@@ -78,7 +78,7 @@ const routes = [
   },
   {
     label: "KUCOIN",
-    path: "/kucoin",
+    path: "/kcc",
     component: KucoinPage,
   },
   {

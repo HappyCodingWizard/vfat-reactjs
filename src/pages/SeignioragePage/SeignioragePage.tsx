@@ -14,7 +14,7 @@ import {
   formatMoney,
   init_ethers,
   lookUpTokenPrices,
-} from "../../hooks/ethers_helper";
+} from "../../config/pools/ethers_helper";
 import { getDollar, getBasisFork } from "../../hooks/utils";
 import { Dollars } from "../../config";
 import { Basis } from "../../config/BCData";

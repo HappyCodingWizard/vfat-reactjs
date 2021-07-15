@@ -29,7 +29,7 @@ export function getNetworkInfo(): any {
       return NetworksInfo.ThunderCoreTableData;
     case "/okex":
       return NetworksInfo.OkexTableData;
-    case "/kucoin":
+    case "/kcc":
       return NetworksInfo.KucoinTableData;
     default:
       return {};
