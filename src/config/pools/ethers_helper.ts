@@ -360,7 +360,7 @@ export const _print = function (message: any) {
           ? JSON.stringify(arguments[i], undefined, 2)
           : arguments[i]) + "<br />";
     } else {
-      logger.innerHTML += arguments[i] + "<br />";
+      logger.innerHTML += arguments[i] + ((arguments[i] === 'start' || arguments[i] === 'end') ? "" : "<br />");
     }
   }
 };
@@ -3544,6 +3544,7 @@ export async function printSynthetixPool(
   chain: any = "eth",
   customURLs: any = undefined
 ) {
+  _print('start');
   info.poolPrices.print_price(chain, 4, customURLs);
   _print(
     `${info.rewardTokenTicker} Per Week: ${info.weeklyRewards.toFixed(
@@ -3682,6 +3683,7 @@ export async function printSynthetixPool(
   }
   _print_link(`Exit`, exit);
   _print("");
+  _print('end');
 
   return {
     staked_tvl: info.poolPrices.staked_tvl,
@@ -3741,6 +3743,7 @@ export async function loadMultipleSynthetixPools(
       individualAPRs.push((p.userStaked * p.apr) / 100);
     }
   }
+  _print("")
   let totalAPR =
     totalUserStaked === 0
       ? 0

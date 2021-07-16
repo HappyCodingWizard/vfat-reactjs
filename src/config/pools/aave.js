@@ -169,6 +169,7 @@ async function loadAaveData(App, aTokenAddress, bTokenAddress, lendingAddress, a
 }
 
 async function printAaveData(data){
+  _print('start');
   _print_bold(`${data.uSymbol} ($${formatMoney(data.underlyingPrice)})`);
   _print(`Supplied : ${formatMoney(data.aTotalSupply)} ($${formatMoney(data.aTotalSupply * data.underlyingPrice)}) at ${data.supplyRate.toFixed(2)}% APR`)
   _print(`Borrowed : ${formatMoney(data.bTotalSupply)} ($${formatMoney(data.bTotalSupply * data.underlyingPrice)}) at ${data.borrowRate.toFixed(2)}% APR`)
@@ -184,4 +185,5 @@ async function printAaveData(data){
     _print(`Estimated Borrow earnings: Day ($${formatMoney(data.bUsdPerDay)}) Week ($${formatMoney(data.bUsdPerWeek)}) Year: ($${formatMoney(data.bUsdPerYear)})`);
   }
   _print("");
+  _print('end');
 }

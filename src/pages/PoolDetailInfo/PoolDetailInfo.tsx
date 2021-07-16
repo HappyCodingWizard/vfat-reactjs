@@ -10,6 +10,8 @@ import IMG_clear_browser from "assets/img/bsc.svg";
 import { consoleInit } from "../../config/pools/ethers_helper";
 import { getPoolInfo } from "hooks";
 
+import $ from "jquery";
+
 const useStyles = makeStyles(({ palette }) => ({
   root: {},
 }));
@@ -27,6 +29,17 @@ const PoolDetailInfo: React.FC = () => {
 
   useEffect(() => {
     main && consoleInit(main);
+
+    let timer = setInterval(() => {
+      $("#log").html($("#log").html().replace(/start/g, '<div class="pool-container"><div class="pool-board">'));
+      $("#log").html($("#log").html().replace(/end/g, "</div></div>"));
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(timer);
+      alert('cleared');
+    }, 30 * 1000)
+
     // eslint-disable-next-line
   }, []);
 
@@ -57,7 +70,7 @@ const PoolDetailInfo: React.FC = () => {
               />
             </Box>
           </Box>
-          <Box id="log"></Box>
+          <Box id="log" />
         </>
       )}
       {!main && (
