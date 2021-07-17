@@ -1,5 +1,4 @@
 import * as ethcall from "ethcall";
-
 import {
   getNewPricesAndTokens,
   getParameterCaseInsensitive,
@@ -73,6 +72,8 @@ export async function main() {
     const App = await init_ethers();
     _print(`Initialized ${App.YOUR_ADDRESS}\n`);
     _print("Reading smart contracts...\n");
+    
+    window.printLog();
 
     let prices = {};
     let tokens = {};
@@ -169,7 +170,6 @@ async function loadAaveData(App, aTokenAddress, bTokenAddress, lendingAddress, a
 }
 
 async function printAaveData(data){
-  _print('start');
   _print_bold(`${data.uSymbol} ($${formatMoney(data.underlyingPrice)})`);
   _print(`Supplied : ${formatMoney(data.aTotalSupply)} ($${formatMoney(data.aTotalSupply * data.underlyingPrice)}) at ${data.supplyRate.toFixed(2)}% APR`)
   _print(`Borrowed : ${formatMoney(data.bTotalSupply)} ($${formatMoney(data.bTotalSupply * data.underlyingPrice)}) at ${data.borrowRate.toFixed(2)}% APR`)
@@ -185,5 +185,6 @@ async function printAaveData(data){
     _print(`Estimated Borrow earnings: Day ($${formatMoney(data.bUsdPerDay)}) Week ($${formatMoney(data.bUsdPerWeek)}) Year: ($${formatMoney(data.bUsdPerYear)})`);
   }
   _print("");
-  _print('end');
+  
+  window.printStyledLog();
 }

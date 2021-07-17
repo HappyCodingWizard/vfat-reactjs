@@ -84,6 +84,7 @@ export async function main() {
   var prices = {}
 
   let p = await loadMultipleSynthetixPools(App, tokens, prices, Pools)
+  _print("");
   _print_bold(`Total staked: $${formatMoney(p.staked_tvl)}`)
   if (p.totalUserStaked > 0) {
     _print(

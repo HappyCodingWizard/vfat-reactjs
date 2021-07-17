@@ -143,6 +143,8 @@ const init_wallet = async function (callback: any) {
     hideLoading();
   }
   _print("");
+  
+  window.printLog!();
 };
 
 export function clearLocalStorage() {
@@ -317,10 +319,13 @@ export const toFixed = function (num: any, fixed: any) {
 };
 
 const start = function (f: any) {
-  f().catch((e: any) => {
+  f().then(() => {
+    window.printLog();
+  }).catch((e: any) => {
     // _print(e)
     console.error(e);
     _print("Oops something went wrong. Try refreshing the page.");
+    window.printLog();
   });
 };
 
@@ -399,7 +404,7 @@ export const _print_link = function (
       $(`#${uuid} > span`).text(message);
       break;
     default:
-      logger.innerHTML += '<a href="#" id=' + uuid + ">" + message + "</a>";
+      logger.innerHTML += '<a href="#" id=' + uuid + ">" + message + "</a>" + "<br />";
       break;
   }
 
@@ -3544,7 +3549,10 @@ export async function printSynthetixPool(
   chain: any = "eth",
   customURLs: any = undefined
 ) {
-  _print('start');
+
+  window.printLog();
+
+  // _print('start');
   info.poolPrices.print_price(chain, 4, customURLs);
   _print(
     `${info.rewardTokenTicker} Per Week: ${info.weeklyRewards.toFixed(
@@ -3683,7 +3691,8 @@ export async function printSynthetixPool(
   }
   _print_link(`Exit`, exit);
   _print("");
-  _print('end');
+  
+  window.printStyledLog();
 
   return {
     staked_tvl: info.poolPrices.staked_tvl,
@@ -3701,6 +3710,7 @@ export async function loadSynthetixPool(
   rewardTokenFunction: any,
   stakeTokenFunction: any
 ) {
+  window.printLog();
   const info = await loadSynthetixPoolInfo(
     App,
     tokens,
@@ -3719,6 +3729,7 @@ export async function loadMultipleSynthetixPools(
   prices: any,
   pools: any
 ) {
+  window.printLog();
   let totalStaked = 0,
     totalUserStaked = 0,
     individualAPRs = [];
