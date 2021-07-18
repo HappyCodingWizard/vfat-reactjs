@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import cx from "classnames";
-import { Box, useMediaQuery } from "@material-ui/core";
+import { Box, LinearProgress, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useIsDarkMode } from "state/user/hooks";
 import { ImgButton, Typography } from "components";
@@ -9,8 +9,6 @@ import IMG_connect_wallet from "assets/img/bsc.svg";
 import IMG_clear_browser from "assets/img/bsc.svg";
 import { consoleInit } from "../../config/pools/ethers_helper";
 import { getPoolInfo } from "hooks";
-
-import $ from "jquery";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {},
@@ -29,17 +27,6 @@ const PoolDetailInfo: React.FC = () => {
 
   useEffect(() => {
     main && consoleInit(main);
-
-    let timer = setInterval(() => {
-      $("#log").html($("#log").html().replace(/start/g, '<div class="pool-container"><div class="pool-board">'));
-      $("#log").html($("#log").html().replace(/end/g, "</div></div>"));
-    }, 100);
-
-    setTimeout(() => {
-      clearInterval(timer);
-      alert('cleared');
-    }, 30 * 1000)
-
     // eslint-disable-next-line
   }, []);
 
@@ -70,7 +57,11 @@ const PoolDetailInfo: React.FC = () => {
               />
             </Box>
           </Box>
-          <Box id="log" />
+          <Box id="logger" />
+          <Box id="log" display="none" />
+          <Box id="loader--1" textAlign="center">
+            <LinearProgress />
+          </Box>
         </>
       )}
       {!main && (
