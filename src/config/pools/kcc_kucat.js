@@ -33,7 +33,7 @@ export async function main() {
     _print(`Rewards start at block ${startBlock}\n`);
   } else {
     rewardsPerWeek = await Cat_CHEF.CatPerBlock() / 1e18
-      * 604800 * multiplier / 2.1;
+      * 604800 * multiplier / 3;
   }
 
   const tokens = {};

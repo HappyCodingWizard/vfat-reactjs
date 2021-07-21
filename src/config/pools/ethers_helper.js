@@ -109,7 +109,7 @@ export const init_wallet = async function (callback) {
       _print(`You are connected to ${networkNameFromId(connectedNetwork.chainId)}, please switch to ${targetNetwork.chainName} network`)
       if (window.ethereum && targetNetwork.chainId !== '0x1') {
         _print('')
-        _print_link("[SWITCH NETWORK]", () => switchNetwork(targetNetwork), "connect_wallet_button", false)
+        _print_link("Switch Network", () => switchNetwork(targetNetwork), "connect_wallet_button")
         // _print_inline(' -=- ');
         _print_link("[CLEAR BROWSER STORAGE]", clearLocalStorage, "clear_browser_storage");
       }
@@ -118,7 +118,7 @@ export const init_wallet = async function (callback) {
   } else {
     _print_link("Connect Wallet", () => connectWallet(callback), "connect_wallet_button");
     // _print_inline(' -=- ');
-    _print_link("Clear Browser Sto", clearLocalStorage, "clear_browser_storage");
+    _print_link("Clear Browser Storage", clearLocalStorage, "clear_browser_storage");
     hideLoading()
   }
   _print('')
@@ -128,6 +128,7 @@ export const init_wallet = async function (callback) {
 
 export function clearLocalStorage() {
   localStorage.clear()
+  window.location.reload();
 }
 
 export async function init_ethers() {
