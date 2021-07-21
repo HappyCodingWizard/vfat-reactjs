@@ -96,6 +96,8 @@ export const init_wallet = async function (callback) {
     let connectedNetwork = await provider.getNetwork()
     let targetNetworkId = parseInt(targetNetwork.chainId, 16)
 
+    console.log($("#connect_wallet_button"));
+
     if (connectedNetwork.chainId === targetNetworkId) {
       _print_link("Change Wallet", changeWallet, "connect_wallet_button");
       // _print_inline(' -=- ');
@@ -108,10 +110,12 @@ export const init_wallet = async function (callback) {
     } else {
       _print(`You are connected to ${networkNameFromId(connectedNetwork.chainId)}, please switch to ${targetNetwork.chainName} network`)
       if (window.ethereum && targetNetwork.chainId !== '0x1') {
+        console.log($("#connect_wallet_button"));
+        console.log($("#clear_browser_storage"));
         _print('')
-        _print_link("Switch Network", () => switchNetwork(targetNetwork), "connect_wallet_button")
+        _print_link("Switch Network", () => switchNetwork(targetNetwork), "connect_wallet_button");
         // _print_inline(' -=- ');
-        _print_link("[CLEAR BROWSER STORAGE]", clearLocalStorage, "clear_browser_storage");
+        _print_link("Clear Browser Storage", clearLocalStorage, "clear_browser_storage");
       }
       hideLoading()
     }
@@ -249,15 +253,12 @@ export const connectWallet = async function (callback) {
 
       start(callback)
     } else {
-
-      let button = document.getElementById('connect_wallet_button')
       $(document).off('click', '#connect_wallet_button')
-      button.remove()
 
       _print(`You are connected to ${networkNameFromId(connectedNetwork.chainId)}, please switch to ${targetNetwork.chainName} network`)
       if (window.ethereum && targetNetwork.chainId !== '0x1') {
         _print('')
-        _print_link("[SWITCH NETWORK]", () => switchNetwork(targetNetwork), "connect_wallet_button")
+        _print_link("Switch Wallet", () => switchNetwork(targetNetwork), "connect_wallet_button")
       }
       hideLoading()
     }
@@ -355,7 +356,7 @@ export const _print_bold = function (message) {
 }
 
 export const _print_link = function (message, onclickFunction, uuid = ID(), add_carriage = true) {
-    if (!logger) {
+  if (!logger) {
     logger = document.getElementById("log");
   }
 
