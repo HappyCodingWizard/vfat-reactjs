@@ -2016,6 +2016,28 @@ export function getBalancerPrices(tokens, prices, pool) {
   }
 }
 
+export function getBunicornPrices(tokens, prices, pool) {
+  const result = getBalancerPrices(tokens, prices, pool);
+  return {
+    ...result, ...{
+      print_price() {
+        let poolUrl = `https://www.bunicorn.exchange/#/liquidity/tokens/detail/${pool.address}`;
+
+        let lpPrice = result.price;
+        if (pool.poolType && pool.poolType === 'stable') {
+          const pairStr = pool.tokens.join('_');
+          poolUrl = `https://www.bunicorn.exchange/#/liquidity/stablecoins/detail/${pairStr.toLowerCase()}/${pool.address}`;
+          lpPrice = result.price / 2
+        }
+        _print(`<a href='${poolUrl}' target='_blank'>${result.stakeTokenTicker}</a> BPT Price: $${formatMoney(lpPrice)} TVL: $${formatMoney(result.tvl)}`);
+        result.prices.forEach((p, i) =>
+          _print(`${result.tokens[i].symbol} Price: $${formatMoney(p)}`)
+        );
+        _print(`Staked: ${pool.staked.toFixed(4)} ${result.stakeTokenTicker} ($${formatMoney(result.staked_tvl)})`);
+      },
+    }
+  }
+}
 export function getWrapPrices(tokens, prices, pool) {
   const wrappedToken = pool.token;
   if (wrappedToken.token0 != null) { //Uniswap

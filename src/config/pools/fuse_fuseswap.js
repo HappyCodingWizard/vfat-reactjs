@@ -45,6 +45,7 @@ export async function main() {
   let prices = await getFusePrices();
 
   let p = await loadFusePools(App, tokens, prices, Pools)
+  _print('\n');
   _print_bold(`Total staked: $${formatMoney(p.staked_tvl)}`);
   if (p.totalUserStaked > 0) {
     _print(`You are staking a total of $${formatMoney(p.totalUserStaked)} at an APR of ${(p.totalAPR * 100).toFixed(2)}%\n`);
