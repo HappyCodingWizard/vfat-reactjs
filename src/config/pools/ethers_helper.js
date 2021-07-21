@@ -96,7 +96,6 @@ export const init_wallet = async function (callback) {
     let connectedNetwork = await provider.getNetwork()
     let targetNetworkId = parseInt(targetNetwork.chainId, 16)
 
-    console.log($("#connect_wallet_button"));
 
     if (connectedNetwork.chainId === targetNetworkId) {
       _print_link("Change Wallet", changeWallet, "connect_wallet_button");
@@ -110,8 +109,6 @@ export const init_wallet = async function (callback) {
     } else {
       _print(`You are connected to ${networkNameFromId(connectedNetwork.chainId)}, please switch to ${targetNetwork.chainName} network`)
       if (window.ethereum && targetNetwork.chainId !== '0x1') {
-        console.log($("#connect_wallet_button"));
-        console.log($("#clear_browser_storage"));
         _print('')
         _print_link("Switch Network", () => switchNetwork(targetNetwork), "connect_wallet_button");
         // _print_inline(' -=- ');
