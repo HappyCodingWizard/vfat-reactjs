@@ -187,6 +187,42 @@ export const tableData = {
       `<a href='fantom/uniron'>Various</a>`,
       "UNIRON",
       "https://www.uniron.finance"
+    ],
+    [
+      "Shade",
+      `<a href='shade'>Various</a>`,
+      "SHADE",
+      "https://shade.cash"
+    ],
+    [
+      "Butt",
+      `<a href='butt'>Various</a>`,
+      "BUTT",
+      "https://www.buttcoincrypto.com"
+    ],
+    [
+      "Grim",
+      `<a href='grim'>Various</a>`,
+      "Various",
+      "https://app.grim.finance"
+    ],
+    [
+      "Ryu Inu",
+      `<a href='ryuinu'>Various</a>`,
+      "RYUINU",
+      "https://ftm.ryuinu.finance"
+    ],
+    [
+      "Knight",
+      `<a href='knight'>Various</a>`,
+      "KF",
+      "https://www.knight-finance.xyz"
+    ],
+    [
+      "beHODL",
+      `<a href='behodl'>Various</a>`,
+      "beHODL",
+      "N/A"
     ]
   ]
 }
