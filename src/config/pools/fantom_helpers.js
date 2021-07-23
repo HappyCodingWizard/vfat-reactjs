@@ -460,6 +460,7 @@ export async function loadFantomChefContract(App, tokens, prices, chef, chefAddr
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }
@@ -530,6 +531,7 @@ export async function loadSteakChefContract(App, tokens, prices, chef, chefAddre
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }

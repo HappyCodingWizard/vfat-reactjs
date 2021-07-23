@@ -108,6 +108,7 @@ async function loadSwirlChefContract0(App, tokens, prices, chef, chefAddress, ch
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }
@@ -180,6 +181,7 @@ async function loadSwirlChefContract1(App, tokens, prices, chef, chefAddress, ch
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }

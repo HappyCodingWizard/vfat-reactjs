@@ -94,6 +94,7 @@ async function loadChefContract(App, tokens, prices, chef, chefAddress, chefAbi,
         , totalStaked = 0
         , averageApr = 0;
     for (const a of aprs) {
+        if (!a) continue;
         if (!isNaN(a.totalStakedUsd)) {
             totalStaked += a.totalStakedUsd;
         }

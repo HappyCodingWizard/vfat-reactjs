@@ -493,6 +493,7 @@ export async function loadMaticChefContract(App, tokens, prices, chef, chefAddre
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }

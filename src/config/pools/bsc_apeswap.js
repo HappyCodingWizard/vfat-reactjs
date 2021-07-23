@@ -92,6 +92,7 @@ async function loadSoulChefContract(App, tokens, prices, chef, chefAddress, chef
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }

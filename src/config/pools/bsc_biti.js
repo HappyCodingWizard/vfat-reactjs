@@ -90,6 +90,7 @@ async function loadBscBitiChefContract(App, tokens, prices, chef, chefAddress, c
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }

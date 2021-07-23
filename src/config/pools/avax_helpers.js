@@ -388,6 +388,7 @@ export async function loadAvaxChefContract(App, tokens, prices, chef, chefAddres
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (!isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }

@@ -80,6 +80,7 @@ async function loadChefBaoContract(App, chef, chefAddress, chefAbi, rewardTokenT
   }
   let totalUserStaked = 0, totalStaked = 0, averageApr = 0;
   for (const a of aprs) {
+    if (!a) continue;
     if (a && !isNaN(a.totalStakedUsd)) {
       totalStaked += a.totalStakedUsd;
     }
