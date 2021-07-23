@@ -17,6 +17,7 @@ export const tableData = {
       ["Birdy       ",`<a href="avax/birdy"      >Various</a>`,"BIRD     ","https://birdy.finance"],
       ["Canary      ",`<a href="avax/canary"     >Various</a>`,"CNR      ","https://app.canary.exchange"],
       ["Avalaunch   ",`<a href="avax/avalaunch"  >Various</a>`,"XAVA     ","https://farm.avalaunch.app"],
-      ["Avme        ",`<a href="avax/avme"       >Various</a>`,"AVME     ","https://avme.io"]
+      ["Avme        ",`<a href="avax/avme"       >Various</a>`,"AVME     ","https://avme.io"],
+      ["TraderJoe   ",`<a href="avax/traderjoe"  >Various</a>`,"JOE      ","https://www.traderjoexyz.com"]
     ]
 }
