@@ -318,7 +318,6 @@ export const _print_inline = function (message) {
       logger.innerHTML += arguments[i]
     }
   }
-  window.printLog();
 }
 
 export const _print = function (message) {
@@ -336,8 +335,6 @@ export const _print = function (message) {
       logger.innerHTML += arguments[i] + "<br />";
     }
   }
-
-  window.printLog();
 }
 
 export const _print_bold = function (message) {
@@ -353,7 +350,6 @@ export const _print_bold = function (message) {
       logger.innerHTML += '<b>' + arguments[i] + '</b><br />'
     }
   }
-  window.printLog();
 }
 
 export const _print_link = function (message, onclickFunction, uuid = ID(), add_carriage = true) {
@@ -376,7 +372,6 @@ export const _print_link = function (message, onclickFunction, uuid = ID(), add_
     onclickFunction();
     return false;
   });
-  window.printLog();
 }
 
 export const _print_href = function (message, href) {
@@ -387,7 +382,6 @@ export const _print_href = function (message, href) {
   const uuid = ID()
 
   logger.innerHTML += `<a href="${href}" target="_blank" id="${uuid}">${message}</a><br />`
-  window.printLog();
 }
 
 export const sleep = function (milliseconds) {
