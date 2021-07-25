@@ -90,6 +90,7 @@ export const init_wallet = async function (callback) {
     await connectWallet(() => { })
   }
 
+
   if (walletProvider) {
 
     let provider = new ethers.providers.Web3Provider(walletProvider)
@@ -255,7 +256,7 @@ export const connectWallet = async function (callback) {
       _print(`You are connected to ${networkNameFromId(connectedNetwork.chainId)}, please switch to ${targetNetwork.chainName} network`)
       if (window.ethereum && targetNetwork.chainId !== '0x1') {
         _print('')
-        _print_link("Switch Wallet", () => switchNetwork(targetNetwork), "connect_wallet_button")
+        _print_link("Switch Network", () => switchNetwork(targetNetwork), "connect_wallet_button")
       }
       hideLoading()
     }
@@ -363,7 +364,10 @@ export const _print_link = function (message, onclickFunction, uuid = ID(), add_
       $(`#${uuid} > span`).text(message);
       break;
     default:
-      logger.innerHTML += '<a href="#" id=' + uuid + ">" + message + "</a><br />";
+      logger.innerHTML += '<a href="#" id=' + uuid + ">" + message + "</a>";
+      if (add_carriage) {
+        logger.innerHTML += '<br />'
+      }
       break;
   }
 
@@ -1762,15 +1766,6 @@ export function getUniPrices(tokens, prices, pool, chain = "eth") {
         _print(`${t0.symbol} Price: $${displayPrice(p0)}`);
         _print(`${t1.symbol} Price: $${displayPrice(p1)}`);
         _print(`Staked: ${pool.staked.toFixed(decimals ?? 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
-
-        // let grid = jQuery('<div/>', {
-        //   class: "row"
-        // }).append(`<div class="col-6 text-end">A:</div>`)
-        //   .append(`<div class="col-6 text-start">B</div>`)
-        //   .append(`<div class="col-6 text-end">A:</div>`)
-        //   .append(`<div class="col-6 text-start">B</div>`)
-
-        // $('#log').append(grid)
       }
     },
     pair_links(chain = "eth", decimals, customURLs) {

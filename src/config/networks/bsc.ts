@@ -432,5 +432,11 @@ export const tableData = {
     ["Area51Defi          ", `<a href="bsc/area51defi"    >Various</a>`,"AFOD             ","https://area51defi.com"],
     ["PiranhaSwap         ", `<a href="bsc/piranhaswap"   >Various</a>`,"PIRANHA          ","https://piranhaswap.finance"],
     ["Robobuddy           ", `<a href="bsc/robobuddy"     >Various</a>`,"ROBO             ","https://robobuddy.finance"],
-    ["Astro               ", `<a href="bsc/astro"         >Various</a>`,"ASTRO            ","https://astroprotocol.com"]
+    ["Astro               ", `<a href="bsc/astro"         >Various</a>`,"ASTRO            ","https://astroprotocol.com"],
+    ["TwilightFinance     ", `<a href="bsc/twilightfinance">Various</a>`,"TWIL            ","https://twilightfinance.org"],
+    ["Badger              ", `<a href="bsc/badger"        >Various</a>`,"BADGER           ","https://app.badger.finance"],
+    ["BambooDeFi          ", `<a href="bsc/bamboodefi"    >Various</a>`,"BAMBOO           ","https://www.bamboodefi.com"],
+    ["GoldRush            ", `<a href="bsc/goldrush"      >Various</a>`,"GNT              ","https://goldrush.farm"],
+    ["MacaronSwap         ", `<a href="bsc/macaron"       >Various</a>`,"MCRN             ","https://macaronswap.finance"],
+    ["PlanetSwap          ", `<a href="bsc/planetswap"    >Various</a>`,"MERCURY          ","https://planetswap.app"],
   ]}

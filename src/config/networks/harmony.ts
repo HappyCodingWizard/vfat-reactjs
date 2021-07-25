@@ -37,6 +37,12 @@ export const tableData = {
       `<a href='harmony/sushi'>Various</a>`,
       "SUSHI",
       "N/A"
+    ],
+    [
+      "Piggybank",
+      `<a href='piggybank'>Various</a>`,
+      "COINK",
+      "https://piggybank.farm/#/"
     ]
   ]
 }

@@ -2,7 +2,6 @@ export const tableData = {
   title: 'POLYGON Network',
   heading: ['Pool Provider', 'LP', 'Reward Tokens', 'INFO'],
   rows: [
-    ['EuroBallz Finance               ', `<a href="polygon/euroballz"           >Various</a>`, 'BALLZ        ', 'https://euroballz.finance'],
     ['Kyber DMM           ', `<a href="polygon/kyber"           >Various</a>`, 'KNC          ', 'https://dmm.exchange'],
     [
       'Quickswap           ',
@@ -17,7 +16,7 @@ export const tableData = {
       'https://swap.cometh.io/#/stake',
     ],
     ['Dark                ', `<a href="polygon/dark"            >Various</a>`, 'DB           ', 'https://www.dark.build'],
-    ['Smartdex            ', `<a href="polygon/smartdex"        >Various</a>`, 'NIOX         ', 'https://swap.smartdex.app'],
+    ['Smartdex *          ', `<a href="polygon/smartdex"        >Various</a>`, 'NIOX         ', 'https://swap.smartdex.app'],
     ['Elk                 ', `<a href="polygon/elk"             >Various</a>`, 'ELK          ', 'https://app.elk.finance'],
     ['Polywhale           ', `<a href="polygon/polywhale"       >Various</a>`, 'KRILL        ', 'https://polywhale.finance'],
     ['Aave                ', `<a href="polygon/aave"            >Various</a>`, 'MATIC        ', 'https://aave.com'],
@@ -85,7 +84,7 @@ export const tableData = {
     ['Gemstones Finance   ', `<a href="polygon/gemstonesfinance">Various</a>`, 'GMS          ', 'https://gemstones.finance'],
     ['Polypanda           ', `<a href="polygon/polypanda"       >Various</a>`, 'BAMBOO       ', 'https://polypanda.finance'],
     [
-      'Dfyn                ',
+      'Dfyn *              ',
       `<a href="polygon/dfyn"            >Various</a>`,
       'DFYN         ',
       'https://exchange.dfyn.network',
@@ -138,7 +137,7 @@ export const tableData = {
     ],
     ['Moonwolf            ', `<a href="polygon/moonwolf"        >Various</a>`, 'MOON         ', 'https://www.moonwolf.io'],
     [
-      'Iron                ',
+      'Iron *              ',
       `<a href="polygon/iron"            >Various</a>`,
       'TITAN        ',
       'https://polygon.iron.finance',
@@ -199,7 +198,7 @@ export const tableData = {
       'DINO         ',
       'https://dinosaurfinance.vercel.app',
     ],
-    ['Magic               ', `<a href="polygon/magic"           >Various</a>`, 'DRAX/DMAGIC  ', 'https://defimagic.io'],
+    ['Magic               ', `<a href="polygon/magic"           >Various</a>`, 'DRAX/NIGHT/DMAGIC  ', 'https://defimagic.io'],
     ['Polymouse           ', `<a href="polygon/polymouse"       >Various</a>`, 'MICE         ', 'https://polymouse.finance'],
     ['PolyTiger           ', `<a href="polygon/polytiger"       >Various</a>`, 'TIGON        ', 'https://www.polytiger.com'],
     ['Polydeer            ', `<a href="polygon/polydeer"        >Various</a>`, 'DEER         ', 'https://polydeer.finance'],
@@ -249,7 +248,7 @@ export const tableData = {
     ['PolyZero            ', `<a href="polygon/polyzero"        >Various</a>`, 'ZERO         ', ''],
     ['PolyMax             ', `<a href="polygon/polymax"         >Various</a>`, 'MAX          ', 'https://polymax.club'],
     ['PolySnowFarm        ', `<a href="polygon/polysnowfarm"    >Various</a>`, 'SNOW         ', 'https://polysnow.farm'],
-    ['Polyyeld            ', `<a href="polygon/polyyeld"        >Various</a>`, 'YELD         ', 'https://polyyeld.finance'],
+    ['Polyyeld *          ', `<a href="polygon/polyyeld"        >Various</a>`, 'YELD/xYELD   ', 'https://polyyeld.finance'],
     ['Polysa              ', `<a href="polygon/polysa"          >Various</a>`, 'DUFF         ', 'https://www.polysa.finance'],
     [
       'Wault               ',
@@ -269,7 +268,7 @@ export const tableData = {
       'TREAT        ',
       'https://www.polywoof.finance',
     ],
-    ['SafeDollar          ', `<a href="polygon/safedollar"      >Various</a>`, 'SDS/SDO      ', 'https://app.safedollar.fi'],
+    ['SafeDollar *        ', `<a href="polygon/safedollar"      >Various</a>`, 'SDS/SDO      ', 'https://app.safedollar.fi'],
     [
       'Cosmic              ',
       `<a href="polygon/cosmic"          >Various</a>`,
@@ -408,8 +407,11 @@ export const tableData = {
     ['BatSwap             ', `<a href="polygon/batswap"         >Various</a>`, 'BATSWAP      ', 'https://batswap.finance'],
     ['ChickenFarms        ', `<a href="polygon/chickenfarms"    >Various</a>`, 'CHICKEN      ', 'https://chickenfarms.live'],
     ['Polyfrenchie        ', `<a href="polygon/Polyfrenchie"    >Various</a>`, 'pFRE         ', 'https://polyfrenchie.com/?network=polygon'],
+    ['ChickenFarms        ', `<a href="polygon/chickenfarms"    >Various</a>`, 'CHICKEN      ', 'https://chickenfarms.live'],
     ['Polycuppa           ', `<a href="polygon/polycuppa"       >Various</a>`, 'CUPPA        ', 'https://polycuppa.finance'],
     ['Polymax - Berkshire ', `<a href="polygon/polymax_berkshire">Various</a>`, 'BERKSHIRE   ', 'https://berkshire.polymax.club'],
+    ['Platinum Finance    ', `<a href="polygon/platinumfinance" >Various</a>`, 'PLATIN       ', 'https://platinumfinance.app'],
+    ['Iridium Finance     ', `<a href="polygon/iridiumfinance"  >Various</a>`, 'IRIDIUM      ', 'https://iridiumfinance.app/'],
     ['Platinum Finance    ', `<a href="polygon/platinumfinance" >Various</a>`, 'PLATIN       ', 'https://platinumfinance.app'],
     ['DuckFarm            ', `<a href="polygon/duckfarm"        >Various</a>`, 'DUCK         ', 'https://duckfarm.one'],
     ['PolyCow             ', `<a href="polygon/polycow"         >Various</a>`, 'MILK         ', 'https://polycow.finance'],
@@ -454,6 +456,10 @@ export const tableData = {
     ['BCharity            ', `<a href="polygon/bcharity"        >Various</a>`, 'GIVE         ', 'https://bcharity.net'],
     ['BlackSwan           ', `<a href="polygon/blackswan"       >Various</a>`, 'SWAN         ', 'https://app.blackswan.network'],
     ['PolyBass            ', `<a href="polygon/polybass"        >Various</a>`, 'BASS         ', 'https://polybass.farm'],
-    ['PolyBakerySwap      ', `<a href="polygon/polybakeryswap"  >Various</a>`, 'BAKE         ', 'https://www.bakery-swap.finance']
+    ['PolyBakerySwap      ', `<a href="polygon/polybakeryswap"  >Various</a>`, 'BAKE         ', 'https://www.bakery-swap.finance'],
+    ['PolyTail            ', `<a href="polygon/polytail"        >Various</a>`, 'POLYTAIL     ', 'https://polytail.farm'],
+    ['PearZap             ', `<a href="polygon/pearzap"         >Various</a>`, 'PEAR         ', 'https://pearzap.com'],
+    ['Astrofarms - Neptune', `<a href="polygon/astrofarmsneptune">Various</a>`,'NEPTUNE      ', 'https://neptune.astrofarms.finance'],
+    ['Cygnus Finance      ', `<a href="polygon/cygnusfinance"   >Various</a>`, 'CYGNUS       ', 'https://www.cygnusdefi.com'],
   ],
 }

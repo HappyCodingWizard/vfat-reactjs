@@ -1,5 +1,6 @@
 import $ from "jquery";
 import { ethers } from "ethers";
+import AsciiTable from "config/ascii-table";
 import {
   _print,
   getToken,
@@ -95,34 +96,32 @@ export async function printChefContractPoolsTable(title, App, chef, chefAddress,
           _build_link(`${i}`, () => {
             document.getElementById("pool-details-modal").style.display = 'block'
 
-            // let table = new AsciiTable();
+            let table = new AsciiTable();
 
             // let tableData = {
             //   "title": pool.pair_link,
             //   "rows": []
             // }
-            // table.addRow(["Pair", pool.pair_link])
-            // table.addRow(["TVL", pool.tvl])
+            table.addRow(["Pair", pool.pair_link])
+            table.addRow(["TVL", pool.tvl])
 
-            // if (pool.add_liquidity_link) {
-            //   table.addRow(["Add Liquidity", pool.add_liquidity_link])
-            //   table.addRow(["Remove Liquidity", pool.remove_liquidity_link])
-            //   table.addRow(["Swap", pool.swap_link])
-            //   table.addRow([`${pool.token0} Price`, pool.price0])
-            //   table.addRow([`${pool.token1} Price`, pool.price1])
-            // }
+            if (pool.add_liquidity_link) {
+              table.addRow(["Add Liquidity", pool.add_liquidity_link])
+              table.addRow(["Remove Liquidity", pool.remove_liquidity_link])
+              table.addRow(["Swap", pool.swap_link])
+              table.addRow([`${pool.token0} Price`, pool.price0])
+              table.addRow([`${pool.token1} Price`, pool.price1])
+            }
 
-            // table.addRow([`${pool.reward_token} Weekly rewards`, pool.weekly_rewards])
-            // table.addRow(["Total staked", `${pool.total_staked} (${pool.total_staked_dollars})`])
-            // table.addRow(["My stake", pool.user_stake])
-            // table.addRow(["DPR", pool.dpr])
-            // table.addRow(["WPR", pool.wpr])
-            // table.addRow(["APR", pool.apr])
-            // table.addRow(["Stake", pool.stake])
-            // table.addRow(["Unstake", pool.unstake])
-            // table.addRow(["Claim", pool.claim])
-
-            let table = "pool-details-content table!!!!!!!!!";
+            table.addRow([`${pool.reward_token} Weekly rewards`, pool.weekly_rewards])
+            table.addRow(["Total staked", `${pool.total_staked} (${pool.total_staked_dollars})`])
+            table.addRow(["My stake", pool.user_stake])
+            table.addRow(["DPR", pool.dpr])
+            table.addRow(["WPR", pool.wpr])
+            table.addRow(["APR", pool.apr])
+            table.addRow(["Stake", pool.stake])
+            table.addRow(["Unstake", pool.unstake])
+            table.addRow(["Claim", pool.claim])
 
             document.getElementById('pool-details-content').innerHTML += table + '<br />';
 
@@ -139,14 +138,12 @@ export async function printChefContractPoolsTable(title, App, chef, chefAddress,
     }
   }
 
-  // let table = new AsciiTable().fromJSON(tableData);
-  // table
-  //   .setAlign(0, AsciiTable.RIGHT)
-  //   .setAlign(2, AsciiTable.RIGHT)
-  //   .setAlign(3, AsciiTable.RIGHT)
-  //   .setAlign(5, AsciiTable.RIGHT)
-
-  let table = "new AsciiTable!!!!!!!!!!!!";
+  let table = new AsciiTable().fromJSON(tableData);
+  table
+    .setAlign(0, AsciiTable.RIGHT)
+    .setAlign(2, AsciiTable.RIGHT)
+    .setAlign(3, AsciiTable.RIGHT)
+    .setAlign(5, AsciiTable.RIGHT)
 
   document.getElementById('log').innerHTML += table + '<br />';
 
