@@ -75,9 +75,10 @@ async function loadBagContract(App, chef, chefAddress, chefAbi, rewardTokenTicke
     }
   }
 
-  // const newTokens = await Promise.all(tokenAddresses.map(async (address) => {
-  //   tokens[address] = await getToken(App, address, chefAddress);
-  // }));
+  // eslint-disable-next-line no-unused-vars
+  const newTokens = await Promise.all(tokenAddresses.map(async (address) => {
+      tokens[address] = await getToken(App, address, chefAddress);
+  }));
 
   if (deathPoolIndices) {   //load prices for the deathpool assets
     deathPoolIndices.map(i => poolInfos[i])
