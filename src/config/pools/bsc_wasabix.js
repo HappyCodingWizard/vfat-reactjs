@@ -168,6 +168,7 @@ function printWasabixContractLinks(App, wasabixAbi, wasabixAddr, poolIndex, pool
   const withdraw = async function () {
     return wasabixContract_withdraw(wasabixAbi, wasabixAddr, poolIndex, App)
   }
+  // eslint-disable-next-line no-unused-vars
   const claim = async function () {
     return wasabixContract_claim(wasabixAbi, wasabixAddr, poolIndex, App)
   }

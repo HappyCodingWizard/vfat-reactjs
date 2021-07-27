@@ -1706,7 +1706,9 @@ export const NETWORKS = {
       "decimals": 18
     },
     "rpcUrls": [
+      // eslint-disable-next-line no-template-curly-in-string
       "https://mainnet.infura.io/v3/${INFURA_API_KEY}",
+      // eslint-disable-next-line no-template-curly-in-string
       "wss://mainnet.infura.io/ws/v3/${INFURA_API_KEY}",
       "https://api.mycryptoapi.com/eth",
       "https://cloudflare-eth.com"

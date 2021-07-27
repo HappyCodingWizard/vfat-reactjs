@@ -305,7 +305,7 @@ const BASE_ERC20_ABI = [
     }
 ]
 
-const POOL_ABI = [
+export const POOL_ABI = [
     {
         "inputs": [],
         "payable": false,
@@ -1664,6 +1664,7 @@ const token_unstake = async function (farmAbi, farmAddress, App, pendingRewardsF
     const FARM_CONTRACT = new ethers.Contract(farmAddress, farmAbi, signer)
 
     const currentStakedAmount = (await FARM_CONTRACT.userInfo(App.YOUR_ADDRESS)).amount
+    // eslint-disable-next-line no-unused-vars
     const earnedTokenAmount = await FARM_CONTRACT.callStatic[pendingRewardsFunction](App.YOUR_ADDRESS) / 1e18
 
     showLoading()

@@ -197,18 +197,19 @@ const convContract_unstake = async function (chefAbi, chefAddress, poolIndex, Ap
   const CHEF_CONTRACT = new ethers.Contract(chefAddress, chefAbi, signer)
 
   const currentStakedAmount = (await CHEF_CONTRACT.userInfo(poolIndex, App.YOUR_ADDRESS)).amount
-  // const earnedTokenAmount = pendingRewardTokens
+  // eslint-disable-next-line no-undef
+  const earnedTokenAmount = pendingRewardTokens
 
-  // if (earnedTokenAmount > 0) {
-  //   showLoading()
-  //   CHEF_CONTRACT.withdraw(poolIndex, currentStakedAmount, { gasLimit: 500000 })
-  //     .then(function (t) {
-  //       return App.provider.waitForTransaction(t.hash)
-  //     })
-  //     .catch(function () {
-  //       hideLoading()
-  //     })
-  // }
+  if (earnedTokenAmount > 0) {
+    showLoading()
+    CHEF_CONTRACT.withdraw(poolIndex, currentStakedAmount, { gasLimit: 500000 })
+      .then(function (t) {
+        return App.provider.waitForTransaction(t.hash)
+      })
+      .catch(function () {
+        hideLoading()
+      })
+  }
 }
 
 const convContract_claim = async function (chefAbi, chefAddress, poolIndex, App,
@@ -217,24 +218,25 @@ const convContract_claim = async function (chefAbi, chefAddress, poolIndex, App,
 
   const CHEF_CONTRACT = new ethers.Contract(chefAddress, chefAbi, signer)
 
-  // const earnedTokenAmount = pendingRewardTokens
+  // eslint-disable-next-line no-undef
+  const earnedTokenAmount = pendingRewardTokens
 
-  // if (earnedTokenAmount > 0) {
-  //   showLoading()
-  //   if (claimFunction) {
-  //     claimFunction(poolIndex, { gasLimit: 500000 })
-  //       .then(function (t) {
-  //         return App.provider.waitForTransaction(t.hash)
-  //       })
-  //   }
-  //   else {
-  //     CHEF_CONTRACT.deposit(poolIndex, 0, { gasLimit: 500000 })
-  //       .then(function (t) {
-  //         return App.provider.waitForTransaction(t.hash)
-  //       })
-  //       .catch(function () {
-  //         hideLoading()
-  //       })
-  //   }
-  // }
+  if (earnedTokenAmount > 0) {
+    showLoading()
+    if (claimFunction) {
+      claimFunction(poolIndex, { gasLimit: 500000 })
+        .then(function (t) {
+          return App.provider.waitForTransaction(t.hash)
+        })
+    }
+    else {
+      CHEF_CONTRACT.deposit(poolIndex, 0, { gasLimit: 500000 })
+        .then(function (t) {
+          return App.provider.waitForTransaction(t.hash)
+        })
+        .catch(function () {
+          hideLoading()
+        })
+    }
+  }
 }

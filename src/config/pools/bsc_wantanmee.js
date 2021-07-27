@@ -44,6 +44,7 @@ export async function main() {
   const rewardsWantanmeeSharePerWeek = await WANTANMEES_CHEF.mesPerBlock() / 1e18
     * 604800 / 3;
 
+  // eslint-disable-next-line no-unused-vars
   const currentEpoch = await WANTANMEE_BOARDROOM.epoch();
   const maxSupplyIncrease = 0.04
 
@@ -66,6 +67,7 @@ export async function main() {
   await loadChefContract(App, tokens, prices, WANTANMEES_CHEF, WANTANMEES_CHEF_ADDR, WANTANMEES_CHEF_ABI, rewardWantanmeeShareTokenTicker,
     "mes", null, rewardsWantanmeeSharePerWeek, "pendingReward", null, 3);
 
+  // eslint-disable-next-line no-unused-vars
   let br = await loadBoardroom(App, prices, WANTANMEES_BOARDROOM_ADDR, WANTANMEE_BOARDROOM_ORACLE_ADDR, lptAddress,
     rewardTokenAddress, stakeTicker, rewardTicker, epochsPerDay, maxSupplyIncrease, decimals, ratio, targetMantissa)
 
@@ -86,6 +88,7 @@ async function loadChefContract(App, tokens, prices, chef, chefAddress, chefAbi,
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

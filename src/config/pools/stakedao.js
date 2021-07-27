@@ -78,8 +78,11 @@ async function getXSDTPoolInfo(app, chefContract, chefAddress, tokenAddress) {
 function printXSDTPool(App, chefAbi, chefAddr, prices, tokens, poolInfo, poolPrices,
   rewardTokenTicker, rewardTokenAddress) {
   const sp = (poolInfo.stakedToken == null) ? null : getPoolPrices(tokens, prices, poolInfo.stakedToken);
+  // eslint-disable-next-line no-unused-vars
   const userStaked = poolInfo.userLPStaked ?? poolInfo.userStaked;
+  // eslint-disable-next-line no-unused-vars
   const rewardPrice = getParameterCaseInsensitive(prices, rewardTokenAddress)?.usd;
+  // eslint-disable-next-line no-unused-vars
   const staked_tvl = sp?.staked_tvl ?? poolPrices.staked_tvl;
   poolPrices.print_price();
   sp?.print_price();

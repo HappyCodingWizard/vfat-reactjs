@@ -6,6 +6,7 @@
  */
 
 ;(function() {
+// eslint-disable-next-line strict
 'use strict';
 
 /*!
@@ -120,6 +121,7 @@ AsciiTable.alignCenter = function(str, len, pad) {
   var nLen = str.length
     , half = Math.floor(len / 2 - nLen / 2)
     , odds = Math.abs((nLen % 2) - (len % 2))
+    // eslint-disable-next-line no-redeclare
     , len = str.length
 
   return AsciiTable.alignRight('', half, pad)
@@ -560,6 +562,7 @@ AsciiTable.prototype.toString = function() {
     body.push(this._renderRow(this.__heading, ' ', this.__headingAlign))
     body.push(this._rowSeperator(mLen, this.__fill))
   }
+  // eslint-disable-next-line no-redeclare
   for (var i = 0; i < this.__rows.length; i++) {
     body.push(this._renderRow(this.__rows[i], ' '))
   }

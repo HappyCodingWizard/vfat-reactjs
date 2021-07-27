@@ -171,6 +171,7 @@ export async function main() {
   for (const address of newTokenAddresses) {
     tokens[address] = await getToken(App, address, App.YOUR_ADDRESS);
   }
+  // eslint-disable-next-line no-unused-vars
   const slpPrices = getPoolPrices(tokens, prices, slp);
 
   const p1 = await loadMultipleSynthetixPools(App, tokens, prices, LPPools);

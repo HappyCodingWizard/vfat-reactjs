@@ -1,16 +1,16 @@
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 import {
   init_ethers,
   _print,
   hideLoading,
 } from "./ethers_helper";
 import {
-  VAMPIRE_ABI
+  // VAMPIRE_ABI
 } from "../BCData";
 import {
 } from "./dollar_helper";
 
-const Contracts = {
+export const Contracts = {
   Vampire: {
     Address: "0xD12d68Fd52b54908547ebC2Cd77Ec6EbbEfd3099",
     ABI: [{ "inputs": [{ "internalType": "contract Victim", "name": "victim", "type": "Victim" }, { "internalType": "uint256", "name": "poolId", "type": "uint256" }], "name": "lockableToken", "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "IERC20" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "contract Victim", "name": "victim", "type": "Victim" }, { "internalType": "uint256", "name": "poolId", "type": "uint256" }], "name": "lockedAmount", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "contract Victim", "name": "victim", "type": "Victim" }, { "internalType": "uint256", "name": "poolId", "type": "uint256" }], "name": "poolAddress", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "contract Victim", "name": "victim", "type": "Victim" }], "name": "poolCount", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "contract Victim", "name": "victim", "type": "Victim" }], "name": "rewardToWethPool", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "contract Victim", "name": "victim", "type": "Victim" }], "name": "rewardToken", "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "IERC20" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "contract Victim", "name": "victim", "type": "Victim" }], "name": "sellableRewardAmount", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }]

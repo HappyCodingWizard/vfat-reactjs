@@ -80,6 +80,7 @@ async function loadBscWaultContract(App, tokens, prices, chef, chefAddress, chef
 
   _print(`There is a locking period for some pools, please check the site.\n`)
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();
@@ -160,6 +161,7 @@ async function loadBscWaultLpStakeContract(App, tokens, prices, chef, chefAddres
   deathPoolIndices) {
   const chefContract = chef ?? new ethers.Contract(chefAddress, chefAbi, App.provider);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

@@ -1,17 +1,21 @@
 
 import {
   init_ethers,
+  _print,
   getUrlParameter,
 } from "./ethers_helper";
 import {
 } from "../BCData";
 import {
 } from "./dollar_helper";
+import {
+    AsciiTable
+} from "../ascii-table";
 
 export async function main() {
 
     const App = await init_ethers()
-    //_print(`Initialized ${App.YOUR_ADDRESS}`)
+    _print(`Initialized ${App.YOUR_ADDRESS}`)
 
     let getlp = getUrlParameter('lp')
     let lp = getlp ? getlp : "uniswap"
@@ -41,11 +45,11 @@ export async function main() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query })
-    };
-    /*fetch(url, opts)
-      .then(res => res.json())
-      .then(console.log)
-      .catch(console.error); */
+      };
+      /*fetch(url, opts)
+        .then(res => res.json())
+        .then(console.log)
+        .catch(console.error); */
     const rez = await fetch(url, opts);
     const rezz = await rez.json();
 
@@ -58,10 +62,10 @@ export async function main() {
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
-    });
+      });
     var asdf = {
-        "title": "new pools",
-        "heading": ["timestamp", "pair", "liquidity in usd", "pair addr"],
+        "title":"new pools",
+        "heading":["timestamp","pair", "liquidity in usd", "pair addr"],
         "rows": []
     }
     let turl;
@@ -72,18 +76,18 @@ export async function main() {
         turl = 'https://info.uniswap.org/pair/'
     }
     rezz.data.pairs.map(x =>
-        asdf.rows.push([
+        asdf.rows.push( [
             convertTimestamptoTime(x.createdAtTimestamp),
             `${x.token0.symbol}-${x.token1.symbol}`,
-            formatter.format(x.reserveUSD.substr(0, 10)),
+            formatter.format(x.reserveUSD.substr(0,10)),
             `<a target='_blank' href='${turl}${x.id}'>${x.id}</a>`
-        ])
+        ] )
     )
-
-    alert('table');
-    // var table2 = new AsciiTable().fromJSON(asdf);
-    // logger.innerHTML += table2 + '<br />';
+    var table2 = new AsciiTable().fromJSON(asdf);
+    let logger = document.getElementById('log');
+    logger.innerHTML += table2 + '<br />';
 
     ////////////////
 
 }
+

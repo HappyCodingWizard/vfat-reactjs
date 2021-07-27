@@ -105,7 +105,7 @@ export async function main() {
     }
     _print(`\nDAO Unbonds`)
     await printDaoUnbonds(App.provider, DAO, epoch + 1, params.DaoLockupPeriods, params.EpochPeriod);
-    _print(`\LP Unbonds`)
+    _print(`\nLP Unbonds`)
     await printLPUnbonds(App.provider, LP, epoch + 1, params.PoolLockupPeriods, params.EpochPeriod);
     hideLoading();
 }

@@ -154,6 +154,7 @@ export async function main() {
     var tokens = {};
 
     const unstakedDollar = await DOLLAR.balanceOf(App.YOUR_ADDRESS) / 1e18;
+    // eslint-disable-next-line no-unused-vars
     const [epoch, totalBonded, price] = await loadVSDDAO(App, DAO, DOLLAR);
 
     await Promise.all(Contracts.VSD.Pools.map(async pool => {

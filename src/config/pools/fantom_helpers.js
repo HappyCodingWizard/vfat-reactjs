@@ -195,6 +195,7 @@ export async function getFantomToken(App, tokenAddress, stakingAddress) {
   if (type) return getFantomStoredToken(App, tokenAddress, stakingAddress, type);
   try {
     const SPOON_VAULT = new ethers.Contract(tokenAddress, SPOON_VAULT_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _spoonVault = await SPOON_VAULT.wantToken();
     const spoonVault = await getFantomSpoonVault(App, SPOON_VAULT, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "fantomSpoonVault");
@@ -204,6 +205,7 @@ export async function getFantomToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const pool = new ethers.Contract(tokenAddress, UNI_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _token0 = await pool.token0();
     const uniPool = await getFantomUniPool(App, pool, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "uniswap");
@@ -213,6 +215,7 @@ export async function getFantomToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const VAULT = new ethers.Contract(tokenAddress, FANTOM_VAULT_TOKEN_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _token = await VAULT.token();
     const vault = await getFantomVault(App, VAULT, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "fantomVault");
@@ -222,6 +225,7 @@ export async function getFantomToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const WANT_VAULT = new ethers.Contract(tokenAddress, FANTOM_VAULT_WANT_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _want = await WANT_VAULT.want();
     const wantVault = await getFantomWantVault(App, WANT_VAULT, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "fantomWantVault");
@@ -231,6 +235,7 @@ export async function getFantomToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const erc20 = new ethers.Contract(tokenAddress, ERC20_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _name = await erc20.name();
     const erc20tok = await geterc20(App, erc20, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "erc20");

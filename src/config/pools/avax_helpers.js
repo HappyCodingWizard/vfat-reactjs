@@ -139,6 +139,7 @@ export async function getAvaxToken(App, tokenAddress, stakingAddress) {
   if (type) return getAvaxStoredToken(App, tokenAddress, stakingAddress, type);
   try {
     const pool = new ethers.Contract(tokenAddress, UNI_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _token0 = await pool.token0();
     const uniPool = await getAvaxUniPool(App, pool, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "uniswap");
@@ -148,6 +149,7 @@ export async function getAvaxToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const VAULT = new ethers.Contract(tokenAddress, BSC_VAULT_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _token = await VAULT.token();
     const vault = await getAvaxVault(App, VAULT, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "vault");
@@ -157,6 +159,7 @@ export async function getAvaxToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const erc20 = new ethers.Contract(tokenAddress, ERC20_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _name = await erc20.name();
     const erc20tok = await getAvax20(App, erc20, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "erc20");
@@ -348,6 +351,7 @@ export async function loadAvaxChefContract(App, tokens, prices, chef, chefAddres
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

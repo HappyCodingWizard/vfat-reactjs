@@ -165,6 +165,7 @@ async function printEpnsPool(App, info, chain = "eth") {
   const unstake = async function () {
     return rewardsContract_unstake(info.stakingAddress, App)
   }
+  // eslint-disable-next-line no-unused-vars
   const claim = async function () {
     return rewardsContract_claim(info.stakingAddress, App)
   }

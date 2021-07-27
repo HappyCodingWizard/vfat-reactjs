@@ -60,6 +60,7 @@ export async function main() {
     _print('')
 
 
+    // eslint-disable-next-line no-unused-vars
     const prices = {
         PAPR: PAPR_price,
         PRNTR: PRNTR_price,
@@ -75,7 +76,9 @@ export async function main() {
     var seconds_until_next_epoch = next_epoch - now;
     var hours_until_next_epoch = Math.floor(seconds_until_next_epoch / 3600); seconds_until_next_epoch = seconds_until_next_epoch - hours_until_next_epoch * 3600;
     var minutes_until_next_epoch = Math.floor(seconds_until_next_epoch / 60); seconds_until_next_epoch = seconds_until_next_epoch - minutes_until_next_epoch * 60;
+    // eslint-disable-next-line no-unused-vars
     const bonds_left = await treasuryContract.epochSupplyContractionLeft();
+    // eslint-disable-next-line no-unused-vars
     const maxDebtRatioPercent = await treasuryContract.maxDeptRatioPercent();
     //const bonds_available_for_purchase = Math.round((PAPR_totalSupply * maxDebtRatioPercent /10000) - INK_totalSupply);
 
@@ -97,8 +100,11 @@ export async function main() {
 
         // calculations
         const rewardToken = Contracts.PAPRPRINTR[key].reward
+        // eslint-disable-next-line no-unused-vars
         const stakingAddress = params[rewardToken].address
+        // eslint-disable-next-line no-unused-vars
         const stakingAbi = params[rewardToken].abi
+        // eslint-disable-next-line no-unused-vars
         const poolId = Contracts.PAPRPRINTR[key].index
 
         const STAKING_POOL = new ethers.Contract(Contracts.PAPRPRINTR[key].address, Contracts.PAPRPRINTR[key].abi, App.provider.getSigner());
@@ -106,7 +112,7 @@ export async function main() {
         const disburseAmount = await STAKING_POOL.disburseAmount() / 1e18;
 
 
-        const share_per_year = (pool_nr == 0) ? 50000 : 35000;
+        const share_per_year = (pool_nr === 0) ? 50000 : 35000;
         var userAmount = await STAKING_POOL.depositedTokens(App.YOUR_ADDRESS) / 1e18;
         //var userRewardDebt = await STAKING_POOL.depositedTokens(App.YOUR_ADDRESS) / 1e18;
         var pendingReward = await STAKING_POOL.getEstimatedPendingDivs(App.YOUR_ADDRESS) / 1e18;
@@ -114,8 +120,11 @@ export async function main() {
         const stakedTokenKey = Contracts.PAPRPRINTR[key].deposit
         const stakedTokenAddress = Contracts.PAPRPRINTR[stakedTokenKey].address
         const stakedToken = new ethers.Contract(stakedTokenAddress, Contracts.PAPRPRINTR[stakedTokenKey].abi, App.provider.getSigner())
+        // eslint-disable-next-line no-unused-vars
         const decimal = await stakedToken.decimals()
+        // eslint-disable-next-line no-unused-vars
         const stakingTokenTicker = Contracts.PAPRPRINTR[key].symbol
+        // eslint-disable-next-line no-unused-vars
         const stakedTokenBalance = await stakedToken.balanceOf(App.YOUR_ADDRESS)
         let pendingHarvest = pendingReward // STAKING_POOL.pendingShare(poolId, App.YOUR_ADDRESS) / 10 ** decimal
         // const claimFunc = async function () {
@@ -198,9 +207,11 @@ export async function main() {
     const boardRoomContract = new ethers.Contract(Contracts.PAPRPRINTR[boardRoomKey].address, Contracts.PAPRPRINTR[boardRoomKey].abi, App.provider.getSigner())
     const inRoomBalance = await boardRoomContract.balanceOf(App.YOUR_ADDRESS)
     const inBoardRoom = (inRoomBalance) / 10 ** 18
+    // eslint-disable-next-line no-unused-vars
     const inBoardRoomUsd = parseFloat(PRNTR_price) * parseFloat(inBoardRoom)
     const boardRoomEarned = (await boardRoomContract.earned(App.YOUR_ADDRESS)) / 10 ** 18
     const boardRoomTotalSupply = (await boardRoomContract.totalSupply()) / 10 ** 18
+    // eslint-disable-next-line no-unused-vars
     const boardRoomRewardPerShare = (await boardRoomContract.rewardPerShare()) / 10 ** 18
     const latestSnapshotIndex = (await boardRoomContract.latestSnapshotIndex())
     const directors = await boardRoomContract.directors(App.YOUR_ADDRESS)
@@ -208,6 +219,7 @@ export async function main() {
     const epochs_since_last_action = current_epoch - last_action_epoch;
     const lastHistory = (await boardRoomContract.boardHistory(latestSnapshotIndex));
     const lastRewardsPerShare = lastHistory[2];
+    // eslint-disable-next-line no-unused-vars
     const lastRewardsReceived = lastHistory[1];
     const prevHistory = (await boardRoomContract.boardHistory(latestSnapshotIndex - 1));
     const prevRewardsPerShare = prevHistory[2];

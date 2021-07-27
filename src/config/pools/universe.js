@@ -113,7 +113,9 @@ async function loadUniversePoolInfo(App, tokens, prices, stakingAbi, contractAdd
   const rewardTokenPrice = getParameterCaseInsensitive(prices, rewardTokenAddress)?.usd;
 
   const currentEpoch = await STAKING_CONTRACT.getCurrentEpoch();
+  // eslint-disable-next-line no-unused-vars
   const epochPoolSize = await STAKING_CONTRACT.getEpochPoolSize(stakeTokenAddress, currentEpoch) / 10 ** stakeToken.decimals;
+  // eslint-disable-next-line no-unused-vars
   const epochUserBalance = await STAKING_CONTRACT.getEpochUserBalance(App.YOUR_ADDRESS, stakeTokenAddress, currentEpoch) / 10 ** stakeToken.decimals;
   const balance = await STAKING_CONTRACT.balanceOf(App.YOUR_ADDRESS, stakeTokenAddress);
   const rewardsPerEpoch = 500000;

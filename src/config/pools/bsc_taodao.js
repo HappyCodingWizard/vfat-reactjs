@@ -186,6 +186,7 @@ export async function main() {
   const TAO_POOL = new ethers.Contract(TAO_POOL_ADDR, TAO_POOL_ABI, App.provider);
   const taoPerBlock = await TAO_POOL.rewardPerBlock();
   const lpToken = await TAO_POOL.LPToken();
+  // eslint-disable-next-line no-unused-vars
   const [userBalance, userEarned] = await TAO_POOL.userDetails(App.YOUR_ADDRESS);
   const pendingRewards = await TAO_POOL.pendingRewards(App.YOUR_ADDRESS);
   const pool = await getBscToken(App, lpToken, TAO_POOL_ADDR);
@@ -204,10 +205,12 @@ export async function main() {
   let stakingReward = await STAKING_TAO_CONTRACT.taoToDistributeNextEpoch(); //getCurrentRewardForNextEpoch();
   let stakingRebase = stakingReward / staoCircSupply;
 
+  // eslint-disable-next-line no-unused-vars
   let nextEpochRewards = userStakingBalance * stakingRebase;
 
   let dayRate = (Math.pow(1 + stakingRebase, 1 * 4) - 1) * 100;
   let weekRate = (Math.pow(1 + stakingRebase, 7 * 4) - 1) * 100;
+  // eslint-disable-next-line no-unused-vars
   let monthlyRate = Math.pow(1 + stakingRebase, 30 * 4) * 100;
   let stakingAPY = Math.pow(1 + stakingRebase, 365 * 4) * 100;
 

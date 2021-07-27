@@ -143,6 +143,7 @@ async function printZookeeperContractPoolsTable(title, App, chef, chefAddress, c
                         document.getElementById('pool-details-content').innerHTML += table + '<br />';
 
                     }),
+                    // eslint-disable-next-line no-control-regex
                     _truncate_link(pool.pair_link.replace(/\u0000/g, ""), 20),
                     pool.total_staked,
                     pool.total_staked_dollars,

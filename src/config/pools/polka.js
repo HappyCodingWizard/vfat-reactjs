@@ -5,6 +5,6 @@ import {
     loadBasisFork
 } from "./ethers_helper";
 
-async function main() {
+export async function main() {
     await loadBasisFork(Basis.Polka);
 }

@@ -21,6 +21,7 @@ export async function main() {
   const tokens = {};
   const prices = await getXdaiPrices();
 
+  // eslint-disable-next-line no-unused-vars
   const blockNumber = await App.provider.getBlockNumber();
   const multiplier = await LEVIN.BONUS_MULTIPLIER();
   const rewardPerBlock = await LEVIN.sushiPerBlock();

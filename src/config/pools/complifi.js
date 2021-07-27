@@ -123,7 +123,7 @@ async function loadComplifiContract(App, chef, chefAddress, chefAbi, rewardToken
 
     const poolPrices = poolInfos.map(poolInfo => {
         if (!poolInfo?.poolToken) {
-            return;
+            return null;
         }
         if (poolInfo.poolToken.token0 != null) return getUniPrices(tokens, prices, poolInfo.poolToken);
         return getErc20Prices(prices, poolInfo.poolToken, "eth");

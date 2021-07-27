@@ -84,6 +84,7 @@ export async function main() {
   _print('')
   _print_bold("Below pools are now closed, please unstake your funds. There are no more rewards to be received.")
   _print("")
+  // eslint-disable-next-line no-unused-vars
   let tombRewardPool = await loadRewardPoolContract(App, tokens, prices, tombRewardPoolContract, TOMB_REWARD_POOL_ADDR, TOMB_REWARD_POOL_ABI, "TOMB",
     "tomb", "pendingTOMB", 1, startTime0, currentTime);
 

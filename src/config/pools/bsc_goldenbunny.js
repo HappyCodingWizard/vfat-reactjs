@@ -217,6 +217,7 @@ function formatPercentage(num) {
   return (Number(num.toString()) * 100).toFixed(2) + "%";
 }
 
+// eslint-disable-next-line no-unused-vars
 function formatLP(amount) {
   return formatNumber((Number(ethers.utils.formatEther(amount))).toFixed(6)) + ' LP';
 }

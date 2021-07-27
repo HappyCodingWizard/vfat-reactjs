@@ -49,9 +49,11 @@ async function loadPandaChefContract(App, tokens, prices, chef, chefAddress, che
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();
+  // eslint-disable-next-line no-unused-vars
   const rewardToken = await getBscToken(App, rewardTokenAddress, chefAddress);
 
   const poolInfos = await Promise.all([...Array(poolCount).keys()].map(async (x) =>

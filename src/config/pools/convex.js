@@ -67,6 +67,7 @@ export async function main() {
   const [multiplier, rewardPerBlock, poolCount] =
     await App.ethcallProvider.all(
       [CVX_CHEF.getMultiplier(block, block + 1), CVX_CHEF.rewardPerBlock(), CVX_CHEF_STAKING.poolLength()]);
+  // eslint-disable-next-line no-unused-vars
   const rewardsPerWeek = rewardPerBlock / 1e18 * 604800 / 13.5 * multiplier;
 
   /*let cp = await loadChefContract(App, null, CVX_CHEF_ADDR, CVX_CHEF_ABI,

@@ -69,6 +69,7 @@ async function loadBscPopsicleContract(App, tokens, prices, chef, chefAddress, c
   const poolCount = parseInt(await chefContract.poolLength(), 10);
   const totalAllocPoints = await chefContract.totalAllocPoint();
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

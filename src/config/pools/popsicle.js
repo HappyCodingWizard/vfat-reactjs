@@ -28,6 +28,7 @@ export async function main() {
   const ICE_CHEF2 = new ethers.Contract(ICE_CHEF_ADDR2, ICE_CHEF_ABI, App.provider);
   const rewardsPerWeek0 = await ICE_CHEF0.icePerSecond() / 1e18 * 604800;
   const rewardsPerWeek1 = await ICE_CHEF1.icePerSecond() / 1e18 * 604800;
+  // eslint-disable-next-line no-unused-vars
   const rewardsPerWeek2 = await ICE_CHEF2.icePerSecond() / 1e18 * 604800;
 
 

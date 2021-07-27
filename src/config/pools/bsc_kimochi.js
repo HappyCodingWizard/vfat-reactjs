@@ -44,6 +44,7 @@ async function loadBscKimochiChefContract(App, tokens, prices, chef, chefAddress
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const poolInfos = await Promise.all([...Array(poolCount).keys()].map(async (x) =>

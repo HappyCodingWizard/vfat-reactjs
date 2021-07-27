@@ -62,6 +62,7 @@ async function loadBscChefAstroContract(App, tokens, prices, chef, chefAddress, 
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

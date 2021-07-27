@@ -45,6 +45,7 @@ export async function main() {
     const vf = new ethers.Contract(VISORFACTORY, factoryABI, signer)
     let allow = Promise.resolve()
     showLoading()
+    // eslint-disable-next-line no-unused-vars
     allow = vf.create()
       .then(function (t) {
         return App.provider.waitForTransaction(t.hash)

@@ -374,6 +374,7 @@ export async function printLPUnbonds(provider, LP, epoch, fluidEpochs, epochTime
     for (var u of filtered) {
       unbonding += u.args.value / 1e18;
       claimable += u.args.newClaimable / 1e18;
+      // eslint-disable-next-line no-loop-func
       for (const b of filteredBonds.filter(b => b.args.account === u.args.account)) {
         unbonding -= b.args.value / 1e18;
         cycling += b.args.value / 1e18;

@@ -186,6 +186,7 @@ async function getWildPool(app, poolAddress, stakingAddress, tokens) {
   const WILD_LP = new ethcall.Contract(poolAddress, WILD_LP_TOKEN_ABI);
   const [owner, _totalSupply, decimals] = await app.ethcallProvider.all([WILD_LP.owner(), WILD_LP.totalSupply(), WILD_LP.decimals()]);
 
+  // eslint-disable-next-line no-unused-vars
   const totalSupply = _totalSupply / 10 ** decimals;
 
   const OWNER = new ethcall.Contract(owner, OWNER_ABI);

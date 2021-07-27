@@ -51,6 +51,7 @@ async function loadBscChefContract(App, tokens, prices, chef, chefAddress, chefA
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
   prices["0xa900A6291d3A49B1b555b40bd6277D56228B690b"] =
     getParameterCaseInsensitive(prices, "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c") //flexBNB price

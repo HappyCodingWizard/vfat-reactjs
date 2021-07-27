@@ -174,6 +174,7 @@ async function loadMaticTrzChefContract(App, tokens, prices, chef, chefAddress, 
   _print("\n");
   _print(`Found ${poolCount} pools.\n`)
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

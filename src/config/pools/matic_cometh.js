@@ -217,6 +217,7 @@ async function printComethSynthetixPool(App, info) {
         + ` Year ${userYearlyRewards.toFixed(2)} ($${formatMoney(userYearlyRewards * info.rewardTokenPrices[i])})`);
     }
   }
+  // eslint-disable-next-line no-unused-vars
   const approveTENDAndStake = async function () {
     return rewardsContract_stake(info.stakeTokenAddress, info.stakingAddress, App)
   }

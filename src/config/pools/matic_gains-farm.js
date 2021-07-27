@@ -125,6 +125,7 @@ async function loadGlobalPoolInfo(App, pool, poolAddress, nfts, lp) {
 
 		_print_link(`Unstake ${Number(user.provided / 1e18).toFixed(5)} LPs`, () => { unstakeLps(user.provided) });
 
+		// eslint-disable-next-line no-unused-vars
 		let stakedNftsMatic = [], stakedNftsPromises = [];
 		for (let i = 0; i < user.stakedNftsCount; i++) {
 			stakedNftsPromises.push(pool.userNfts(addr, i));

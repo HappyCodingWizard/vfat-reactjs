@@ -204,6 +204,7 @@ async function approveAndCall(App, farm, token, unstaked) {
   const userNuts = await token.balanceOf(App.YOUR_ADDRESS);
   let allow = Promise.resolve()
   showLoading()
+  // eslint-disable-next-line no-unused-vars
   allow = token.approveAndCall(farm.address, userNuts, [], { gasLimit: 200000 })
     .then(function (t) {
       return App.provider.waitForTransaction(t.hash)

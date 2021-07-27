@@ -155,6 +155,7 @@ export async function getKccToken(App, tokenAddress, stakingAddress) {
   if (type) return getKccStoredToken(App, tokenAddress, stakingAddress, type);
   try {
     const pool = new ethers.Contract(tokenAddress, UNI_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _token0 = await pool.token0();
     const uniPool = await getKccUniPool(App, pool, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "uniswap");
@@ -164,6 +165,7 @@ export async function getKccToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const VAULT = new ethers.Contract(tokenAddress, KCC_VAULT_TOKEN_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _token = await VAULT.token();
     const vault = await getKccVault(App, VAULT, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "kccVault");
@@ -173,6 +175,7 @@ export async function getKccToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const WANT_VAULT = new ethers.Contract(tokenAddress, KCC_VAULT_WANT_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _want = await WANT_VAULT.want();
     const wantVault = await getKccWantVault(App, WANT_VAULT, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "kccWantVault");
@@ -182,6 +185,7 @@ export async function getKccToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const erc20 = new ethers.Contract(tokenAddress, ERC20_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _name = await erc20.name();
     const erc20tok = await geterc20(App, erc20, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "erc20");

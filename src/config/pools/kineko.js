@@ -48,6 +48,7 @@ async function loadKinekoContract(App, chef, chefAddress, chefAbi, rewardTokenTi
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();
+  // eslint-disable-next-line no-unused-vars
   const rewardToken = await getToken(App, rewardTokenAddress, chefAddress);
 
   const poolInfos = await Promise.all([...Array(poolCount).keys()].map(async (x) => {

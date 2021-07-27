@@ -50,6 +50,7 @@ export async function main() {
   await loadMidasChefContract(App, tokens, prices, MIDAS_CHEF, MIDAS_CHEF_ADDR, MIDAS_CHEF_ABI, rewardMidasTokenTicker,
     "mds", null, rewardsMidasPerWeek, "pendingShare", 3);
 
+  // eslint-disable-next-line no-unused-vars
   let br = await loadBoardroom(App, prices, MIDAS_BOARDROOM_ADDR, MIDAS_BOARDROOM_ORACLE_ADDR, lptAddress, rewardTokenAddress, stakeTicker,
     rewardTicker, epochsPerDay, maxSupplyIncrease, decimals, ratio, targetMantissa)
 
@@ -68,6 +69,7 @@ async function loadMidasChefContract(App, tokens, prices, chef, chefAddress, che
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

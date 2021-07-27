@@ -27,6 +27,7 @@ export async function main() {
   var tokens = {};
   const prices = await lookUpTokenPrices(["0x6DEA81C8171D0bA574754EF6F8b412F2Ed88c54D"]);
 
+  // eslint-disable-next-line no-unused-vars
   const p0 = await loadMultipleSynthetixPools(App, tokens, prices, [Pool]);
 
   hideLoading();

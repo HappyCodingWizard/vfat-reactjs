@@ -163,6 +163,7 @@ async function loadFaasPools(App, faasAddresses) {
         await Promise.all(tokenAddresses.map(async (address) => {
             tokens[address] = await getToken(App, address, address);
         }));
+        // eslint-disable-next-line no-loop-func
         const poolPrices = poolInfos.map(poolInfo => getPoolPrices(tokens, prices, poolInfo.poolToken));
         for (let i = 0; i < poolLength; i++) {
             const rewardPoolInfo = poolInfos[i]
@@ -194,6 +195,7 @@ export async function main() {
     const BSDS_USDC_BALANCER_POOL = "0x8438d64Da58772E9F7FCeAa1506bA300F935ABBd";
     const BSDS_DAI_BALANCER_POOL = "0xdD82e4227BaeC1Fc40a72ef9895f38f2C1Df4F42";
     _print("Reading share bank smart contracts...\n");
+    // eslint-disable-next-line no-unused-vars
     const tokens = await loadFaasPools(App,
         [
             { address: BSD_USDC_BALANCER_POOL, poolLength: 1 },

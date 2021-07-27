@@ -55,6 +55,7 @@ async function loadBscBvaultsContract(App, tokens, prices, chef, chefAddress, ch
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
   const rewardPoolLength = await chef.rewardPoolLength() / 1;
   const rewardPools = await Promise.all([...Array(rewardPoolLength).keys()].map(i =>

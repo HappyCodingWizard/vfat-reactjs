@@ -49,6 +49,7 @@ export async function main() {
     _print('Reading smart contracts...\n')
 
     const YOLO_CHEF_ADDR = '0xf19a0a7bdabd710fa2c33df432760c9bec195011'
+    // eslint-disable-next-line no-unused-vars
     const rewardTokenTicker = 'YoloDraw'
     const YoloChef = new ethers.Contract(YOLO_CHEF_ADDR, YOLO_CHEF_ABI, App.provider)
 
@@ -63,9 +64,12 @@ export async function main() {
     const d = (((divRеwardInBNB / (isBoosted ? 2 : 1) * 1.2 * 48) / 4.3) * 100)
     const d10 = (((divRеwardInBNB / (isBoosted ? 2 : 1) * 1.2 * 48) / 10) * 100)
     const APY = formatNumber((d * 365).toFixed(2))
+    // eslint-disable-next-line no-unused-vars
     const APY10 = formatNumber((d10 * 365).toFixed(2))
 
+    // eslint-disable-next-line no-unused-vars
     const tokens = {}
+    // eslint-disable-next-line no-unused-vars
     const prices = await getBscPrices()
 
     _print(`APY:  +  Daily ${d.toFixed(2)} % +  Yearly $${APY}\n`)

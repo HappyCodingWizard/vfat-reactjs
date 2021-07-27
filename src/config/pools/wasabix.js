@@ -173,6 +173,7 @@ export async function main() {
   for (const address of uni.tokens) {
     tokens[address] = await getToken(App, address, UNI_POOL_ADDRESS);
   }
+  // eslint-disable-next-line no-unused-vars
   const pp = getPoolPrices(tokens, prices, uni);
 
   await Promise.all(tokenAddresses.map(async (address) => {

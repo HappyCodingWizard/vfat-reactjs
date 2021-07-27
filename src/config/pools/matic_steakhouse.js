@@ -19,6 +19,7 @@ export async function main() {
   _print(`Initialized ${App.YOUR_ADDRESS}\n`);
   _print("Reading smart contracts...\n");
 
+  // eslint-disable-next-line no-unused-vars
   const customURLs =
   {
     add: "https://swap.steakhouse.finance/#/add",

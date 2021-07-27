@@ -65,6 +65,7 @@ export async function main() {
     _print('')
 
 
+    // eslint-disable-next-line no-unused-vars
     const prices = {
         BTD: BTD_price,
         BTS: BTS_price,
@@ -105,7 +106,9 @@ export async function main() {
 
         // calculations
         const rewardToken = Contracts.BATDOLLAR[key].reward
+        // eslint-disable-next-line no-unused-vars
         const stakingAddress = params[rewardToken].address
+        // eslint-disable-next-line no-unused-vars
         const stakingAbi = params[rewardToken].abi
         const poolId = Contracts.BATDOLLAR[key].index
 
@@ -120,6 +123,7 @@ export async function main() {
         const userInfo = await STAKING_POOL.userInfo(poolId, App.YOUR_ADDRESS);
         var userAmount = userInfo[0] / 1e18;
         var userRewardDebt = userInfo[1] / 1e18;
+        // eslint-disable-next-line no-unused-vars
         var pendingReward = (userAmount * accSharePerShare / 1e18) - userRewardDebt;
 
         const stakedTokenKey = Contracts.BATDOLLAR[key].deposit
@@ -191,6 +195,7 @@ export async function main() {
                 _print(`Total shares distributed per epoch = ${parseFloat(share_per_year/365/(24/period)).toFixed(0)} ($${formatMoney(share_per_year/365/(24/period)*BTS_price)})`)
         */
         let epochRewardsPerLP = share_per_year / 365 / 4 / (24 / period) / total_supply;
+        // eslint-disable-next-line no-unused-vars
         let yourRewardPerEpoch = epochRewardsPerLP * userStaked;
 
         let apr = epochRewardsPerLP * (24 / period) * 365 * BTS_price * 100 / tokenPrice;
@@ -245,9 +250,11 @@ export async function main() {
     const boardRoomContract = new ethers.Contract(Contracts.BATDOLLAR[boardRoomKey].address, Contracts.BATDOLLAR[boardRoomKey].abi, App.provider.getSigner())
     const inRoomBalance = await boardRoomContract.balanceOf(App.YOUR_ADDRESS)
     const inBoardRoom = (inRoomBalance) / 10 ** 18
+    // eslint-disable-next-line no-unused-vars
     const inBoardRoomUsd = parseFloat(BTS_price) * parseFloat(inBoardRoom)
     const boardRoomEarned = (await boardRoomContract.earned(App.YOUR_ADDRESS)) / 10 ** 18
     const boardRoomTotalSupply = (await boardRoomContract.totalSupply()) / 10 ** 18
+    // eslint-disable-next-line no-unused-vars
     const boardRoomRewardPerShare = (await boardRoomContract.rewardPerShare()) / 10 ** 18
     const latestSnapshotIndex = (await boardRoomContract.latestSnapshotIndex())
     const directors = await boardRoomContract.directors(App.YOUR_ADDRESS)
@@ -255,6 +262,7 @@ export async function main() {
     const epochs_since_last_action = current_epoch - last_action_epoch;
     const lastHistory = (await boardRoomContract.boardHistory(latestSnapshotIndex));
     const lastRewardsPerShare = lastHistory[2];
+    // eslint-disable-next-line no-unused-vars
     const lastRewardsReceived = lastHistory[1];
     const prevHistory = (await boardRoomContract.boardHistory(latestSnapshotIndex - 1));
     const prevRewardsPerShare = prevHistory[2];

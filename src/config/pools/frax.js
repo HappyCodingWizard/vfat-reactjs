@@ -61,6 +61,7 @@ export async function main() {
     await loadSynthetixPool(App, tokens, prices, FRAX_STAKING_POOL_ABI, address, "rewardsToken", "stakingToken");
   }
 
+  // eslint-disable-next-line no-unused-vars
   let p = await loadFraxSynthetixPools(App, tokens, prices, Pool.abi, Pool.address, Pool.RewardTokenFunction0,
     Pool.RewardTokenFunction1, Pool.stakingTokenFunction)
 

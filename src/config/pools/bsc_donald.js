@@ -58,6 +58,7 @@ async function loadDonaldContract(App, tokens, prices, chef, chefAddress, chefAb
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

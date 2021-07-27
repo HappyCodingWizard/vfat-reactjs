@@ -26,6 +26,7 @@ const TTSwapFactoryABI = [{ "name": "NewExchange", "inputs": [{ "type": "address
 const ether = ethers.BigNumber.from(10).pow(18)
 
 const TT_SWAP_FACTORY_ADDRESS = "0xce393b11872ee5020828e443f6ec9de58cd8b6c5";
+// eslint-disable-next-line no-unused-vars
 const TT_MARKET_ADDRESS = '0xeF5A0CE54a519B1Db3F350EB902C4cFbf7671D88';
 const RAM_CONTROLLER_ADDR = "0x0d4fe8832857Bb557d8CFCf3737cbFc8aE784106";
 

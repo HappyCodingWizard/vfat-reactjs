@@ -110,6 +110,7 @@ export async function getHarmonyToken(App, tokenAddress, stakingAddress) {
   if (type) return getHarmonyStoredToken(App, tokenAddress, stakingAddress, type);
   try {
     const pool = new ethers.Contract(tokenAddress, UNI_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _token0 = await pool.token0();
     const uniPool = await getHarmonyUniPool(App, pool, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "uniswap");
@@ -119,6 +120,7 @@ export async function getHarmonyToken(App, tokenAddress, stakingAddress) {
   }
   try {
     const erc20 = new ethers.Contract(tokenAddress, ERC20_ABI, App.provider);
+    // eslint-disable-next-line no-unused-vars
     const _name = await erc20.name();
     const erc20tok = await geterc20(App, erc20, tokenAddress, stakingAddress);
     window.localStorage.setItem(tokenAddress, "erc20");
@@ -308,6 +310,7 @@ export async function loadHarmonyChefContract(App, tokens, prices, chef, chefAdd
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

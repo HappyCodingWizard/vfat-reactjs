@@ -21,6 +21,7 @@ export async function main() {
   const WHALE_CHEF = new ethers.Contract(WHALE_CHEF_ADDR, WHALE_CHEF_ABI, App.provider);
   const startBlock = await WHALE_CHEF.startBlock();
   const harvestBlock = await WHALE_CHEF.startBlockHarvest();
+  // eslint-disable-next-line no-unused-vars
   const harvestTime = await WHALE_CHEF.harvestTime();
   const currentBlock = await App.provider.getBlockNumber();
   let rewardsPerWeek = 0

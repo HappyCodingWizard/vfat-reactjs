@@ -77,6 +77,7 @@ async function loadKeepVault(App, tokens, prices, STAKING_POOL, KEEP_TOKEN_ADDR,
 
   _print(`\n${keepToken.symbol} Price: $${keepPrice.usd} TVL: ${toDollar(staked_tvl)}`);
   _print(`Staked: ${toFixed(totalStaked, 2)}`)
+  // eslint-disable-next-line no-unused-vars
   const apr = printAPR(keepToken.symbol, keepPrice.usd, rewardsPerWeek, keepToken.symbol,
     staked_tvl, yourStakedLP, keepPrice.usd, 2);
 

@@ -189,6 +189,7 @@ async function printSynthetixLIFTPool(App, info, chain = "eth") {
       + ` Week ${userWeeklyRewards.toFixed(2)} ($${formatMoney(userWeeklyRewards * info.rewardTokenPrice)})`
       + ` Year ${userYearlyRewards.toFixed(2)} ($${formatMoney(userYearlyRewards * info.rewardTokenPrice)})`);
   }
+  // eslint-disable-next-line no-unused-vars
   const approveTENDAndStake = async function () {
     return rewardsContract_stake(info.stakeTokenAddress, info.stakingAddress, App)
   }

@@ -68,6 +68,7 @@ export async function main() {
   await loadSoupChefContract(App, tokens, prices, SOUPS_CHEF, SOUPS_CHEF_ADDR, SOUPS_CHEF_ABI, rewardSoupsTokenTicker,
     "soups", null, rewardsSoupsPerWeek, "pendingRewards", null, 2);
 
+  // eslint-disable-next-line no-unused-vars
   let br = await loadBoardroom(App, prices, SOUPS_BOARDROOM_ADDR, SOUP_BOARDROOM_ORACLE_ADDR, lptAddress,
     rewardTokenAddress, stakeTicker, rewardTicker, epochsPerDay, maxSupplyIncrease, decimals, ratio, targetMantissa)
 
@@ -89,6 +90,7 @@ async function loadSoupExpiredChefContract(App, tokens, prices, chef, chefAddres
 
   _print(`Please remove your funds\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();
@@ -173,6 +175,7 @@ const chefSoupContract_unstake = async function (chefAbi, chefAddress, poolIndex
   const CHEF_CONTRACT = new ethers.Contract(chefAddress, chefAbi, signer)
 
   const currentStakedAmount = (await CHEF_CONTRACT.userInfo(poolIndex, App.YOUR_ADDRESS)).amount
+  // eslint-disable-next-line no-unused-vars
   const earnedTokenAmount = await CHEF_CONTRACT.pendingRewards(poolIndex, App.YOUR_ADDRESS) / 1e18
 
   showLoading()
@@ -197,6 +200,7 @@ async function loadSoupChefContract(App, tokens, prices, chef, chefAddress, chef
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

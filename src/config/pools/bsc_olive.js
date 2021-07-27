@@ -50,6 +50,7 @@ async function loadOliveChefContract(App, tokens, prices, chef, chefAddress, che
 
   _print(`Showing incentivized pools only.\n`);
 
+  // eslint-disable-next-line no-redeclare
   var tokens = {};
 
   const rewardTokenAddress = await chefContract.callStatic[rewardTokenFunction]();

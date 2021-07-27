@@ -241,6 +241,7 @@ async function printGalaxyPool(App, info, chain = "matic") {
   let totalEarnds = 0;
   let totalEarndsUsd = 0;
   for (let i = 0; i < info.rewardTokenTickers.length; i++) {
+    // eslint-disable-next-line no-unused-vars
     totalEarnds += info.earneds[i];
     totalEarndsUsd += info.earneds[i] * info.rewardTokenPrices[i]
   }

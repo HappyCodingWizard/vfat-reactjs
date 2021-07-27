@@ -65,6 +65,7 @@ export async function main() {
     printAPR("SI", rewardPrice, 31250, amm.collatToken.symbol, poolPrices.staked_tvl, amm.userStaked, poolPrices.price, 4);
     _print("");
   }
+  // eslint-disable-next-line no-unused-vars
   let p0 = await loadSynthetixPool(App, tokens, prices, newPool.abi, newPool.address, newPool.rewardTokenFunction, newPool.stakeTokenFunction);
   hideLoading();
 }
