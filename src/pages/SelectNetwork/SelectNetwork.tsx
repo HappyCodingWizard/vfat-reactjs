@@ -8,32 +8,7 @@ import Carousel from 'react-elastic-carousel'
 import { Button } from 'components'
 import { useHistory } from 'react-router'
 
-import IMG_BSC from 'assets/networks/BSC.png'
-// import IMG_BSC1 from 'assets/networks/undefined.png'
-
-interface networkItemType {
-  name: string
-  logoSrc: string
-  redirectUrl: string
-}
-
-const items: networkItemType[] = [
-  {
-    name: 'BINANCE SMART CHAIN',
-    logoSrc: IMG_BSC,
-    redirectUrl: '/bsc'
-  },
-  {
-    name: 'POLYGON NETWORK',
-    logoSrc: IMG_BSC,
-    redirectUrl: '/polygon'
-  },
-  {
-    name: 'KCC NETWORK',
-    logoSrc: IMG_BSC,
-    redirectUrl: '/kcc'
-  }
-]
+import { networks, networkItemType } from 'data'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -78,19 +53,31 @@ const SelectNetwork: React.FC = () => {
   //   )
   // }
 
+  const handleSelectNetwork = (item: networkItemType) => {
+    history.push({
+      pathname: item.redirectUrl,
+      state: {
+        networkInfo: item
+      }
+    })
+  }
+
   return (
     <Box className={cx(classes.root)}>
       <Carousel
         itemsToShow={1}
         className={cx(classes.carousel)}
         isRTL={false}
+        renderPagination={() => {
+          return <></>
+        }}
         // renderArrow={customArrow}
       >
-        {items && items.map(item => (
-          <Box className={cx(classes.carouselItem)}>
+        {networks && networks.map(item => (
+          <Box className={cx(classes.carouselItem)} key={item.name}>
             <p className={cx(classes.networkName)}>{item.name}</p>
             <img src={item.logoSrc} alt='BSC' width='200px' height='200px' />
-            <Button onClick={() => history.push(item.redirectUrl)}>SELECT NETWORK</Button>
+            <Button onClick={() => handleSelectNetwork(item)}>SELECT NETWORK</Button>
           </Box>
         ))}
       </Carousel>

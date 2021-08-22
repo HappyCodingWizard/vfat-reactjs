@@ -7,8 +7,8 @@ import { merge } from "lodash";
 
 // custom colors
 
-const primaryLightDay = "#fff6ef";
-const primaryLightNight = "#fff6ef";
+const primaryLightDay = "#61738E";
+const primaryLightNight = "#61738E";
 
 const primaryMainDay = "#0D2146";
 const primaryMainNight = "#0D2146";
