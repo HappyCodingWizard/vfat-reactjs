@@ -16,7 +16,11 @@ import store from "./state";
 import Layout from "layouts/Layout";
 
 import * as config from "config";
-import { PoolDetailInfoPage, ConnectWalletPage } from "pages";
+import { 
+  PoolDetailInfoPage, 
+  ConnectWalletPage,
+  SelectNetworkPage
+} from "pages";
 
 const ThemeProvider: React.FC = ({ children }) => {
   const darkMode = useIsDarkMode();
@@ -59,6 +63,10 @@ const App: React.FC = () => {
         <Switch>
           <Route exact path="/">
             <ConnectWalletPage />
+          </Route>
+
+          <Route exact path="/networks">
+            <SelectNetworkPage />
           </Route>
 
           {config.Routes.map((route: any, index: number) => {

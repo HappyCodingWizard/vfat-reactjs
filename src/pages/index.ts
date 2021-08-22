@@ -1,4 +1,5 @@
 export { default as ConnectWalletPage } from "./ConnectWallet";
+export { default as SelectNetworkPage } from "./SelectNetwork";
 
 export { default as HomePage } from "./NetworksInfo";
 export { default as AllPage } from "./NetworksInfo";
