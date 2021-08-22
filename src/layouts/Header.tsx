@@ -1,163 +1,99 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Link,
-  IconButton,
-  Drawer,
-  useMediaQuery,
-  Container,
-} from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Hamburger from "hamburger-react";
-import cx from "classnames";
+import React from 'react'
+import { Box, useMediaQuery, Container } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import cx from 'classnames'
 
-import { useIsDarkMode } from "state/user/hooks";
-import { useLocation } from "react-router-dom";
-
-import * as config from "config";
-
-// import LOGO_Blue from "assets/logo_blue.png";
-// import LOGO_Text from "assets/logo_text.png";
+import { useIsDarkMode } from 'state/user/hooks'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
-  self: {
-    position: "fixed",
+  root: {
+    position: 'fixed',
     top: 0,
     zIndex: 100,
-    width: "100%",
-    padding: "20px 0px",
-    background: palette.primary.main,
-    boxShadow: "0 0 24px 0 #d58c613d",
+    width: '100%',
+    padding: '20px 0px',
+    background: palette.background.default
   },
 
   container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
 
   logo: {
-    paddingLeft: "10px",
-    display: "flex",
-    alignItems: "center",
-    cursor: "pointer",
-    "& img": {
-      padding: "20px 10px",
-    },
-    "& img:last-child": {
-      filter: palette.type === "light" ? "invert(1)" : "invert(0)",
-    },
+    display: 'flex',
+    alignItems: 'center'
   },
 
-  navBar: {
-    display: "flex",
-    flexFlow: "wrap",
-    alignItems: "center",
-
-    "& a": {
-      padding: "8px 16px",
-      margin: "2px",
-      color: palette.primary.dark,
-      fontWeight: 700,
-      fontSize: "14px",
-      cursor: "pointer",
-      background: palette.primary.light,
-      borderRadius: "10px",
-
-      "&:hover": {
-        color: palette.primary.main,
-        background: palette.primary.dark,
-        textDecoration: "unset",
-      },
+  logoImg: {
+    '& > div:first-child': {
+      top: '36px',
+      left: '86px',
+      width: '40px',
+      height: '40px',
+      transform: 'matrix(0.71, 0.71, -0.71, 0.71, 0, 0)',
+      background: '#0D2146 0% 0% no-repeat padding-box',
+      display: 'inline-block'
     },
-
-    "& .active": {
-      color: palette.primary.main,
-      background: palette.primary.dark,
-    },
-
-    [breakpoints.down("sm")]: {
-      flexDirection: "column",
-      textAlign: "center",
-    },
+    '& > div:last-child': {
+      top: '36px',
+      left: '102px',
+      width: '40px',
+      height: '40px',
+      transform: 'matrix(0.71, 0.71, -0.71, 0.71, 0, 0)',
+      background: '#FDC113 0% 0% no-repeat padding-box',
+      display: 'inline-block',
+      marginLeft: '-28px'
+    }
+  },
+  logoTitle: {
+    color: palette.text.primary,
+    paddingLeft: '20px'
   },
 
-  subHeader: {
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItem: "center",
+  navMenu: {
+    display: 'flex',
+    alignItems: 'center'
   },
-}));
+
+  navItem: {
+    color: palette.primary.main,
+    padding: '0px 10px',
+    display: 'inline-block',
+    cursor: 'pointer'
+  }
+}))
 
 const Header: React.FC = () => {
-  const theme = useTheme();
-  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const dark = useIsDarkMode();
-  const classes = useStyles({ dark, mobile });
-  const { pathname } = useLocation<{ previous: string }>();
-
-  const [openMenu, setOpenMenu] = useState(false);
-
-  const toggleMenu = () => {
-    setOpenMenu((prev) => !prev);
-  };
-
-  const isActiveURL = (link: string): boolean => {
-    return pathname.indexOf(link) > -1;
-  };
+  const theme = useTheme()
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const dark = useIsDarkMode()
+  const classes = useStyles({ dark, mobile })
+  const history = useHistory()
 
   return (
-    <Box className={cx(classes.self)}>
+    <Box className={cx(classes.root)}>
       <Container>
         <Box className={cx(classes.container)}>
-          {/* <Box className={cx(classes.logo)} onClick={() => history.push("/")}>
-            <img src={LOGO_Blue} alt="Ardana Logo" />
-            <img src={LOGO_Text} alt="Ardana Logo" />
-          </Box> */}
-
-          {!mobile && (
-            <Box className={cx(classes.navBar)}>
-              {config.Routes.map((navItem, index) => (
-                <Link
-                  className={isActiveURL(navItem.path) ? "active" : ""}
-                  key={index}
-                  href={navItem.path}
-                >
-                  {navItem.label}
-                </Link>
-              ))}
+          <Box className={cx(classes.logo)} onClick={() => history.push('/')}>
+            <Box className={cx(classes.logoImg)}>
+              <div />
+              <div />
             </Box>
-          )}
+            <Box className={cx(classes.logoTitle)}>Their Logo</Box>
+          </Box>
 
-          {mobile && (
-            <>
-              <IconButton
-                style={{ height: "48px", padding: 0 }}
-                onClick={() => setOpenMenu(!openMenu)}
-              >
-                <Hamburger
-                  size={24}
-                  distance={"lg"}
-                  color={theme.palette.text.primary}
-                  toggled={openMenu}
-                  toggle={setOpenMenu}
-                />
-              </IconButton>
-              <Drawer anchor={"top"} open={openMenu} onClose={toggleMenu}>
-                <Box className={cx(classes.navBar)}>
-                  {config.Routes.map((navItem, index) => (
-                    <Link key={index} href={navItem.path}>
-                      {navItem.label}
-                    </Link>
-                  ))}
-                </Box>
-              </Drawer>
-            </>
-          )}
+          <Box className={cx(classes.navMenu)}>
+            <Box className={cx(classes.navItem)}>About</Box>
+            <Box className={cx(classes.navItem)}>Contact</Box>
+            <Box className={cx(classes.navItem)}>Branding</Box>
+          </Box>
         </Box>
       </Container>
     </Box>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

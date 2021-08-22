@@ -10,8 +10,8 @@ import { merge } from "lodash";
 const primaryLightDay = "#fff6ef";
 const primaryLightNight = "#fff6ef";
 
-const primaryMainDay = "#ffd8c1";
-const primaryMainNight = "#ffd8c1";
+const primaryMainDay = "#0D2146";
+const primaryMainNight = "#0D2146";
 
 const primaryDarkDay = "#341f10";
 const primaryDarkNight = "#341f10";
@@ -34,16 +34,16 @@ const infoDarkDay =
 const infoDarkNight =
   "linear-gradient(180deg, #73D6F1 0%, #5F72FF 99.99%, #2F3DA0 100%)";
 
-const backgroundDay = primaryMainDay;
-const backgroundNight = primaryMainNight;
+  const backgroundDay = "#F1F6FF";
+  const backgroundNight = "#F1F6FF";
 
 const backgroundPaperDay =
   "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)";
 const backgroundPaperNight =
   "linear-gradient(180deg, #131B59 0%, #2F3DA0 100%)";
 
-const textPrimaryDay = primaryDarkDay;
-const textPrimaryNight = primaryDarkNight;
+const textPrimaryDay = '#101722';
+const textPrimaryNight = '#101722';
 
 const textSecondaryDay = "#636060";
 const textSecondaryNight = "#FFFFFF";
@@ -643,7 +643,6 @@ export const darkTheme = responsiveFontSizes(
     },
     typography: {
       htmlFontSize: 16,
-      fontFamily: "'Brandon Grotesque','Museo Sans'",
       fontSize: 14,
       h1: {},
       h2: {},

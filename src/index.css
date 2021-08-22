@@ -1,9 +1,9 @@
-@import url("http://fonts.cdnfonts.com/css/mark-pro");
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css");
 
 * {
   transition: all 0.2s ease-in;
-  font-family: "Mark Pro", sans-serif, Arial;
+  font-family: "Montserrat", sans-serif, Arial;
 }
 
 .pool-container {
