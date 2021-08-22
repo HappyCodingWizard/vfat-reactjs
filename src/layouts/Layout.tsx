@@ -14,12 +14,14 @@ const useStyles = makeStyles(({ palette }) => ({
   root: {
     background: palette.background.default,
     paddingTop: "100px",
+    paddingBottom: "80px",
+    position: 'fixed',
+    width: '100%',
+    height: '100%'
   },
-  container: {    
-    boxShadow: "0 0 24px 0 #d58c613d",
-    backgroundColor: "#fff6ef",
-    borderRadius: "12px",
-    padding: "24px",
+  container: {
+    width: '100%',
+    height: '100%',
   }
 }));
 

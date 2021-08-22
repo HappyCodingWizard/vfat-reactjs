@@ -1,3 +1,5 @@
+export { default as ConnectWalletPage } from "./ConnectWallet";
+
 export { default as HomePage } from "./NetworksInfo";
 export { default as AllPage } from "./NetworksInfo";
 export { default as BSCPage } from "./NetworksInfo";

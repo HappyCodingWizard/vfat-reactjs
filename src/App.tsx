@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider as StateProvider } from "react-redux";
 import {
   ThemeProvider as MuiThemeProvider,
@@ -16,7 +16,7 @@ import store from "./state";
 import Layout from "layouts/Layout";
 
 import * as config from "config";
-import { PoolDetailInfoPage } from "pages";
+import { PoolDetailInfoPage, ConnectWalletPage } from "pages";
 
 const ThemeProvider: React.FC = ({ children }) => {
   const darkMode = useIsDarkMode();
@@ -58,7 +58,7 @@ const App: React.FC = () => {
       <Layout>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/home" />
+            <ConnectWalletPage />
           </Route>
 
           {config.Routes.map((route: any, index: number) => {
