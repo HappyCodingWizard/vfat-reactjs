@@ -4,14 +4,19 @@ import { Box, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useIsDarkMode } from "state/user/hooks";
 
-import Carousel from 'react-elastic-carousel'
+import Carousel, { RenderArrowProps } from 'react-elastic-carousel'
 import { getNetworkInfo, fetchLogo } from "hooks";
 
-import ICON_TOKEN from 'assets/icon/awesome-coins.svg'
-import ICON_WEBSITE from 'assets/icon/ionic-md-link.svg'
 import { useHistory, useLocation } from "react-router-dom";
 
 import { networks, networkItemType } from 'data'
+
+import ICON_TOKEN from 'assets/icon/awesome-coins.svg'
+import ICON_WEBSITE from 'assets/icon/ionic-md-link.svg'
+import ICON_DOWN from 'assets/icon/material-arrow-drop-down.svg'
+import ICON_PLUS from 'assets/icon/feather-plus-circle.svg'
+import ICON_ARROW_LEFT from 'assets/icon/ionic-md-arrow-dropleft-circle.svg'
+import ICON_ARROW_RIGHT from 'assets/icon/ionic-md-arrow-dropright-circle.svg'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -49,7 +54,19 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 
   filter: {
-
+    display: 'flex',
+    alignItems: 'center',
+  },
+  
+  filterItem: {
+    borderRadius: '10px',
+    backgroundColor: '#DAE7F9',
+    padding: '10px',
+    margin: '0px 10px',
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '10px',
+    cursor: 'pointer'
   },
 
   carouselItem: {
@@ -103,6 +120,18 @@ const NetworksInfo: React.FC = () => {
       </Box>
     )
   }
+  const renderPagination = () => {
+    return <></>
+  }
+
+  const renderArrow = ({ type, onClick, isEdge }: RenderArrowProps) => {
+    const pointer = type === 'PREV' ? ICON_ARROW_LEFT : ICON_ARROW_RIGHT
+    return (
+      <Box onClick={onClick} visibility={isEdge ? 'hidden' : 'visible'} display='flex' alignItems='center' style={{cursor: 'pointer'}}>
+        <img src={pointer} alt='direction' width='60px' />
+      </Box>
+    )
+  }
 
   const handleChangeNetwork = () => {
     history.push('/networks')
@@ -129,15 +158,31 @@ const NetworksInfo: React.FC = () => {
         </Box>
         <Box className={cx(classes.filter)}>
 
+          <Box className={cx(classes.filterItem)}>
+            TVL&nbsp;
+            <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
+          </Box>
+          <Box className={cx(classes.filterItem)}>
+            Reward&nbsp;
+            <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
+          </Box>
+          <Box className={cx(classes.filterItem)}>
+            Last 30 days&nbsp;
+            <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
+          </Box>
+          <Box className={cx(classes.filterItem)}>
+            <img src={ICON_PLUS} alt='add' width='10px' height='10px' />&nbsp;
+            Add Filter
+          </Box>
+
         </Box>
       </Box>
 
       <Carousel
         itemsToShow={3}
         isRTL={false}
-        renderPagination={() => {
-          return <></>
-        }}
+        renderPagination={renderPagination}
+        renderArrow={renderArrow}
       >
         {rows && rows.map((row: string[], i: number) => (
           <Box className={cx(classes.carouselItem)} key={i}>
