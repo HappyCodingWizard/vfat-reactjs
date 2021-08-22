@@ -24,7 +24,8 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
 
   logo: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    cursor: 'pointer'
   },
 
   logoImg: {
