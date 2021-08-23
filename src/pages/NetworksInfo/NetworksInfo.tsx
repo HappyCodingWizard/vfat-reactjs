@@ -36,7 +36,8 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 
   networkName: {
-    fontWeight: 900,
+    fontFamily: "'Montserrat Black'",
+    fontWeight: 100,
     color: palette.primary.main
   },
 
@@ -80,15 +81,19 @@ const useStyles = makeStyles(({ palette }) => ({
 
   poolName: {
     fontSize: '20px',
+    fontFamily: "'Montserrat Black'",
+    textTransform: 'uppercase',
   },
 
   tokenName: {
+    fontFamily: "'Montserrat Black'",
     display: 'flex',
     alignItems: 'center',
     fontSize: '10px'
   },
 
   webSite: {
+    fontFamily: "'Montserrat Black'",
     display: 'flex',
     alignItems: 'center',
     fontSize: '10px'
