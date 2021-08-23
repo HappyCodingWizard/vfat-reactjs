@@ -5,6 +5,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useIsDarkMode } from 'state/user/hooks'
 
 import { Button } from 'components'
+import { connectWallet } from 'config/pools/ethers_helper'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -29,12 +31,19 @@ const ConnectWallet: React.FC = () => {
   const dark = useIsDarkMode()
   const mobile = useMediaQuery(breakpoints.down('xs'))
   const classes = useStyles({ dark, mobile })
+  const history = useHistory();
+
+  const handleClick = () => {
+    connectWallet().then(() => {
+      history.push('/networks');
+    })
+  }
 
   return (
     <Box className={cx(classes.root)}>
       <Button
         id='connect_wallet_button'
-        onClick={() => {}}
+        onClick={handleClick}
       >
         CONNECT WALLET
       </Button>
