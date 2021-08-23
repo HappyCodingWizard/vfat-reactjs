@@ -31,7 +31,6 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 
   networkName: {
-    fontFamily: "'Montserrat Black'",
     fontWeight: 900,
     color: palette.text.primary,
     fontSize: '30px'
@@ -126,7 +125,6 @@ const useStyles = makeStyles(({ palette }) => ({
   siblingName: {
     fontSize: '10px',
     fontWeight: 'bold',
-    fontFamily: "'Montserrat Black'",
   }
 }))
 
