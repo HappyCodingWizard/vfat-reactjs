@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cx from 'classnames'
 import { Box, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -37,7 +37,7 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 
   ArrowRight: {
-    width: '50px',
+    width: '40px',
     transition: 'width .5s',
 
     '& div:first-child': {
@@ -54,6 +54,11 @@ const useStyles = makeStyles(({ palette }) => ({
       float: 'left',
       transition: 'float .5s',
     },
+    '& ~ span': {
+      opacity: 0,
+      marginRight: '-30px',
+      marginBottom: '5px',
+    },
 
     '&:hover': {
       background: '#DAE7F9',
@@ -67,12 +72,15 @@ const useStyles = makeStyles(({ palette }) => ({
       '& div:last-child': {
         display: 'block',
         float: 'right',
+      },
+      '& ~ span': {
+        opacity: 1
       },
     }
   },
 
   ArrowLeft: {
-    width: '50px',
+    width: '40px',
     transition: 'width .5s',
 
     '& div:first-child': {
@@ -89,6 +97,11 @@ const useStyles = makeStyles(({ palette }) => ({
       float: 'right',
       transition: 'float .5s',
     },
+    '& ~ span': {
+      opacity: 0,
+      marginLeft: '-30px',
+      marginBottom: '5px',
+    },
 
     '&:hover': {
       background: '#DAE7F9',
@@ -103,8 +116,16 @@ const useStyles = makeStyles(({ palette }) => ({
         display: 'block',
         float: 'left',
       },
+      '& ~ span': {
+        opacity: 1
+      },
     }
   },
+
+  siblingName: {
+    fontSize: '10px',
+    fontWeight: 'bold',
+  }
 }))
 
 const SelectNetwork: React.FC = () => {
@@ -113,6 +134,8 @@ const SelectNetwork: React.FC = () => {
   const mobile = useMediaQuery(breakpoints.down('xs'))
   const classes = useStyles({ dark, mobile })
   const history = useHistory()
+
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const renderArrow = ({ type, onClick, isEdge }: RenderArrowProps) => {
     const pointer = type === 'PREV' ? 'left' : 'right'
@@ -124,16 +147,29 @@ const SelectNetwork: React.FC = () => {
         width={'150px'}
         justifyContent={type === 'PREV' ? 'flex-end' : 'flex-start'}
       >
-        <Box
-          className={cx({[classes.ArrowLeft]: type === 'PREV'}, {[classes.ArrowRight]: type !== 'PREV'})}
-          style={{cursor: 'pointer'}}
-          onClick={onClick}
+        <Box 
+          display="flex"
+          flexDirection="column"
+          width="100%"
+          alignItems={type === 'PREV' ? 'flex-end' : 'flex-start'}
         >
-          <Box>
-            <i className={`far fa-chevron-circle-${pointer}`} />
+          <Box
+            className={cx({[classes.ArrowLeft]: type === 'PREV'}, {[classes.ArrowRight]: type !== 'PREV'})}
+            style={{cursor: 'pointer'}}
+            order={2}
+            onClick={onClick}
+          >
+            <Box>
+              <i className={`far fa-chevron-circle-${pointer}`} />
+            </Box>
+            <Box >
+              <i className={`fas fa-chevron-circle-${pointer}`} />
+            </Box>
           </Box>
-          <Box>
-            <i className={`fas fa-chevron-circle-${pointer}`} />
+          <Box component='span' order={1} className={cx(classes.siblingName)}>
+            {type === 'PREV' ? 
+              networks[selectedIndex - 1]?.name ?? 'PREV' : 
+              networks[selectedIndex + 1]?.name ?? 'NEXT'}
           </Box>
         </Box>
       </Box>
@@ -141,6 +177,10 @@ const SelectNetwork: React.FC = () => {
   }
   const renderPagination = () => {
     return <></>
+  }
+
+  const onChange = (currentItem: any, pageIndex: number) => {
+    setSelectedIndex(pageIndex)
   }
 
   const handleSelectNetwork = (item: networkItemType) => {
@@ -160,6 +200,7 @@ const SelectNetwork: React.FC = () => {
         isRTL={false}
         renderPagination={renderPagination}
         renderArrow={renderArrow}
+        onChange={onChange}
       >
         {networks && networks.map(item => (
           <Box className={cx(classes.carouselItem)} key={item.name}>
