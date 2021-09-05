@@ -10,6 +10,8 @@ import { useHistory } from 'react-router'
 
 import { networks, networkItemType } from 'data'
 import { useNetwork } from 'state/network/hooks'
+import { pageNetworkFromParam } from 'config/pools/ethers_helper'
+import { ethers } from 'ethers'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -185,14 +187,36 @@ const SelectNetwork: React.FC = () => {
     setSelectedIndex(pageIndex)
   }
 
-  const handleSelectNetwork = (item: networkItemType) => {
+  const handleSelectNetwork = async (item: networkItemType) => {
     setNetwork(item)
-    history.push({
-      pathname: item.redirectUrl,
-      state: {
-        networkInfo: item
-      }
-    })
+
+    const targetNetwork = pageNetworkFromParam(item.id)
+    console.log(targetNetwork)
+
+    const walletProvider = window.ethereum
+    let provider = new ethers.providers.Web3Provider(walletProvider)
+    let connectedNetwork = await provider.getNetwork()
+    let targetNetworkId = parseInt(targetNetwork.chainId, 16)
+
+    if (connectedNetwork.chainId !== targetNetworkId) {
+      await walletProvider.request({ method: 'wallet_addEthereumChain', params: [targetNetwork] }).catch()
+
+      walletProvider.on('chainChanged', (chainId: string) => {
+        history.push({
+          pathname: item.redirectUrl,
+          state: {
+            networkInfo: item
+          }
+        })
+      });
+    } else {
+      history.push({
+        pathname: item.redirectUrl,
+        state: {
+          networkInfo: item
+        }
+      })
+    }
   }
 
   useEffect(() => {

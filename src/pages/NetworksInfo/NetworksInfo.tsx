@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import cx from 'classnames'
 import { useHistory } from 'react-router'
 import { Box, Button, useMediaQuery } from '@material-ui/core'
@@ -13,6 +13,8 @@ import ICON_WEBSITE from 'assets/icon/ionic-md-link.svg'
 // import ICON_ARROW_LEFT from 'assets/icon/ionic-md-arrow-dropleft-circle.svg'
 // import ICON_ARROW_RIGHT from 'assets/icon/ionic-md-arrow-dropright-circle.svg'
 import BACK_POOLLOGO from 'assets/pools/poolLogoBackground.png'
+import { useNetwork } from 'state/network/hooks'
+import { usePoolToken } from 'state/pool/hooks'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -97,7 +99,14 @@ const NetworksInfo: React.FC = () => {
   const carouselRef = useRef<any>(null)
   const history = useHistory()
   const { rows } = getNetworkInfo()
+  const [network] = useNetwork()
+  const [, setToken] = usePoolToken()
   const colorList = ['#FDC113', '#C81B72', '#1BC870']
+
+  useEffect(() => {
+    if (!network) history.push('/networks')
+    // eslint-disable-next-line
+  }, [network])
 
   const renderHighlight = (value: string | number, i: number) => {
     return (
@@ -138,7 +147,8 @@ const NetworksInfo: React.FC = () => {
     return tag.match(/"([^']+)"/)![1] ?? '';
   }
 
-  const handleClickPool = (url: string) => {
+  const handleClickPool = (url: string, token: string) => {
+    setToken(token)
     history.push(extractLink(url))
   }
 
@@ -156,7 +166,7 @@ const NetworksInfo: React.FC = () => {
         {rows &&
           rows.map((row: string[], i: number) => (
             <Box className={cx(classes.carouselItem)} key={i}>
-              <Box className={cx(classes.poolName)} onClick={() => handleClickPool(row[1])}>
+              <Box className={cx(classes.poolName)} onClick={() => handleClickPool(row[1], row[2])}>
                 {renderHighlight('#' + (i + 1), i)}&nbsp;
                 {row[0]}
               </Box>

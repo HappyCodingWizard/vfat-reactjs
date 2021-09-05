@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import cx from 'classnames'
 import { Box, Button, useMediaQuery } from '@material-ui/core'
 import {
@@ -10,8 +10,12 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useIsDarkMode } from 'state/user/hooks'
 import { FilterToolbar, PoolGrid } from 'components'
 
-// import { consoleInit } from "../../config/pools/ethers_helper";
-// import { getPoolInfo } from "hooks";
+import { consoleInit } from "../../config/pools/ethers_helper";
+import { getPoolInfo, nFormatter } from "hooks";
+import { useNetwork } from 'state/network/hooks'
+import { useHistory } from 'react-router'
+import { usePool, usePoolToken } from 'state/pool/hooks'
+import { isNaN } from 'lodash'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {},
@@ -43,6 +47,16 @@ const useStyles = makeStyles(({ palette }) => ({
     color: palette.common.white,
     width: '120px',
     fontSize: '12px',
+  },
+  priceCell: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    lineHeight: '100%',
+
+    '& > span:last-child': {
+      fontSize: '9px',
+    }
   }
 }))
 
@@ -51,6 +65,11 @@ const PoolDetailInfo: React.FC = () => {
   const dark = useIsDarkMode()
   const mobile = useMediaQuery(breakpoints.down('xs'))
   const classes = useStyles({ dark, mobile })
+  const [network] = useNetwork()
+  const history = useHistory();
+  const [pool] = usePool();
+  const [token] = usePoolToken();
+  const [rows, setRows] = useState([]);
 
   const renderAction = (params: GridCellParams): React.ReactNode => {
     return (
@@ -73,6 +92,19 @@ const PoolDetailInfo: React.FC = () => {
         >
           CLAIM
         </Button>
+      </>
+    )
+  }
+
+  const renderTwoPrice = (params: GridCellParams): React.ReactNode => {
+    const price = params.getValue(params.id, `${params.field}`)
+    const priceUsd = params.getValue(params.id, `${params.field}Usd`)
+    return (
+      <>
+        <Box className={cx(classes.priceCell)}>
+          <span>{price}&nbsp;{token}</span>
+          <span>{`(${priceUsd})`}</span>
+        </Box>
       </>
     )
   }
@@ -114,7 +146,8 @@ const PoolDetailInfo: React.FC = () => {
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      flex: 1
+      flex: 1,
+      renderCell: renderTwoPrice
     },
     {
       field: 'cakePerWeek',
@@ -149,32 +182,65 @@ const PoolDetailInfo: React.FC = () => {
     }
   ]
 
-  const rows = [
-    {
-      id: 1,
-      marketCap: '19.12M',
-      tvl: 0,
-      totalStaked: '3789376.1426 CAKE',
-      cakePerWeek: '63,000.00',
-      apr: '0.24% | 1.66 % | 86.45 %',
-      myStaked: '0'
-    },
-    {
-      id: 2,
-      marketCap: '19.12M',
-      tvl: 0,
-      totalStaked: '3789376.1426 CAKE',
-      cakePerWeek: '63,000.00',
-      apy: '0.24% | 1.66 % | 86.45 %',
-      myStaked: '0'
-    }
-  ]
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     marketCap: '19.12M',
+  //     tvl: 0,
+  //     totalStaked: '3789376.1426 CAKE',
+  //     cakePerWeek: '63,000.00',
+  //     apr: '0.24% | 1.66 % | 86.45 %',
+  //     myStaked: '0'
+  //   },
+  //   {
+  //     id: 2,
+  //     marketCap: '19.12M',
+  //     tvl: 0,
+  //     totalStaked: '3789376.1426 CAKE',
+  //     cakePerWeek: '63,000.00',
+  //     apr: '0.24% | 1.66 % | 86.45 %',
+  //     myStaked: '0'
+  //   }
+  // ]
 
-  // const main = getPoolInfo();
+  const mapToTable = (poolInfos: any[]): any => {
+    console.log(poolInfos);
+    return poolInfos.map((poolInfo) => {
+      const yearlyAPR = isNaN(poolInfo.yearlyAPR) ? 0 : poolInfo.yearlyAPR,
+            weeklyAPR = yearlyAPR / 52,
+            dailyAPR = yearlyAPR / 365
+      return {
+        id: poolInfo.poolIndex + 1,
+        marketCap: nFormatter(poolInfo.poolPrices.marketCap, 2) ?? '',
+        tvl: poolInfo.poolPrices.tvl ? nFormatter(poolInfo.poolPrices.tvl, 2) : '-',
+        totalStaked: `${poolInfo.poolPrices.staked.toFixed(4)} `,
+        totalStakedUsd: nFormatter(poolInfo.totalStakedUsd, 2),
+        cakePerWeek: poolInfo.poolRewardsPerWeek,
+        cakePerWeekUsd: nFormatter(poolInfo.poolRewardsPerWeekUsd, 2),
+        apr: `${dailyAPR.toFixed(2)}% | ${weeklyAPR.toFixed(2)} | ${yearlyAPR.toFixed(2)}`,
+        myStaked: isNaN(poolInfo.userStakedPct) ? 0 : poolInfo.userStakedPct
+      }
+    })
+  }
+
+  const main = getPoolInfo();
   useEffect(() => {
-    // main && consoleInit(main);
+    (async() => {
+      main && consoleInit(main)
+    })();
     // eslint-disable-next-line
-  }, [])
+  }, [main])
+
+  useEffect(() => {
+    if (!network) history.push('/networks')
+    // eslint-disable-next-line
+  }, [network])
+
+  useEffect(() => {
+    if (pool) {
+      setRows(mapToTable(pool))
+    }
+  }, [pool])
 
   return (
     <Box className={cx(classes.root)}>
@@ -184,7 +250,7 @@ const PoolDetailInfo: React.FC = () => {
         <Box className={cx(classes.overview)}>
           <Box className='label'>POOLS</Box>
           <Box className='value' style={{ backgroundColor: '#FDC113' }}>
-            11
+            {rows.length}
           </Box>
         </Box>
         <Box className={cx(classes.overview)}>
@@ -213,6 +279,8 @@ const PoolDetailInfo: React.FC = () => {
           autoHeight
         />
       </Box>
+
+      <Box id='log' display='none' />
     </Box>
   )
 }
