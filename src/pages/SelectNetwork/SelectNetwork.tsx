@@ -9,6 +9,7 @@ import { Button } from 'components'
 import { useHistory } from 'react-router'
 
 import { networks, networkItemType } from 'data'
+import { useNetwork } from 'state/network/hooks'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -136,6 +137,7 @@ const SelectNetwork: React.FC = () => {
   const history = useHistory()
 
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [, setNetwork] = useNetwork()
 
   const renderArrow = ({ type, onClick, isEdge }: RenderArrowProps) => {
     const pointer = type === 'PREV' ? 'left' : 'right'
@@ -184,6 +186,7 @@ const SelectNetwork: React.FC = () => {
   }
 
   const handleSelectNetwork = (item: networkItemType) => {
+    setNetwork(item)
     history.push({
       pathname: item.redirectUrl,
       state: {
