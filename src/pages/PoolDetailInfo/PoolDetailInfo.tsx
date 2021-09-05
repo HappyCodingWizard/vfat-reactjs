@@ -102,7 +102,7 @@ const PoolDetailInfo: React.FC = () => {
     return (
       <>
         <Box className={cx(classes.priceCell)}>
-          <span>{price}&nbsp;{token}</span>
+          <span>{price}</span>
           <span>{`(${priceUsd})`}</span>
         </Box>
       </>
@@ -154,7 +154,8 @@ const PoolDetailInfo: React.FC = () => {
       headerName: 'CAKE/WEEK',
       align: 'center',
       headerAlign: 'center',
-      sortable: false
+      sortable: false,
+      renderCell: renderTwoPrice
     },
     {
       field: 'apr',
@@ -213,7 +214,7 @@ const PoolDetailInfo: React.FC = () => {
         id: poolInfo.poolIndex + 1,
         marketCap: nFormatter(poolInfo.poolPrices.marketCap, 2) ?? '',
         tvl: poolInfo.poolPrices.tvl ? nFormatter(poolInfo.poolPrices.tvl, 2) : '-',
-        totalStaked: `${poolInfo.poolPrices.staked.toFixed(4)} `,
+        totalStaked: `${poolInfo.poolPrices.staked.toFixed(4)} ${token}`,
         totalStakedUsd: nFormatter(poolInfo.totalStakedUsd, 2),
         cakePerWeek: poolInfo.poolRewardsPerWeek,
         cakePerWeekUsd: nFormatter(poolInfo.poolRewardsPerWeekUsd, 2),
@@ -240,6 +241,7 @@ const PoolDetailInfo: React.FC = () => {
     if (pool) {
       setRows(mapToTable(pool))
     }
+    // eslint-disable-next-line
   }, [pool])
 
   return (
