@@ -12,6 +12,7 @@ import ICON_WEBSITE from 'assets/icon/ionic-md-link.svg'
 import ICON_DOWN from 'assets/icon/material-arrow-drop-down.svg'
 // import ICON_ARROW_LEFT from 'assets/icon/ionic-md-arrow-dropleft-circle.svg'
 // import ICON_ARROW_RIGHT from 'assets/icon/ionic-md-arrow-dropright-circle.svg'
+import BACK_POOLLOGO from 'assets/pools/poolLogoBackground.png'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -54,6 +55,23 @@ const useStyles = makeStyles(({ palette }) => ({
     fontSize: '45px',
     fontWeight: 900,
     textTransform: 'uppercase'
+  },
+
+  poolLogo: {
+    background: `url(${BACK_POOLLOGO}) left 5px top 5px no-repeat`,
+    backgroundSize: 'cover',
+    width: '200px',
+    height: '200px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    '& > img': {
+      width: '65%',
+      height: '65%',
+      transform: 'rotateY(-30deg) rotateX(30deg)',
+      transformStyle: 'preserve-3d'
+    }
   },
 
   tokenName: {
@@ -167,12 +185,9 @@ const NetworksInfo: React.FC = () => {
                 {row[0]}
               </Box>
               <Box mt={'20px'} />
-              <img
-                src={fetchLogo(row[0])}
-                alt={row[0]}
-                width='150px'
-                height='150px'
-              />
+              <Box className={cx(classes.poolLogo)}>
+                <img src={fetchLogo(row[0])} alt={row[0]} />
+              </Box>
               <Box mt={'15px'} />
               <Box className={cx(classes.tokenName)}>
                 <img src={ICON_TOKEN} alt='Token' width='20px' height='20px' />
