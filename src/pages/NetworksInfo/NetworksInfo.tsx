@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import cx from 'classnames'
+import { useHistory } from 'react-router'
 import { Box, Button, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useIsDarkMode } from 'state/user/hooks'
@@ -94,6 +95,7 @@ const NetworksInfo: React.FC = () => {
   const mobile = useMediaQuery(breakpoints.down('xs'))
   const classes = useStyles({ dark, mobile })
   const carouselRef = useRef<any>(null)
+  const history = useHistory()
   const { rows } = getNetworkInfo()
   const colorList = ['#FDC113', '#C81B72', '#1BC870']
 
@@ -132,8 +134,12 @@ const NetworksInfo: React.FC = () => {
     }
   }
 
+  const extractLink = (tag: string): string => {
+    return tag.match(/"([^']+)"/)![1] ?? '';
+  }
+
   const handleClickPool = (url: string) => {
-    console.log('url', url)
+    history.push(extractLink(url))
   }
 
   return (
