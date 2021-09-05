@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box, useMediaQuery, Container } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import cx from 'classnames'
@@ -101,10 +101,6 @@ const Header: React.FC = () => {
   const handleChangeNetwork = () => {
     history.push('/networks')
   }
-
-  useEffect(() => {
-    console.log(network)
-  }, [network])
 
   return (
     <Box className={cx(classes.root)}>
