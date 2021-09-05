@@ -96,10 +96,11 @@ const Header: React.FC = () => {
   const dark = useIsDarkMode()
   const classes = useStyles({ dark, mobile })
   const history = useHistory()
-  const [network] = useNetwork()
+  const [network, setNetwork] = useNetwork()
 
   const handleChangeNetwork = () => {
     history.push('/networks')
+    setNetwork(null)
   }
 
   return (

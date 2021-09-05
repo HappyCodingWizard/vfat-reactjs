@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cx from 'classnames'
 import { Box, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -194,6 +194,10 @@ const SelectNetwork: React.FC = () => {
       }
     })
   }
+
+  useEffect(() => {
+    setNetwork(null)
+  }, [setNetwork])
 
   return (
     <Box className={cx(classes.root)}>

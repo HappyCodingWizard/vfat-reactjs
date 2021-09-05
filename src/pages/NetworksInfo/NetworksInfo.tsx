@@ -3,13 +3,12 @@ import cx from 'classnames'
 import { Box, Button, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useIsDarkMode } from 'state/user/hooks'
-
 import Carousel, { RenderArrowProps } from 'react-elastic-carousel'
 import { getNetworkInfo, fetchLogo } from 'hooks'
+import { FilterToolbar } from 'components'
 
 import ICON_TOKEN from 'assets/icon/awesome-coins.svg'
 import ICON_WEBSITE from 'assets/icon/ionic-md-link.svg'
-import ICON_DOWN from 'assets/icon/material-arrow-drop-down.svg'
 // import ICON_ARROW_LEFT from 'assets/icon/ionic-md-arrow-dropleft-circle.svg'
 // import ICON_ARROW_RIGHT from 'assets/icon/ionic-md-arrow-dropright-circle.svg'
 import BACK_POOLLOGO from 'assets/pools/poolLogoBackground.png'
@@ -26,22 +25,6 @@ const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '50px'
   },
 
-  filter: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-
-  filterItem: {
-    borderRadius: '10px',
-    backgroundColor: '#DAE7F9',
-    padding: '10px',
-    margin: '0px 10px',
-    display: 'flex',
-    alignItems: 'center',
-    fontSize: '10px',
-    cursor: 'pointer'
-  },
-
   carouselItem: {
     display: 'flex',
     flexDirection: 'column',
@@ -54,7 +37,8 @@ const useStyles = makeStyles(({ palette }) => ({
   poolName: {
     fontSize: '45px',
     fontWeight: 900,
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    cursor: 'pointer'
   },
 
   poolLogo: {
@@ -110,10 +94,7 @@ const NetworksInfo: React.FC = () => {
   const mobile = useMediaQuery(breakpoints.down('xs'))
   const classes = useStyles({ dark, mobile })
   const carouselRef = useRef<any>(null)
-
-  const TableData = getNetworkInfo()
-  const { rows } = TableData
-
+  const { rows } = getNetworkInfo()
   const colorList = ['#FDC113', '#C81B72', '#1BC870']
 
   const renderHighlight = (value: string | number, i: number) => {
@@ -151,24 +132,13 @@ const NetworksInfo: React.FC = () => {
     }
   }
 
+  const handleClickPool = (url: string) => {
+    console.log('url', url)
+  }
+
   return (
     <Box className={cx(classes.root)}>
-      <Box className={cx(classes.toolbar)}>
-        <Box className={cx(classes.filter)}>
-          <Box className={cx(classes.filterItem)}>
-            TVL&nbsp;
-            <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
-          </Box>
-          <Box className={cx(classes.filterItem)}>
-            Reward&nbsp;
-            <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
-          </Box>
-          <Box className={cx(classes.filterItem)}>
-            Last 30 days&nbsp;
-            <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
-          </Box>
-        </Box>
-      </Box>
+      <FilterToolbar />
 
       <Carousel
         ref={ref => (carouselRef.current = ref)}
@@ -180,7 +150,7 @@ const NetworksInfo: React.FC = () => {
         {rows &&
           rows.map((row: string[], i: number) => (
             <Box className={cx(classes.carouselItem)} key={i}>
-              <Box className={cx(classes.poolName)}>
+              <Box className={cx(classes.poolName)} onClick={() => handleClickPool(row[1])}>
                 {renderHighlight('#' + (i + 1), i)}&nbsp;
                 {row[0]}
               </Box>

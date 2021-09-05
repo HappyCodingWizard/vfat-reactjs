@@ -8,7 +8,7 @@ import { setNetworkAction } from './actions'
 
 export function useNetwork (): [
   networkItemType | null,
-  (network: networkItemType) => void
+  (network: networkItemType | null) => void
 ] {
   const dispatch = useDispatch<AppDispatch>()
   const { network } = useSelector<AppState, { network: networkItemType | null }>(
@@ -17,7 +17,7 @@ export function useNetwork (): [
   )
 
   const setNetwork = useCallback(
-    (network: networkItemType) => {
+    (network: networkItemType | null) => {
       dispatch(setNetworkAction(network))
     },
     [dispatch]
