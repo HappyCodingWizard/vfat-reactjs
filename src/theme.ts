@@ -26,13 +26,22 @@ const secondaryLightNight = "#131B59";
 const secondaryDarkDay = "#A5A5A5";
 const secondaryDarkNight = "rgba(24, 33, 100, 0.5)";
 
-const infoMainDay = "#F5F5F5";
-const infoMainNight = "#2B3992";
+const infoMainDay = "#1E2735";
+const infoMainNight = "#1E2735";
 
 const infoDarkDay =
   "linear-gradient(180deg, #A5A5A5 0%, #A5A5A5 54.17%, #A5A5A5 99.99%)";
 const infoDarkNight =
   "linear-gradient(180deg, #73D6F1 0%, #5F72FF 99.99%, #2F3DA0 100%)";
+
+const SuccessMainDay = '#1BC870';
+const SuccessMainNight = '#1BC870';
+
+const ErrorMainDay = '#C81B72';
+const ErrorMainNight = '#C81B72';
+
+const WarningMainDay = '#FDC113';
+const WarningMainNight = '#FDC113';
 
   const backgroundDay = "#F1F6FF";
   const backgroundNight = "#F1F6FF";
@@ -69,9 +78,6 @@ const callGradientB = "#1EFF78";
 
 const putGradientA = "#EB4A97";
 const putGradientB = "#8C43F6";
-
-const hotBadgeGradientA = "#EB7A4A";
-const hotBadgeGradientB = "#F643CF";
 
 const dividerGreyDay = "#E9E9E9";
 const dividerGreyNight = "#212121";
@@ -121,8 +127,7 @@ export const lightTheme = responsiveFontSizes(
         white,
       },
       warning: {
-        main: hotBadgeGradientA,
-        dark: hotBadgeGradientB,
+        main: WarningMainDay,
       },
       text: {
         primary: textPrimaryDay,
@@ -134,12 +139,10 @@ export const lightTheme = responsiveFontSizes(
         paper: backgroundPaperDay,
       },
       success: {
-        main: callGradientA,
-        dark: callGradientB,
+        main: SuccessMainDay,
       },
       error: {
-        main: putGradientA,
-        dark: putGradientB,
+        main: ErrorMainDay,
       },
       divider: dividerGreyDay,
     },
@@ -615,8 +618,7 @@ export const darkTheme = responsiveFontSizes(
         white,
       },
       warning: {
-        main: hotBadgeGradientA,
-        dark: hotBadgeGradientB,
+        main: WarningMainNight,
       },
       text: {
         primary: textPrimaryNight,
@@ -628,12 +630,10 @@ export const darkTheme = responsiveFontSizes(
         paper: backgroundPaperNight,
       },
       success: {
-        main: callGradientA,
-        dark: callGradientB,
+        main: SuccessMainNight,
       },
       error: {
-        main: putGradientA,
-        dark: putGradientB,
+        main: ErrorMainNight,
       },
       divider: dividerGreyNight,
       // Used to shift a color's luminance by approximately

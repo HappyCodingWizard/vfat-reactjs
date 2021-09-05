@@ -6,12 +6,13 @@ const StyledDataGrid = withStyles(theme => ({
     border: 'unset',
     '& .MuiDataGrid-columnHeaderTitle': {
       fontWeight: 900,
-      fontSize: '15px',
+      fontSize: '12px',
       color: theme.palette.primary.main,
     },
     '& .MuiDataGrid-columnSeparator': {
-      opacity: '0 !important',
-      border: 'unset',
+      // opacity: '0 !important',
+      // border: 'unset',
+      display: 'none'
     },
     '& .MuiDataGrid-cell:focus, & .MuiDataGrid-columnHeader:focus': {
       outline: 'none !important'
@@ -24,13 +25,22 @@ const StyledDataGrid = withStyles(theme => ({
     },
     '& .MuiDataGrid-cell': {
       border: 'unset !important'
+    },
+
+    '& .MuiDataGrid-renderingZone': {
+      '& > div:nth-child(even)': {
+        background: '#FFFFFF'
+      },
+      '& > div:nth-child(odd)': {
+        background: '#F3F3F3'
+      }
     }
   },
   columnHeader: {
   },
   row: {
     fontWeight: 'normal',
-    fontSize: '15px',
+    fontSize: '12px',
     color: theme.palette.primary.main,
     width: '100% !important',
     padding: '0 5px',
