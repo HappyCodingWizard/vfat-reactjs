@@ -15,7 +15,6 @@ export function useNetwork (): [
     ({ network }) => network,
     shallowEqual
   )
-  console.log(network)
 
   const setNetwork = useCallback(
     (network: networkItemType) => {
