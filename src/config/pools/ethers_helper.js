@@ -165,8 +165,6 @@ export const init_wallet = async function (callback) {
     hideLoading()
   }
   _print('')
-
-  window.printLog();
 }
 
 export function clearLocalStorage() {
@@ -331,12 +329,10 @@ export const toFixed = function (num, fixed) {
 
 export const start = function (f) {
   f().then(() => {
-    window.printLog();
   }).catch((e) => {
     // _print(e)
     console.error(e);
     _print("Oops something went wrong. Try refreshing the page.");
-    window.printLog();
   });
 }
 
@@ -2644,8 +2640,6 @@ export async function loadSynthetixPoolInfo(App, tokens, prices, stakingAbi, sta
 }
 
 export async function printSynthetixPool(App, info, chain = "eth", customURLs) {
-  window.printLog();
-
   info.poolPrices.print_price(chain, 4, customURLs);
   _print(`${info.rewardTokenTicker} Per Week: ${info.weeklyRewards.toFixed(2)} ($${formatMoney(info.usdPerWeek)})`);
   const weeklyAPR = info.usdPerWeek / info.staked_tvl * 100;
@@ -2729,8 +2723,6 @@ export async function printSynthetixPool(App, info, chain = "eth", customURLs) {
   _print_link(`Exit`, exit)
   _print("");
 
-  window.printStyledLog();
-
   return {
     staked_tvl: info.poolPrices.staked_tvl,
     userStaked: userStakedUsd,
@@ -2739,13 +2731,11 @@ export async function printSynthetixPool(App, info, chain = "eth", customURLs) {
 }
 
 export async function loadSynthetixPool(App, tokens, prices, abi, address, rewardTokenFunction, stakeTokenFunction) {
-  window.printLog();
   const info = await loadSynthetixPoolInfo(App, tokens, prices, abi, address, rewardTokenFunction, stakeTokenFunction);
   return await printSynthetixPool(App, info);
 }
 
 export async function loadMultipleSynthetixPools(App, tokens, prices, pools) {
-  window.printLog();
   let totalStaked = 0, totalUserStaked = 0, individualAPRs = [];
   const infos = await Promise.all(pools.map(p =>
     loadSynthetixPoolInfo(App, tokens, prices, p.abi, p.address, p.rewardTokenFunction, p.stakeTokenFunction)));

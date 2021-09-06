@@ -73,8 +73,6 @@ export async function main() {
     _print(`Initialized ${App.YOUR_ADDRESS}\n`);
     _print("Reading smart contracts...\n");
     
-    window.printLog();
-
     let prices = {};
     let tokens = {};
 
@@ -185,6 +183,4 @@ async function printAaveData(data){
     _print(`Estimated Borrow earnings: Day ($${formatMoney(data.bUsdPerDay)}) Week ($${formatMoney(data.bUsdPerWeek)}) Year: ($${formatMoney(data.bUsdPerYear)})`);
   }
   _print("");
-  
-  window.printStyledLog();
 }

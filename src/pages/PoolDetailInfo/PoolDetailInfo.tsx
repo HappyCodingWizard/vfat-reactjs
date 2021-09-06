@@ -218,7 +218,7 @@ const PoolDetailInfo: React.FC = () => {
         totalStakedUsd: nFormatter(poolInfo.totalStakedUsd, 2),
         cakePerWeek: poolInfo.poolRewardsPerWeek,
         cakePerWeekUsd: nFormatter(poolInfo.poolRewardsPerWeekUsd, 2),
-        apr: `${dailyAPR.toFixed(2)}% | ${weeklyAPR.toFixed(2)} | ${yearlyAPR.toFixed(2)}`,
+        apr: `${dailyAPR.toFixed(2)}% | ${weeklyAPR.toFixed(2)}% | ${yearlyAPR.toFixed(2)}%`,
         myStaked: isNaN(poolInfo.userStakedPct) ? 0 : poolInfo.userStakedPct
       }
     })
@@ -281,8 +281,6 @@ const PoolDetailInfo: React.FC = () => {
           autoHeight
         />
       </Box>
-
-      <Box id='log' display='none' />
     </Box>
   )
 }

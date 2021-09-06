@@ -188,8 +188,6 @@ const SelectNetwork: React.FC = () => {
   }
 
   const handleSelectNetwork = async (item: networkItemType) => {
-    setNetwork(item)
-
     const targetNetwork = pageNetworkFromParam(item.id)
     console.log(targetNetwork)
 
@@ -202,6 +200,7 @@ const SelectNetwork: React.FC = () => {
       await walletProvider.request({ method: 'wallet_addEthereumChain', params: [targetNetwork] }).catch()
 
       walletProvider.on('chainChanged', (chainId: string) => {
+        setNetwork(item)
         history.push({
           pathname: item.redirectUrl,
           state: {
@@ -210,6 +209,7 @@ const SelectNetwork: React.FC = () => {
         })
       });
     } else {
+      setNetwork(item)
       history.push({
         pathname: item.redirectUrl,
         state: {
