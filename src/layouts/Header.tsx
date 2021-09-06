@@ -5,6 +5,7 @@ import cx from 'classnames'
 
 import { useIsDarkMode } from 'state/user/hooks'
 import { useHistory } from 'react-router'
+import { useNetwork } from 'state/network/hooks'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
   root: {
@@ -64,6 +65,28 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     padding: '0px 10px',
     display: 'inline-block',
     cursor: 'pointer'
+  },
+  
+  network: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+
+  networkName: {
+    fontWeight: 900,
+    color: palette.primary.main
+  },
+  changeNetwork: {
+    fontSize: '10px',
+    color: palette.primary.light,
+    cursor: 'pointer',
+    transition: 'border .2s ease-in',
+    borderBottom: `1px solid transparent`,
+    display: 'inline-block',
+
+    '&:hover': {
+      borderBottom: `1px solid ${palette.primary.light}`
+    }
   }
 }))
 
@@ -73,6 +96,12 @@ const Header: React.FC = () => {
   const dark = useIsDarkMode()
   const classes = useStyles({ dark, mobile })
   const history = useHistory()
+  const [network, setNetwork] = useNetwork()
+
+  const handleChangeNetwork = () => {
+    history.push('/networks')
+    setNetwork(null)
+  }
 
   return (
     <Box className={cx(classes.root)}>
@@ -86,11 +115,32 @@ const Header: React.FC = () => {
             <Box className={cx(classes.logoTitle)}>Their Logo</Box>
           </Box>
 
-          <Box className={cx(classes.navMenu)}>
-            <Box className={cx(classes.navItem)}>About</Box>
-            <Box className={cx(classes.navItem)}>Contact</Box>
-            <Box className={cx(classes.navItem)}>Branding</Box>
-          </Box>
+          {!network && (
+            <Box className={cx(classes.navMenu)}>
+              <Box className={cx(classes.navItem)}>About</Box>
+              <Box className={cx(classes.navItem)}>Contact</Box>
+              <Box className={cx(classes.navItem)}>Branding</Box>
+            </Box>
+          )}
+          {network && (
+            <Box className={cx(classes.network)}>
+              <img
+                src={network.logoSrc}
+                alt='network logo'
+                width='60px'
+                height='60px'
+              />
+              <Box textAlign='right' display='inline-block'>
+                <Box className={cx(classes.networkName)}>{network.name}</Box>
+                <Box
+                  className={cx(classes.changeNetwork)}
+                  onClick={handleChangeNetwork}
+                >
+                  Change Network
+                </Box>
+              </Box>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>

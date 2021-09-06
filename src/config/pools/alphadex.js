@@ -118,14 +118,11 @@ export async function main() {
   _print(`Initialized ${App.YOUR_ADDRESS}`);
   _print("Reading smart contracts...\n");
 
-  window.printLog();
-
   var tokens = {};
   var prices = {};
 
   for (const c of CONTRACTS) {
     await loadPool(App, tokens, prices, c);
-    window.printStyledLog();
   }
 
   hideLoading();

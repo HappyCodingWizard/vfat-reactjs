@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cx from 'classnames'
 import { Box, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -9,6 +9,9 @@ import { Button } from 'components'
 import { useHistory } from 'react-router'
 
 import { networks, networkItemType } from 'data'
+import { useNetwork } from 'state/network/hooks'
+import { pageNetworkFromParam } from 'config/pools/ethers_helper'
+import { ethers } from 'ethers'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -136,6 +139,7 @@ const SelectNetwork: React.FC = () => {
   const history = useHistory()
 
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [, setNetwork] = useNetwork()
 
   const renderArrow = ({ type, onClick, isEdge }: RenderArrowProps) => {
     const pointer = type === 'PREV' ? 'left' : 'right'
@@ -183,14 +187,41 @@ const SelectNetwork: React.FC = () => {
     setSelectedIndex(pageIndex)
   }
 
-  const handleSelectNetwork = (item: networkItemType) => {
-    history.push({
-      pathname: item.redirectUrl,
-      state: {
-        networkInfo: item
-      }
-    })
+  const handleSelectNetwork = async (item: networkItemType) => {
+    const targetNetwork = pageNetworkFromParam(item.id)
+    console.log(targetNetwork)
+
+    const walletProvider = window.ethereum
+    let provider = new ethers.providers.Web3Provider(walletProvider)
+    let connectedNetwork = await provider.getNetwork()
+    let targetNetworkId = parseInt(targetNetwork.chainId, 16)
+
+    if (connectedNetwork.chainId !== targetNetworkId) {
+      await walletProvider.request({ method: 'wallet_addEthereumChain', params: [targetNetwork] }).catch()
+
+      walletProvider.on('chainChanged', (chainId: string) => {
+        setNetwork(item)
+        history.push({
+          pathname: item.redirectUrl,
+          state: {
+            networkInfo: item
+          }
+        })
+      });
+    } else {
+      setNetwork(item)
+      history.push({
+        pathname: item.redirectUrl,
+        state: {
+          networkInfo: item
+        }
+      })
+    }
   }
+
+  useEffect(() => {
+    setNetwork(null)
+  }, [setNetwork])
 
   return (
     <Box className={cx(classes.root)}>

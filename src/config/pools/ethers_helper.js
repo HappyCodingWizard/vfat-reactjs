@@ -3,6 +3,9 @@ import * as ethcall from "ethcall";
 import $ from "jquery";
 import * as BCData from "../BCData";
 import { getCurrentPriceAndTimestamp, calculateTwap } from "./dollar_helper";
+// import { usePool } from 'state/pool/hooks';
+import store from 'state'
+import { emptyPoolInfoAction, updatePoolInfoAction } from 'state/pool/actions'
 
 const {
   NETWORKS,
@@ -82,6 +85,44 @@ export const pageNetwork = function () {
   return NETWORKS.ETHEREUM
 }
 
+export const pageNetworkFromParam = function (network) {
+  if (network === 'bsc') {
+    return NETWORKS.BINANCE_SMART_CHAIN
+  }
+  if (network === 'heco') {
+    return NETWORKS.HECO
+  }
+  if (network === 'polygon') {
+    return NETWORKS.POLYGON
+  }
+  if (network === 'okex') {
+    return NETWORKS.OKEX
+  }
+  if (network === 'kcc') {
+    return NETWORKS.KCC
+  }
+  if (network === 'xdai') {
+    return NETWORKS.XDAI
+  }
+  if (network === 'fantom') {
+    return NETWORKS.FANTOM
+  }
+  if (network === 'harmony') {
+    return NETWORKS.HARMONY_S0
+  }
+  if (network === 'avax') {
+    return NETWORKS.AVALANCHE
+  }
+  if (network === 'fuse') {
+    return NETWORKS.FUSE
+  }
+  if (network === 'thundercore') {
+    return NETWORKS.THUNDERCORE
+  }
+
+  return NETWORKS.ETHEREUM
+}
+
 export const init_wallet = async function (callback) {
 
   let targetNetwork = pageNetwork()
@@ -124,8 +165,6 @@ export const init_wallet = async function (callback) {
     hideLoading()
   }
   _print('')
-
-  window.printLog();
 }
 
 export function clearLocalStorage() {
@@ -194,9 +233,9 @@ export async function init_ethers() {
     }
 
   } catch (e) {
-
+    console.log(e)
   }
-
+  
   if (!App.YOUR_ADDRESS || !ethers.utils.isAddress(App.YOUR_ADDRESS)) {
     const msg = 'Could not initialize your address. Make sure your address is checksum valid.';
     throw msg
@@ -290,12 +329,10 @@ export const toFixed = function (num, fixed) {
 
 export const start = function (f) {
   f().then(() => {
-    window.printLog();
   }).catch((e) => {
     // _print(e)
     console.error(e);
     _print("Oops something went wrong. Try refreshing the page.");
-    window.printLog();
   });
 }
 
@@ -1511,8 +1548,9 @@ export function getGelatoPrices(tokens, prices, pool, chain = "eth") {
     q1: q1,
     price: price,
     tvl: tvl,
-    staked_tvl: staked_tvl,
+    staked_tvl: staked_tvl, //  staked USD
     stakeTokenTicker: stakeTokenTicker,
+    staked: pool.staked.toFixed(4), //  staked specific token
     print_price(chain = "eth") {
       // const t0address = t0.symbol === "ETH" ? "ETH" : t0.address;
       // const t1address = t1.symbol === "ETH" ? "ETH" : t1.address;
@@ -1596,6 +1634,7 @@ export function getUniPrices(tokens, prices, pool, chain = "eth") {
     q1: q1,
     price: price,
     tvl: tvl,
+    staked: pool.staked,
     staked_tvl: staked_tvl,
     stakeTokenTicker: stakeTokenTicker,
     print_price(chain = "eth", decimals, customURLs) {
@@ -1911,6 +1950,7 @@ export function getValuePrices(tokens, prices, pool) {
     t1, p1, q1, w1: pool.w1,
     price: price,
     tvl: tvl,
+    staked: pool.staked,
     staked_tvl: staked_tvl,
     stakeTokenTicker: stakeTokenTicker,
     print_price() {
@@ -1993,6 +2033,7 @@ export function getBalancerPrices(tokens, prices, pool) {
     quantities: quantities,
     price: price,
     tvl: tvl,
+    staked: pool.staked,
     staked_tvl: staked_tvl,
     stakeTokenTicker: stakeTokenTicker,
     print_price() {
@@ -2050,6 +2091,7 @@ export function getWrapPrices(tokens, prices, pool) {
     return {
       name: name,
       tvl: tvl,
+      staked: pool.staked,
       staked_tvl: staked_tvl,
       price: price,
       stakeTokenTicker: pool.symbol,
@@ -2077,6 +2119,7 @@ export function getWrapPrices(tokens, prices, pool) {
     return {
       name: pool.symbol,
       tvl: tvl,
+      staked: pool.staked,
       staked_tvl: staked_tvl,
       price: price,
       stakeTokenTicker: pool.symbol,
@@ -2146,8 +2189,10 @@ export function getErc20Prices(prices, pool, chain = "eth") {
 
   const name = `<a href='${poolUrl}' target='_blank'>${pool.symbol}</a>`;
   return {
+    staked: pool.staked,
     staked_tvl: staked_tvl,
     price: price,
+    marketCap: tvl,
     stakeTokenTicker: pool.symbol,
     print_price() {
       _print(`${name} Price: $${displayPrice(price)} Market Cap: $${formatMoney(tvl)} ${getDexguruTokenlink()}`);
@@ -2191,8 +2236,10 @@ export function getCurvePrices(prices, pool) {
     return dexguruTokenlink
   }
   return {
+    staked: pool.staked,
     staked_tvl: staked_tvl,
     price: price,
+    marketCap: tvl,
     stakeTokenTicker: pool.symbol,
     print_price() {
       _print(`${name} Price: $${formatMoney(price)} Market Cap: $${formatMoney(tvl)} ${getDexguruTokenlink()}`);
@@ -2274,6 +2321,8 @@ export function printAPR(rewardTokenTicker, rewardPrice, poolRewardsPerWeek,
       + ` Year ${userYearlyRewards.toFixed(fixedDecimals)} ($${formatMoney(userYearlyRewards * rewardPrice)})`);
   }
   return {
+    poolRewardsPerWeek: poolRewardsPerWeek.toFixed(fixedDecimals),
+    poolRewardsPerWeekUsd: formatMoney(usdPerWeek),
     userStakedUsd,
     totalStakedUsd: staked_tvl,
     userStakedPct,
@@ -2330,12 +2379,18 @@ export function printChefPool(App, chefAbi, chefAddr, prices, tokens, poolInfo, 
   printChefContractLinks(App, chefAbi, chefAddr, poolIndex, poolInfo.address, pendingRewardsFunction,
     rewardTokenTicker, poolPrices.stakeTokenTicker, poolInfo.poolToken.unstaked,
     poolInfo.userStaked, poolInfo.pendingRewardTokens, fixedDecimals, claimFunction, rewardPrice, chain, depositFee, withdrawFee);
+  store.dispatch(updatePoolInfoAction({
+    ...apr,
+    poolIndex,
+    poolPrices
+  }))
   return apr;
 }
 
 export async function loadChefContract(App, chef, chefAddress, chefAbi, rewardTokenTicker,
   rewardTokenFunction, rewardsPerBlockFunction, rewardsPerWeekFixed, pendingRewardsFunction,
   extraPrices, deathPoolIndices, showAll) {
+  store.dispatch(emptyPoolInfoAction())
   const chefContract = chef ?? new ethers.Contract(chefAddress, chefAbi, App.provider);
 
   const poolCount = parseInt(await chefContract.poolLength(), 10);
@@ -2585,8 +2640,6 @@ export async function loadSynthetixPoolInfo(App, tokens, prices, stakingAbi, sta
 }
 
 export async function printSynthetixPool(App, info, chain = "eth", customURLs) {
-  window.printLog();
-
   info.poolPrices.print_price(chain, 4, customURLs);
   _print(`${info.rewardTokenTicker} Per Week: ${info.weeklyRewards.toFixed(2)} ($${formatMoney(info.usdPerWeek)})`);
   const weeklyAPR = info.usdPerWeek / info.staked_tvl * 100;
@@ -2670,8 +2723,6 @@ export async function printSynthetixPool(App, info, chain = "eth", customURLs) {
   _print_link(`Exit`, exit)
   _print("");
 
-  window.printStyledLog();
-
   return {
     staked_tvl: info.poolPrices.staked_tvl,
     userStaked: userStakedUsd,
@@ -2680,13 +2731,11 @@ export async function printSynthetixPool(App, info, chain = "eth", customURLs) {
 }
 
 export async function loadSynthetixPool(App, tokens, prices, abi, address, rewardTokenFunction, stakeTokenFunction) {
-  window.printLog();
   const info = await loadSynthetixPoolInfo(App, tokens, prices, abi, address, rewardTokenFunction, stakeTokenFunction);
   return await printSynthetixPool(App, info);
 }
 
 export async function loadMultipleSynthetixPools(App, tokens, prices, pools) {
-  window.printLog();
   let totalStaked = 0, totalUserStaked = 0, individualAPRs = [];
   const infos = await Promise.all(pools.map(p =>
     loadSynthetixPoolInfo(App, tokens, prices, p.abi, p.address, p.rewardTokenFunction, p.stakeTokenFunction)));

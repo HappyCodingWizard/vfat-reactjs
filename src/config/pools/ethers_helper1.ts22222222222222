@@ -3710,7 +3710,6 @@ export async function loadSynthetixPool(
   rewardTokenFunction: any,
   stakeTokenFunction: any
 ) {
-  window.printLog();
   const info = await loadSynthetixPoolInfo(
     App,
     tokens,

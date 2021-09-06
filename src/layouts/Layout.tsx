@@ -40,6 +40,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Header />
       <Container className={cx(classes.container)}>{children}</Container>
       <Footer />
+
+      <Box id='log' display='none' />
     </Box>
   );
 };
