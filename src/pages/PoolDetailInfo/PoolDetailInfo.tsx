@@ -16,6 +16,8 @@ import { useNetwork } from 'state/network/hooks'
 import { useHistory } from 'react-router'
 import { usePool, usePoolToken } from 'state/pool/hooks'
 import { isNaN } from 'lodash'
+import { useDispatch } from 'react-redux'
+import { emptyPoolInfoAction } from 'state/pool/actions'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
   root: {
@@ -74,7 +76,6 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     borderRadius: '5px',
     padding: '10px',
     color: palette.common.white,
-    width: '120px',
     fontSize: '12px',
   },
   priceCell: {
@@ -90,6 +91,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
 }))
 
 const PoolDetailInfo: React.FC = () => {
+  const dispatch = useDispatch()
   const { palette, breakpoints } = useTheme()
   const dark = useIsDarkMode()
   const mobile = useMediaQuery(breakpoints.down('xs'))
@@ -141,25 +143,27 @@ const PoolDetailInfo: React.FC = () => {
   const columns: GridColDef[] = [
     {
       field: 'id',
-      headerName: ' ',
+      headerName: '',
       width: 10,
       align: 'center',
       headerAlign: 'center',
       sortable: false,
       valueGetter: (params: GridValueGetterParams) => {
         return `#${params.value}`
-      }
+      },
+      renderHeader: () => <></>
     },
     {
       field: 'marketCap',
-      headerName: 'MARKETCAP',
+      headerName: '',
       align: 'center',
       headerAlign: 'center',
-      sortable: false
+      sortable: false,
+      renderHeader: () => <>MARKETCAP</>
     },
     {
       field: 'tvl',
-      headerName: 'TVL',
+      headerName: '',
       type: 'number',
       align: 'center',
       headerAlign: 'center',
@@ -167,16 +171,18 @@ const PoolDetailInfo: React.FC = () => {
       valueGetter: (params: GridValueGetterParams) => {
         if (params.value === 0) return '-'
         return `${params.value}`
-      }
+      },
+      renderHeader: () => <>TVL</>
     },
     {
       field: 'totalStaked',
-      headerName: 'TOTAL STAKED',
+      headerName: '',
       align: 'center',
       headerAlign: 'center',
       sortable: false,
       flex: 1,
-      renderCell: renderTwoPrice
+      renderCell: renderTwoPrice,
+      renderHeader: () => <>TOTAL STAKED</>
     },
     {
       field: 'cakePerWeek',
@@ -184,32 +190,36 @@ const PoolDetailInfo: React.FC = () => {
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      renderCell: renderTwoPrice
+      renderCell: renderTwoPrice,
+      renderHeader: () => <>CAKE/WEEK</>
     },
     {
       field: 'apr',
-      headerName: 'APR(DAY|WEEK|YEAR)',
+      headerName: '',
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      flex: 1
+      flex: 1,
+      renderHeader: () => <>APR(DAY|WEEK|YEAR)</>
     },
     {
       field: 'myStaked',
-      headerName: 'TOKENS YOU STAKED',
+      headerName: '',
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      description: ' '
+      flex: 1,
+      renderHeader: () => <>TOKENS YOU STAKED</>
     },
     {
       field: 'action',
-      headerName: ' ',
+      headerName: '',
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      width: 200,
-      renderCell: renderAction
+      width: 300,
+      renderCell: renderAction,
+      renderHeader: () => <></>
     }
   ]
 
@@ -255,6 +265,11 @@ const PoolDetailInfo: React.FC = () => {
   }
 
   const main = getPoolInfo();
+
+  useEffect(() => {
+    dispatch(emptyPoolInfoAction())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     (async() => {
       main && consoleInit(main)

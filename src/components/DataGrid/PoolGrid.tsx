@@ -39,7 +39,10 @@ const StyledDataGrid = withStyles(theme => ({
     },
 
     '& .MuiDataGrid-columnHeaderTitleContainer': {
-      padding: 'unset !important'
+      padding: 'unset !important',
+      fontSize: 12,
+      fontWeight: 'bold',
+      cursor: 'pointer'
     }
   },
   columnHeader: {
