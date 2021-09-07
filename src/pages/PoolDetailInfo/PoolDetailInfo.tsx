@@ -17,12 +17,12 @@ import { useHistory } from 'react-router'
 import { usePool, usePoolToken } from 'state/pool/hooks'
 import { isNaN } from 'lodash'
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(({ palette, breakpoints }) => ({
   root: {
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'left',
     flexDirection: 'column',
     height: '100%'
   },
@@ -31,6 +31,9 @@ const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     right: '20px',
     top: '30px',
+    [breakpoints.down('xs')]: {
+      top: '0px'
+    }
   },
 
   overview: {
@@ -42,7 +45,7 @@ const useStyles = makeStyles(({ palette }) => ({
 
     '& > .label': {
       fontSize: '18px',
-      fontWeight: 900,
+      fontWeight: 'bold',
       paddingBottom: '10px'
     },
     '& > .value': {
@@ -53,6 +56,18 @@ const useStyles = makeStyles(({ palette }) => ({
       width: '60px',
       height: '60px',
       color: palette.common.white
+    },
+
+    [breakpoints.down('sm')]: {
+      margin: 'auto 10px',
+      '& > .label': {
+        fontSize: '12px',
+      },
+      '& > .value': {
+        fontSize: '12px',
+        width: '40px',
+        height: '40px',
+      },
     }
   },
   actionButton: {
@@ -127,7 +142,7 @@ const PoolDetailInfo: React.FC = () => {
     {
       field: 'id',
       headerName: ' ',
-      width: 30,
+      width: 10,
       align: 'center',
       headerAlign: 'center',
       sortable: false,
@@ -184,7 +199,8 @@ const PoolDetailInfo: React.FC = () => {
       headerName: 'TOKENS YOU STAKED',
       align: 'center',
       headerAlign: 'center',
-      sortable: false
+      sortable: false,
+      description: ' '
     },
     {
       field: 'action',
@@ -192,7 +208,7 @@ const PoolDetailInfo: React.FC = () => {
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      flex: 1,
+      width: 200,
       renderCell: renderAction
     }
   ]
@@ -264,7 +280,7 @@ const PoolDetailInfo: React.FC = () => {
         <FilterToolbar />
       </Box>
 
-      <Box>
+      <Box textAlign={!mobile ? 'left' : 'center'}>
         <Box className={cx(classes.overview)}>
           <Box className='label'>POOLS</Box>
           <Box className='value' style={{ backgroundColor: '#FDC113' }}>
@@ -285,11 +301,12 @@ const PoolDetailInfo: React.FC = () => {
         </Box>
       </Box>
 
-      <Box>
+      <Box width='100%'>
         <PoolGrid
           rows={rows}
           columns={columns}
           pageSize={5}
+          loading={rows.length === 0}
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
           disableColumnSelector

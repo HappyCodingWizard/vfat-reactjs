@@ -1,5 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import { DataGrid } from '@material-ui/data-grid';
+// import { DataGridPro } from '@mui/x-data-grid-pro';
 
 const StyledDataGrid = withStyles(theme => ({
   root: {
@@ -24,7 +25,8 @@ const StyledDataGrid = withStyles(theme => ({
       overflow: 'unset !important',
     },
     '& .MuiDataGrid-cell': {
-      border: 'unset !important'
+      border: 'unset !important',
+      padding: 'unset !important',
     },
 
     '& .MuiDataGrid-renderingZone': {
@@ -34,9 +36,14 @@ const StyledDataGrid = withStyles(theme => ({
       '& > div:nth-child(odd)': {
         background: '#F3F3F3'
       }
+    },
+
+    '& .MuiDataGrid-columnHeaderTitleContainer': {
+      padding: 'unset !important'
     }
   },
   columnHeader: {
+    padding: '0 !important'
   },
   row: {
     fontWeight: 'normal',

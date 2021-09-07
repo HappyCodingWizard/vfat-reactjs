@@ -25,7 +25,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
   carousel: {
     width: '700px',
     [breakpoints.down('xs')]: {
-      width: '400px'
+      width: '350px'
     }
   },
 
@@ -42,7 +42,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     fontSize: '30px',
 
     [breakpoints.down('xs')]: {
-      fontSize: '20px',
+      fontSize: '19px',
       margin: 'auto -100px'
     }
   },

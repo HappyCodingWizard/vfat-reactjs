@@ -15,7 +15,11 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     zIndex: 100,
     width: '100%',
     padding: '36px 20px',
-    background: palette.background.default
+    background: palette.background.default,
+
+    [breakpoints.down('sm')]: {
+      padding: '20px 20px',
+    }
   },
 
   container: {
