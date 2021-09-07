@@ -12,6 +12,7 @@ const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
+    zIndex: 100,
   },
   
   filter: {

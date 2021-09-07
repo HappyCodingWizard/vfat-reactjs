@@ -18,14 +18,19 @@ import { usePoolToken } from 'state/pool/hooks'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
     height: '100%'
   },
 
   toolbar: {
+    position: 'absolute',
     display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginBottom: '50px'
+    right: '20px',
+    top: '30px',
   },
 
   carouselItem: {
@@ -154,7 +159,9 @@ const NetworksInfo: React.FC = () => {
 
   return (
     <Box className={cx(classes.root)}>
-      <FilterToolbar />
+      <Box className={cx(classes.toolbar)}>
+        <FilterToolbar />
+      </Box>
 
       <Carousel
         ref={ref => (carouselRef.current = ref)}
