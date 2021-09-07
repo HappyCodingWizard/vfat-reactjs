@@ -92,6 +92,10 @@ const useStyles = makeStyles(({ palette }) => ({
 
     '& .text': {
       margin: 'auto 5px'
+    },
+
+    '&:hover': {
+      backgroundColor: palette.text.primary,
     }
   }
 }))

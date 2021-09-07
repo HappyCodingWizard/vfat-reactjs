@@ -93,10 +93,6 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     transition: 'border .2s ease-in',
     borderBottom: `1px solid transparent`,
     display: 'inline-block',
-
-    '&:hover': {
-      borderBottom: `1px solid ${palette.primary.light}`
-    }
   }
 }))
 
