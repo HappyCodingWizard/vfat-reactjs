@@ -1,7 +1,8 @@
-import React from 'react'
-import { Box, useMediaQuery, Container } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Box, useMediaQuery, Container, Drawer } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import cx from 'classnames'
+import Hamburger from 'hamburger-react'
 
 import { useIsDarkMode } from 'state/user/hooks'
 import { useHistory } from 'react-router'
@@ -13,7 +14,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     top: 0,
     zIndex: 100,
     width: '100%',
-    padding: '20px 0px',
+    padding: '36px 20px',
     background: palette.background.default
   },
 
@@ -57,14 +58,23 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
 
   navMenu: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    [breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      backgroundColor: palette.background.default
+    }
   },
 
   navItem: {
     color: palette.primary.main,
     padding: '0px 10px',
     display: 'inline-block',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    
+    [breakpoints.down('xs')]: {
+      padding: '20px'
+    }
   },
   
   network: {
@@ -92,11 +102,12 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
 
 const Header: React.FC = () => {
   const theme = useTheme()
-  const mobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'))
   const dark = useIsDarkMode()
   const classes = useStyles({ dark, mobile })
   const history = useHistory()
   const [network, setNetwork] = useNetwork()
+  const [isOpen, setOpen] = useState(false)
 
   const handleChangeNetwork = () => {
     history.push('/networks')
@@ -116,11 +127,27 @@ const Header: React.FC = () => {
           </Box>
 
           {!network && (
-            <Box className={cx(classes.navMenu)}>
-              <Box className={cx(classes.navItem)}>About</Box>
-              <Box className={cx(classes.navItem)}>Contact</Box>
-              <Box className={cx(classes.navItem)}>Branding</Box>
-            </Box>
+            <>
+              {!mobile && (
+                <Box className={cx(classes.navMenu)}>
+                  <Box className={cx(classes.navItem)}>About</Box>
+                  <Box className={cx(classes.navItem)}>Contact</Box>
+                  <Box className={cx(classes.navItem)}>Branding</Box>
+                </Box>
+              )}
+              {mobile && (
+                <>
+                  <Hamburger toggled={isOpen} toggle={setOpen} />
+                  <Drawer anchor={'top'} open={isOpen} onClose={() => setOpen(false)}>
+                    <Box className={cx(classes.navMenu)}>
+                      <Box className={cx(classes.navItem)}>About</Box>
+                      <Box className={cx(classes.navItem)}>Contact</Box>
+                      <Box className={cx(classes.navItem)}>Branding</Box>
+                    </Box>
+                  </Drawer>
+                </>
+              )}
+            </>
           )}
           {network && (
             <Box className={cx(classes.network)}>
