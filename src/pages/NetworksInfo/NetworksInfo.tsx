@@ -16,7 +16,7 @@ import BACK_POOLLOGO from 'assets/pools/poolLogoBackground.png'
 import { useNetwork } from 'state/network/hooks'
 import { usePoolToken } from 'state/pool/hooks'
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(({ palette, breakpoints }) => ({
   root: {
     position: 'relative',
     display: 'flex',
@@ -46,7 +46,11 @@ const useStyles = makeStyles(({ palette }) => ({
     fontSize: '45px',
     fontWeight: 900,
     textTransform: 'uppercase',
-    cursor: 'pointer'
+    cursor: 'pointer',
+
+    [breakpoints.down('xs')]: {
+      fontSize: '35px',
+    }
   },
 
   poolLogo: {
@@ -70,14 +74,23 @@ const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 900,
     display: 'flex',
     alignItems: 'center',
-    fontSize: '10px'
+    fontSize: '20px',
+
+    [breakpoints.down('xs')]: {
+      fontSize: '15px',
+    }
   },
 
   webSite: {
     fontWeight: 900,
     display: 'flex',
     alignItems: 'center',
-    fontSize: '10px'
+    fontSize: '20px',
+    
+    [breakpoints.down('xs')]: {
+      fontSize: '15px',
+      margin: 'auto -100px'
+    }
   },
 
   switchButton: {
@@ -87,7 +100,7 @@ const useStyles = makeStyles(({ palette }) => ({
     display: 'inline-block',
     color: palette.common.white,
     margin: 'auto 7px',
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: 100,
 
     '& .text': {
