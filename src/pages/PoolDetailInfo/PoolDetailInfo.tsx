@@ -18,7 +18,21 @@ import { usePool, usePoolToken } from 'state/pool/hooks'
 import { isNaN } from 'lodash'
 
 const useStyles = makeStyles(({ palette }) => ({
-  root: {},
+  root: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    height: '100%'
+  },
+  toolbar: {
+    position: 'absolute',
+    display: 'flex',
+    right: '20px',
+    top: '30px',
+  },
+
   overview: {
     display: 'inline-flex',
     flexDirection: 'column',
@@ -246,7 +260,9 @@ const PoolDetailInfo: React.FC = () => {
 
   return (
     <Box className={cx(classes.root)}>
-      <FilterToolbar />
+      <Box className={cx(classes.toolbar)}>
+        <FilterToolbar />
+      </Box>
 
       <Box>
         <Box className={cx(classes.overview)}>
