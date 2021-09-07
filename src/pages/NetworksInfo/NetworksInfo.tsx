@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import cx from 'classnames'
 import { useHistory } from 'react-router'
-import { Box, Button, useMediaQuery } from '@material-ui/core'
+import { Box, Button, Link, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useIsDarkMode } from 'state/user/hooks'
 import Carousel, { RenderArrowProps } from 'react-elastic-carousel'
@@ -185,7 +185,9 @@ const NetworksInfo: React.FC = () => {
               <Box className={cx(classes.tokenName)}>
                 <img src={ICON_TOKEN} alt='Token' width='20px' height='20px' />
                 &nbsp; REWARD TOKEN:&nbsp;
-                {renderHighlight(row[2], i)}
+                <Link href={row[3]} target="_blank" rel="noopener" underline='none'>
+                  {renderHighlight(row[2], i)}
+                </Link>
               </Box>
               <Box mt={'15px'} />
               <Box className={cx(classes.webSite)}>
@@ -196,7 +198,9 @@ const NetworksInfo: React.FC = () => {
                   height='20px'
                 />
                 &nbsp; Website:&nbsp;
-                {renderHighlight(row[3], i)}
+                <Link href={row[3]} target="_blank" rel="noopener" underline='none'>
+                  {renderHighlight(row[3], i)}
+                </Link>
               </Box>
             </Box>
           ))}
