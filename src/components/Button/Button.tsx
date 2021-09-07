@@ -7,8 +7,14 @@ const StyledButton = withStyles((theme) => ({
     borderRadius: '20px',
     padding: '30px 30px',
     width: '250px',
-    color: 'white',
+    color: theme.palette.background.default,
     fontSize: '15px',
+    fontWeight: 100,
+
+    '&:hover': {
+      color: theme.palette.background.default,
+      backgroundColor: theme.palette.primary.main,
+    }
   },
 }))(Button);
 
