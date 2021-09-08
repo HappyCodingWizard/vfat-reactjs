@@ -42,7 +42,10 @@ const StyledDataGrid = withStyles(theme => ({
       padding: 'unset !important',
       fontSize: 12,
       fontWeight: 'bold',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      textAlign: 'center',
+      whiteSpace: 'pre-wrap',
+      lineHeight: '100%'
     }
   },
   columnHeader: {
