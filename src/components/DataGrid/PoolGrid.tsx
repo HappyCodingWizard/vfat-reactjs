@@ -49,9 +49,13 @@ const StyledDataGrid = withStyles(theme => ({
       lineHeight: '100%'
     },
 
+    '& .MuiDataGrid-footerContainer': {
+      display: 'none',
+    },
+
     '& *::-webkit-scrollbar': {
       background: 'unset',
-      height: '1px'
+      height: '10px'
     },
 
     '& *::-webkit-scrollbar-thumb': {

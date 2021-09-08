@@ -10,8 +10,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useIsDarkMode } from 'state/user/hooks'
 import { FilterToolbar, PoolGrid } from 'components'
 
-import { consoleInit } from "../../config/pools/ethers_helper";
-import { getPoolInfo, nFormatter } from "hooks";
+import { consoleInit } from '../../config/pools/ethers_helper'
+import { getPoolInfo, nFormatter } from 'hooks'
 import { useNetwork } from 'state/network/hooks'
 import { useHistory } from 'react-router'
 import { usePool, usePoolToken } from 'state/pool/hooks'
@@ -63,20 +63,48 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     [breakpoints.down('sm')]: {
       margin: '10px',
       '& > .label': {
-        fontSize: '12px',
+        fontSize: '12px'
       },
       '& > .value': {
         fontSize: '12px',
         width: '40px',
-        height: '40px',
-      },
+        height: '40px'
+      }
     }
   },
+  paginationContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginTop: '20px',
+    marginRight: '20px',
+
+    '& .label': {
+      color: palette.info.main,
+      paddingRight: '15px'
+    },
+
+    '& .pageNumbers': {
+      color: palette.primary.light,
+      cursor: 'pointer',
+      display: 'flex',
+
+      '& .separater': {
+        margin: 'auto 5px'
+      }
+    },
+
+    '& .active': {
+      color: palette.info.main
+    }
+  },
+
   actionButton: {
     borderRadius: '5px',
     padding: '10px',
     color: palette.common.white,
-    fontSize: '12px',
+    fontSize: '12px'
   },
   priceCell: {
     display: 'flex',
@@ -85,7 +113,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     lineHeight: '100%',
 
     '& > span:last-child': {
-      fontSize: '9px',
+      fontSize: '9px'
     }
   }
 }))
@@ -97,10 +125,13 @@ const PoolDetailInfo: React.FC = () => {
   const mobile = useMediaQuery(breakpoints.down('xs'))
   const classes = useStyles({ dark, mobile })
   const [network] = useNetwork()
-  const history = useHistory();
-  const [pool] = usePool();
-  const [token] = usePoolToken();
-  const [rows, setRows] = useState([]);
+  const history = useHistory()
+  const [pool] = usePool()
+  const [token] = usePoolToken()
+  const [rows, setRows] = useState([])
+  const rowsPerPage = 5
+  const [pageIndex, setPageIndex] = useState<number>(1)
+  const [pageCount, setPageCount] = useState<number>(0)
 
   const renderAction = (params: GridCellParams): React.ReactNode => {
     return (
@@ -245,35 +276,39 @@ const PoolDetailInfo: React.FC = () => {
   // ]
 
   const mapToTable = (poolInfos: any[]): any => {
-    console.log(poolInfos);
-    return poolInfos.map((poolInfo) => {
+    console.log(poolInfos)
+    return poolInfos.map(poolInfo => {
       const yearlyAPR = isNaN(poolInfo.yearlyAPR) ? 0 : poolInfo.yearlyAPR,
-            weeklyAPR = yearlyAPR / 52,
-            dailyAPR = yearlyAPR / 365
+        weeklyAPR = yearlyAPR / 52,
+        dailyAPR = yearlyAPR / 365
       return {
         id: poolInfo.poolIndex + 1,
         marketCap: nFormatter(poolInfo.poolPrices.marketCap, 2) ?? '',
-        tvl: poolInfo.poolPrices.tvl ? nFormatter(poolInfo.poolPrices.tvl, 2) : '-',
+        tvl: poolInfo.poolPrices.tvl
+          ? nFormatter(poolInfo.poolPrices.tvl, 2)
+          : '-',
         totalStaked: `${poolInfo.poolPrices.staked.toFixed(4)} ${token}`,
         totalStakedUsd: nFormatter(poolInfo.totalStakedUsd, 2),
         cakePerWeek: poolInfo.poolRewardsPerWeek,
         cakePerWeekUsd: nFormatter(poolInfo.poolRewardsPerWeekUsd, 2),
-        apr: `${dailyAPR.toFixed(2)}% | ${weeklyAPR.toFixed(2)}% | ${yearlyAPR.toFixed(2)}%`,
+        apr: `${dailyAPR.toFixed(2)}% | ${weeklyAPR.toFixed(
+          2
+        )}% | ${yearlyAPR.toFixed(2)}%`,
         myStaked: isNaN(poolInfo.userStakedPct) ? 0 : poolInfo.userStakedPct
       }
     })
   }
 
-  const main = getPoolInfo();
+  const main = getPoolInfo()
 
   useEffect(() => {
     dispatch(emptyPoolInfoAction())
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
-    (async() => {
+    ;(async () => {
       main && consoleInit(main)
-    })();
+    })()
     // eslint-disable-next-line
   }, [main])
 
@@ -285,6 +320,8 @@ const PoolDetailInfo: React.FC = () => {
   useEffect(() => {
     if (pool) {
       setRows(mapToTable(pool))
+      setPageCount(Math.ceil(rows.length / rowsPerPage))
+      setPageIndex(1)
     }
     // eslint-disable-next-line
   }, [pool])
@@ -298,37 +335,62 @@ const PoolDetailInfo: React.FC = () => {
       <Box textAlign={!mobile ? 'left' : 'center'}>
         <Box className={cx(classes.overview)}>
           <Box className='label'>POOLS</Box>
-          <Box className='value' style={{ backgroundColor: '#FDC113' }}>
+          <Box className='value' style={{ backgroundColor: palette.error.main }}>
             {rows.length}
           </Box>
         </Box>
         <Box className={cx(classes.overview)}>
           <Box className='label'>CAKE PRICE</Box>
-          <Box className='value' style={{ backgroundColor: '#C81B72' }}>
+          <Box className='value' style={{ backgroundColor: palette.success.main }}>
             $0.5
           </Box>
         </Box>
         <Box className={cx(classes.overview)}>
           <Box className='label'>WBNB PRICE</Box>
-          <Box className='value' style={{ backgroundColor: '#1BC870' }}>
+          <Box className='value' style={{ backgroundColor: palette.warning.main }}>
             $500
           </Box>
         </Box>
       </Box>
 
-      <Box width='100%'>
+      <Box width='100%' height='330px'>
         <PoolGrid
-          rows={rows}
+          rows={rows.slice(
+            (pageIndex - 1) * rowsPerPage,
+            pageIndex * rowsPerPage
+          )}
           columns={columns}
-          pageSize={5}
+          pageSize={rowsPerPage}
           loading={rows.length === 0}
-          rowsPerPageOptions={[5]}
+          rowsPerPageOptions={[rowsPerPage]}
           disableSelectionOnClick
           disableColumnSelector
           disableColumnMenu
-          autoHeight
-          headerHeight={30}
+          headerHeight={35}
+          hideFooterPagination
         />
+      </Box>
+      <Box className={cx(classes.paginationContainer)}>
+        <Box className='label'>PAGES</Box>
+        <Box className='pageNumbers'>
+          {pageCount !== 0 &&
+            Array.from(Array(pageCount)).map((x, i) => {
+              return (
+                <Box key={i}>
+                  <Box component='span' className='separater'>
+                    {i !== 0 && '|'}
+                  </Box>
+                  <Box
+                    component='span'
+                    className={cx({ active: i + 1 === pageIndex })}
+                    onClick={() => setPageIndex(i + 1)}
+                  >
+                    {i + 1}
+                  </Box>
+                </Box>
+              )
+            })}
+        </Box>
       </Box>
     </Box>
   )
