@@ -1,7 +1,8 @@
-import React from 'react'
-import { Box, useMediaQuery, Container } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Box, useMediaQuery, Container, Drawer } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import cx from 'classnames'
+import Hamburger from 'hamburger-react'
 
 import { useIsDarkMode } from 'state/user/hooks'
 import { useHistory } from 'react-router'
@@ -13,8 +14,12 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     top: 0,
     zIndex: 100,
     width: '100%',
-    padding: '20px 0px',
-    background: palette.background.default
+    padding: '36px 20px',
+    background: palette.background.default,
+
+    [breakpoints.down('sm')]: {
+      padding: '20px 20px',
+    }
   },
 
   container: {
@@ -26,7 +31,12 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
   logo: {
     display: 'flex',
     alignItems: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    flexDirection: 'row',
+    
+    [breakpoints.down('xs')]: {
+      flexDirection: 'column',
+    }
   },
 
   logoImg: {
@@ -48,25 +58,51 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
       background: '#FDC113 0% 0% no-repeat padding-box',
       display: 'inline-block',
       marginLeft: '-28px'
+    },
+
+    [breakpoints.down('sm')]: {
+      '& > div:first-child': {
+        width: '30px',
+        height: '30px'
+      },
+      '& > div:last-child': {
+        width: '30px',
+        height: '30px',
+        marginLeft: '-22px'
+      }
     }
   },
   logoTitle: {
     color: palette.text.primary,
-    paddingLeft: '20px'
+    paddingLeft: '20px',
+
+    [breakpoints.down('xs')]: {
+      paddingTop: '10px',
+      paddingLeft: '0px'
+    }
   },
 
   navMenu: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    [breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      backgroundColor: palette.background.default
+    }
   },
 
   navItem: {
     color: palette.primary.main,
     padding: '0px 10px',
     display: 'inline-block',
-    cursor: 'pointer'
+    cursor: 'pointer',
+
+    [breakpoints.down('xs')]: {
+      padding: '20px'
+    }
   },
-  
+
   network: {
     display: 'flex',
     alignItems: 'center'
@@ -82,21 +118,18 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     cursor: 'pointer',
     transition: 'border .2s ease-in',
     borderBottom: `1px solid transparent`,
-    display: 'inline-block',
-
-    '&:hover': {
-      borderBottom: `1px solid ${palette.primary.light}`
-    }
+    display: 'inline-block'
   }
 }))
 
 const Header: React.FC = () => {
   const theme = useTheme()
-  const mobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'))
   const dark = useIsDarkMode()
   const classes = useStyles({ dark, mobile })
   const history = useHistory()
   const [network, setNetwork] = useNetwork()
+  const [isOpen, setOpen] = useState(false)
 
   const handleChangeNetwork = () => {
     history.push('/networks')
@@ -116,11 +149,31 @@ const Header: React.FC = () => {
           </Box>
 
           {!network && (
-            <Box className={cx(classes.navMenu)}>
-              <Box className={cx(classes.navItem)}>About</Box>
-              <Box className={cx(classes.navItem)}>Contact</Box>
-              <Box className={cx(classes.navItem)}>Branding</Box>
-            </Box>
+            <>
+              {!mobile && (
+                <Box className={cx(classes.navMenu)}>
+                  <Box className={cx(classes.navItem)}>About</Box>
+                  <Box className={cx(classes.navItem)}>Contact</Box>
+                  <Box className={cx(classes.navItem)}>Branding</Box>
+                </Box>
+              )}
+              {mobile && (
+                <>
+                  <Hamburger toggled={isOpen} toggle={setOpen} />
+                  <Drawer
+                    anchor={'top'}
+                    open={isOpen}
+                    onClose={() => setOpen(false)}
+                  >
+                    <Box className={cx(classes.navMenu)}>
+                      <Box className={cx(classes.navItem)}>About</Box>
+                      <Box className={cx(classes.navItem)}>Contact</Box>
+                      <Box className={cx(classes.navItem)}>Branding</Box>
+                    </Box>
+                  </Drawer>
+                </>
+              )}
+            </>
           )}
           {network && (
             <Box className={cx(classes.network)}>

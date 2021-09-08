@@ -1,5 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import { DataGrid } from '@material-ui/data-grid';
+// import { DataGridPro } from '@mui/x-data-grid-pro';
 
 const StyledDataGrid = withStyles(theme => ({
   root: {
@@ -10,9 +11,10 @@ const StyledDataGrid = withStyles(theme => ({
       color: theme.palette.primary.main,
     },
     '& .MuiDataGrid-columnSeparator': {
-      // opacity: '0 !important',
-      // border: 'unset',
       display: 'none'
+    },
+    '& .MuiDataGrid-columnsContainer': {
+      border: 'unset !important',
     },
     '& .MuiDataGrid-cell:focus, & .MuiDataGrid-columnHeader:focus': {
       outline: 'none !important'
@@ -21,10 +23,11 @@ const StyledDataGrid = withStyles(theme => ({
       outline: 'none !important'
     },
     '& .MuiDataGrid-window, & .MuiDataGrid-viewport': {
-      overflow: 'unset !important',
+      // overflow: 'unset !important',
     },
     '& .MuiDataGrid-cell': {
-      border: 'unset !important'
+      border: 'unset !important',
+      padding: 'unset !important',
     },
 
     '& .MuiDataGrid-renderingZone': {
@@ -34,9 +37,34 @@ const StyledDataGrid = withStyles(theme => ({
       '& > div:nth-child(odd)': {
         background: '#F3F3F3'
       }
-    }
+    },
+
+    '& .MuiDataGrid-columnHeaderTitleContainer': {
+      padding: 'unset !important',
+      fontSize: 13,
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      textAlign: 'center',
+      whiteSpace: 'pre-wrap',
+      lineHeight: '100%'
+    },
+
+    '& .MuiDataGrid-footerContainer': {
+      display: 'none',
+    },
+
+    '& *::-webkit-scrollbar': {
+      background: 'unset',
+      height: '10px'
+    },
+
+    '& *::-webkit-scrollbar-thumb': {
+      border: 'unset !important',
+      backgroundColor: 'lightgray',
+    },
   },
   columnHeader: {
+    padding: '0 !important'
   },
   row: {
     fontWeight: 'normal',

@@ -1,4 +1,6 @@
 import IMG_BSC from 'assets/networks/BSC.png'
+import IMG_POLYGON from 'assets/networks/POLYGON.png'
+import IMG_KCC from 'assets/networks/KCC.png'
 
 export interface networkItemType {
   id: string
@@ -17,13 +19,13 @@ export const networks: networkItemType[] = [
   {
     id: 'polygon',
     name: 'POLYGON NETWORK',
-    logoSrc: IMG_BSC,
+    logoSrc: IMG_POLYGON,
     redirectUrl: '/polygon'
   },
   {
     id: 'kcc',
     name: 'KCC NETWORK',
-    logoSrc: IMG_BSC,
+    logoSrc: IMG_KCC,
     redirectUrl: '/kcc'
   }
 ]

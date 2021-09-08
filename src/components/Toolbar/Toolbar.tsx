@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import cx from "classnames";
-import { Box, useMediaQuery } from "@material-ui/core";
+import { Box, MenuItem, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useIsDarkMode } from "state/user/hooks";
 import SortIcon from '@material-ui/icons/Sort'
 
-import ICON_DOWN from 'assets/icon/material-arrow-drop-down.svg'
+// import ICON_DOWN from 'assets/icon/material-arrow-drop-down.svg'
+import Select from "components/Select";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
+    zIndex: 100,
   },
   
   filter: {
@@ -41,6 +43,13 @@ const useStyles = makeStyles(({ palette }) => ({
       color: 'gray'
     }
   },
+  filterSelect: {
+    color: 'red',
+    margin: 'auto 5px',
+    '&::before, &::after': {
+      display: 'none',
+    }
+  },
 
   filterItem: {
     borderRadius: '10px',
@@ -52,6 +61,11 @@ const useStyles = makeStyles(({ palette }) => ({
     fontSize: '10px',
     cursor: 'pointer'
   },
+  filterMenuItem: {
+    fontSize: '12px',
+    display: 'flex',
+    justifyContent: 'center',
+  }
 }));
 
 export interface ToolbarProps {
@@ -63,9 +77,39 @@ const Toolbar: React.FC<ToolbarProps> = () => {
   const mobile = useMediaQuery(breakpoints.down("xs"));
   const classes = useStyles({ dark, mobile });
   const [filterToggle, setFilterToggle] = useState<boolean>(false)
+  const [filter, setFilter] = useState({
+    token: 'TVL',
+    reward: 'Reward',
+    period: '30d',
+  })
 
   const handleFilterToggle = () => {
     setFilterToggle(!filterToggle)
+  }
+
+  const handleFilterChange = (type: string, value: string) => {
+    switch (type) {
+      case 'TVL':
+        setFilter({
+          ...filter,
+          token: value
+        })
+        break;
+      case 'Reward':
+        setFilter({
+          ...filter,
+          reward: value
+        })
+        break;
+      case 'Period':
+        setFilter({
+          ...filter,
+          period: value
+        })
+        break;
+      default:
+        break;
+    }
   }
 
   return (
@@ -83,18 +127,41 @@ const Toolbar: React.FC<ToolbarProps> = () => {
         {filterToggle && (
           <Box>
             <Box display='flex'>
-              <Box className={cx(classes.filterItem)}>
-                TVL&nbsp;
-                <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
-              </Box>
-              <Box className={cx(classes.filterItem)}>
-                Reward&nbsp;
-                <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
-              </Box>
-              <Box className={cx(classes.filterItem)}>
-                Last 30 days&nbsp;
-                <img src={ICON_DOWN} alt='down' width='10px' height='10px' />
-              </Box>
+              <Select
+                labelId="Select-TVL-label"
+                id="Select-TVL"
+                className={cx(classes.filterSelect)}
+                value={filter.token}
+                onChange={(event: React.ChangeEvent<{ value: unknown }>) => handleFilterChange('TVL', event.target.value as string)}
+              >
+                <MenuItem className={cx(classes.filterMenuItem)} value={'TVL'}>TVL</MenuItem>
+                <MenuItem className={cx(classes.filterMenuItem)} value={'TVL1'}>TVL1</MenuItem>
+                <MenuItem className={cx(classes.filterMenuItem)} value={'TVL2'}>TVL2</MenuItem>
+              </Select>
+
+              <Select
+                labelId="Select-Reward-label"
+                id="Select-Reward"
+                className={cx(classes.filterSelect)}
+                value={filter.reward}
+                onChange={(event: React.ChangeEvent<{ value: unknown }>) => handleFilterChange('Reward', event.target.value as string)}
+              >
+                <MenuItem className={cx(classes.filterMenuItem)} value={'Reward'}>Reward</MenuItem>
+                <MenuItem className={cx(classes.filterMenuItem)} value={'Reward1'}>Reward1</MenuItem>
+                <MenuItem className={cx(classes.filterMenuItem)} value={'Reward2'}>Reward2</MenuItem>
+              </Select>
+
+              <Select
+                labelId="Select-period-label"
+                id="Select-period"
+                className={cx(classes.filterSelect)}
+                value={filter.period}
+                onChange={(event: React.ChangeEvent<{ value: unknown }>) => handleFilterChange('Period', event.target.value as string)}
+              >
+                <MenuItem className={cx(classes.filterMenuItem)} value={'30d'}>Last 30 days</MenuItem>
+                <MenuItem className={cx(classes.filterMenuItem)} value={'1d'}>Last 1 day</MenuItem>
+                <MenuItem className={cx(classes.filterMenuItem)} value={'2d'}>Last 2 days</MenuItem>
+              </Select>
             </Box>
             <Box
               className={cx(classes.hideFilter)}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import cx from 'classnames'
 import { useHistory } from 'react-router'
-import { Box, Button, useMediaQuery } from '@material-ui/core'
+import { Box, Button, Link, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useIsDarkMode } from 'state/user/hooks'
 import Carousel, { RenderArrowProps } from 'react-elastic-carousel'
@@ -16,16 +16,21 @@ import BACK_POOLLOGO from 'assets/pools/poolLogoBackground.png'
 import { useNetwork } from 'state/network/hooks'
 import { usePoolToken } from 'state/pool/hooks'
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(({ palette, breakpoints }) => ({
   root: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
     height: '100%'
   },
 
   toolbar: {
+    position: 'absolute',
     display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginBottom: '50px'
+    right: '20px',
+    top: '30px',
   },
 
   carouselItem: {
@@ -41,7 +46,11 @@ const useStyles = makeStyles(({ palette }) => ({
     fontSize: '45px',
     fontWeight: 900,
     textTransform: 'uppercase',
-    cursor: 'pointer'
+    cursor: 'pointer',
+
+    [breakpoints.down('xs')]: {
+      fontSize: '35px',
+    }
   },
 
   poolLogo: {
@@ -65,14 +74,23 @@ const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 900,
     display: 'flex',
     alignItems: 'center',
-    fontSize: '10px'
+    fontSize: '20px',
+
+    [breakpoints.down('xs')]: {
+      fontSize: '15px',
+    }
   },
 
   webSite: {
     fontWeight: 900,
     display: 'flex',
     alignItems: 'center',
-    fontSize: '10px'
+    fontSize: '20px',
+    
+    [breakpoints.down('xs')]: {
+      fontSize: '15px',
+      margin: 'auto -100px'
+    }
   },
 
   switchButton: {
@@ -82,11 +100,15 @@ const useStyles = makeStyles(({ palette }) => ({
     display: 'inline-block',
     color: palette.common.white,
     margin: 'auto 7px',
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: 100,
 
     '& .text': {
       margin: 'auto 5px'
+    },
+
+    '&:hover': {
+      backgroundColor: palette.text.primary,
     }
   }
 }))
@@ -154,7 +176,9 @@ const NetworksInfo: React.FC = () => {
 
   return (
     <Box className={cx(classes.root)}>
-      <FilterToolbar />
+      <Box className={cx(classes.toolbar)}>
+        <FilterToolbar />
+      </Box>
 
       <Carousel
         ref={ref => (carouselRef.current = ref)}
@@ -178,7 +202,9 @@ const NetworksInfo: React.FC = () => {
               <Box className={cx(classes.tokenName)}>
                 <img src={ICON_TOKEN} alt='Token' width='20px' height='20px' />
                 &nbsp; REWARD TOKEN:&nbsp;
-                {renderHighlight(row[2], i)}
+                <Link href={row[3]} target="_blank" rel="noopener" underline='none'>
+                  {renderHighlight(row[2], i)}
+                </Link>
               </Box>
               <Box mt={'15px'} />
               <Box className={cx(classes.webSite)}>
@@ -189,7 +215,9 @@ const NetworksInfo: React.FC = () => {
                   height='20px'
                 />
                 &nbsp; Website:&nbsp;
-                {renderHighlight(row[3], i)}
+                <Link href={row[3]} target="_blank" rel="noopener" underline='none'>
+                  {renderHighlight(row[3], i)}
+                </Link>
               </Box>
             </Box>
           ))}

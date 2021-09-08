@@ -13,7 +13,7 @@ import { useNetwork } from 'state/network/hooks'
 import { pageNetworkFromParam } from 'config/pools/ethers_helper'
 import { ethers } from 'ethers'
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(({ palette, breakpoints }) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -23,7 +23,10 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 
   carousel: {
-    width: '700px'
+    width: '700px',
+    [breakpoints.down('xs')]: {
+      width: '350px'
+    }
   },
 
   carouselItem: {
@@ -36,7 +39,12 @@ const useStyles = makeStyles(({ palette }) => ({
   networkName: {
     fontWeight: 900,
     color: palette.text.primary,
-    fontSize: '30px'
+    fontSize: '30px',
+
+    [breakpoints.down('xs')]: {
+      fontSize: '19px',
+      margin: 'auto -100px'
+    }
   },
 
   ArrowRight: {
@@ -48,19 +56,19 @@ const useStyles = makeStyles(({ palette }) => ({
       fontSize: '40px',
       lineHeight: '100%',
       float: 'right',
-      transition: 'float .5s',
+      transition: 'float .5s'
     },
     '& div:last-child': {
       display: 'none',
       fontSize: '40px',
       lineHeight: '100%',
       float: 'left',
-      transition: 'float .5s',
+      transition: 'float .5s'
     },
     '& ~ span': {
       opacity: 0,
       marginRight: '-30px',
-      marginBottom: '5px',
+      marginBottom: '5px'
     },
 
     '&:hover': {
@@ -70,15 +78,15 @@ const useStyles = makeStyles(({ palette }) => ({
 
       '& div:first-child': {
         display: 'none',
-        float: 'left',
+        float: 'left'
       },
       '& div:last-child': {
         display: 'block',
-        float: 'right',
+        float: 'right'
       },
       '& ~ span': {
         opacity: 1
-      },
+      }
     }
   },
 
@@ -91,19 +99,19 @@ const useStyles = makeStyles(({ palette }) => ({
       fontSize: '40px',
       lineHeight: '100%',
       float: 'left',
-      transition: 'float .5s',
+      transition: 'float .5s'
     },
     '& div:last-child': {
       display: 'none',
       fontSize: '40px',
       lineHeight: '100%',
       float: 'right',
-      transition: 'float .5s',
+      transition: 'float .5s'
     },
     '& ~ span': {
       opacity: 0,
       marginLeft: '-30px',
-      marginBottom: '5px',
+      marginBottom: '5px'
     },
 
     '&:hover': {
@@ -113,21 +121,21 @@ const useStyles = makeStyles(({ palette }) => ({
 
       '& div:first-child': {
         display: 'none',
-        float: 'right',
+        float: 'right'
       },
       '& div:last-child': {
         display: 'block',
-        float: 'left',
+        float: 'left'
       },
       '& ~ span': {
         opacity: 1
-      },
+      }
     }
   },
 
   siblingName: {
     fontSize: '10px',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   }
 }))
 
@@ -143,41 +151,60 @@ const SelectNetwork: React.FC = () => {
 
   const renderArrow = ({ type, onClick, isEdge }: RenderArrowProps) => {
     const pointer = type === 'PREV' ? 'left' : 'right'
-    return (
-      <Box 
-        visibility={isEdge ? 'hidden' : 'visible'}
-        display='flex'
-        alignItems='center'
-        width={'150px'}
-        justifyContent={type === 'PREV' ? 'flex-end' : 'flex-start'}
-      >
-        <Box 
-          display="flex"
-          flexDirection="column"
-          width="100%"
-          alignItems={type === 'PREV' ? 'flex-end' : 'flex-start'}
+    if (!mobile) {
+      return (
+        <Box
+          visibility={isEdge ? 'hidden' : 'visible'}
+          display='flex'
+          alignItems='center'
+          width={'150px'}
+          justifyContent={type === 'PREV' ? 'flex-end' : 'flex-start'}
         >
           <Box
-            className={cx({[classes.ArrowLeft]: type === 'PREV'}, {[classes.ArrowRight]: type !== 'PREV'})}
-            style={{cursor: 'pointer'}}
-            order={2}
-            onClick={onClick}
+            display='flex'
+            flexDirection='column'
+            width='100%'
+            alignItems={type === 'PREV' ? 'flex-end' : 'flex-start'}
           >
-            <Box>
-              <i className={`far fa-chevron-circle-${pointer}`} />
+            <Box
+              className={cx(
+                { [classes.ArrowLeft]: type === 'PREV' },
+                { [classes.ArrowRight]: type !== 'PREV' }
+              )}
+              style={{ cursor: 'pointer' }}
+              order={2}
+              onClick={onClick}
+            >
+              <Box>
+                <i className={`far fa-chevron-circle-${pointer}`} />
+              </Box>
+              <Box>
+                <i className={`fas fa-chevron-circle-${pointer}`} />
+              </Box>
             </Box>
-            <Box >
-              <i className={`fas fa-chevron-circle-${pointer}`} />
+            <Box component='span' order={1} className={cx(classes.siblingName)}>
+              {type === 'PREV'
+                ? networks[selectedIndex - 1]?.name ?? 'PREV'
+                : networks[selectedIndex + 1]?.name ?? 'NEXT'}
             </Box>
-          </Box>
-          <Box component='span' order={1} className={cx(classes.siblingName)}>
-            {type === 'PREV' ? 
-              networks[selectedIndex - 1]?.name ?? 'PREV' : 
-              networks[selectedIndex + 1]?.name ?? 'NEXT'}
           </Box>
         </Box>
-      </Box>
-    )
+      )
+    } else {
+      return (
+        <Box
+          visibility={isEdge ? 'hidden' : 'visible'}
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          style={{ fontSize: '40px' }}
+        >
+          <Box onClick={onClick}>
+            <i className={`far fa-chevron-circle-${pointer}`} />
+          </Box>
+        </Box>
+      )
+    }
   }
   const renderPagination = () => {
     return <></>
@@ -197,7 +224,9 @@ const SelectNetwork: React.FC = () => {
     let targetNetworkId = parseInt(targetNetwork.chainId, 16)
 
     if (connectedNetwork.chainId !== targetNetworkId) {
-      await walletProvider.request({ method: 'wallet_addEthereumChain', params: [targetNetwork] }).catch()
+      await walletProvider
+        .request({ method: 'wallet_addEthereumChain', params: [targetNetwork] })
+        .catch()
 
       walletProvider.on('chainChanged', (chainId: string) => {
         setNetwork(item)
@@ -207,7 +236,7 @@ const SelectNetwork: React.FC = () => {
             networkInfo: item
           }
         })
-      });
+      })
     } else {
       setNetwork(item)
       history.push({
@@ -233,13 +262,16 @@ const SelectNetwork: React.FC = () => {
         renderArrow={renderArrow}
         onChange={onChange}
       >
-        {networks && networks.map(item => (
-          <Box className={cx(classes.carouselItem)} key={item.name}>
-            <p className={cx(classes.networkName)}>{item.name}</p>
-            <img src={item.logoSrc} alt='BSC' width='200px' height='200px' />
-            <Button onClick={() => handleSelectNetwork(item)}>SELECT NETWORK</Button>
-          </Box>
-        ))}
+        {networks &&
+          networks.map(item => (
+            <Box className={cx(classes.carouselItem)} key={item.name}>
+              <p className={cx(classes.networkName)}>{item.name}</p>
+              <img src={item.logoSrc} alt='BSC' width='200px' height='200px' />
+              <Button onClick={() => handleSelectNetwork(item)}>
+                SELECT NETWORK
+              </Button>
+            </Box>
+          ))}
       </Carousel>
     </Box>
   )

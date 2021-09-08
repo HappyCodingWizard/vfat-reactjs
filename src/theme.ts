@@ -673,6 +673,13 @@ export const darkTheme = responsiveFontSizes(
           padding: 0,
         },
       },
+      MuiMenu: {
+        paper: {
+          borderRadius: 5,
+          border: `1px solid ${primaryLightDay}`,
+          background: '#DAE7F9'
+        }
+      },
       MuiInputBase: {
         root: {
           "&.Mui-focused > input::placeholder": {
