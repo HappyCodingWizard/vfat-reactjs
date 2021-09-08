@@ -43,7 +43,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 'auto 20px',
+    margin: '20px',
 
     '& > .label': {
       fontSize: '18px',
@@ -61,7 +61,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     },
 
     [breakpoints.down('sm')]: {
-      margin: 'auto 10px',
+      margin: '10px',
       '& > .label': {
         fontSize: '12px',
       },
@@ -180,7 +180,7 @@ const PoolDetailInfo: React.FC = () => {
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      flex: 1,
+      minWidth: 200,
       renderCell: renderTwoPrice,
       renderHeader: () => <>TOTAL STAKED</>
     },
@@ -199,8 +199,8 @@ const PoolDetailInfo: React.FC = () => {
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      flex: 1,
-      renderHeader: () => <>APR(DAY|WEEK|YEAR)</>
+      minWidth: 200,
+      renderHeader: () => <>APR (DAY|WEEK|YEAR)</>
     },
     {
       field: 'myStaked',
@@ -217,7 +217,7 @@ const PoolDetailInfo: React.FC = () => {
       align: 'center',
       headerAlign: 'center',
       sortable: false,
-      width: 300,
+      minWidth: 300,
       renderCell: renderAction,
       renderHeader: () => <></>
     }
@@ -327,6 +327,7 @@ const PoolDetailInfo: React.FC = () => {
           disableColumnSelector
           disableColumnMenu
           autoHeight
+          headerHeight={30}
         />
       </Box>
     </Box>

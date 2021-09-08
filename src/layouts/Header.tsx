@@ -31,7 +31,12 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
   logo: {
     display: 'flex',
     alignItems: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    flexDirection: 'row',
+    
+    [breakpoints.down('xs')]: {
+      flexDirection: 'column',
+    }
   },
 
   logoImg: {
@@ -71,8 +76,9 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     color: palette.text.primary,
     paddingLeft: '20px',
 
-    [breakpoints.down('sm')]: {
-      paddingLeft: '10px'
+    [breakpoints.down('xs')]: {
+      paddingTop: '10px',
+      paddingLeft: '0px'
     }
   },
 

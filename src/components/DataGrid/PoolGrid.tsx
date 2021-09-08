@@ -11,9 +11,10 @@ const StyledDataGrid = withStyles(theme => ({
       color: theme.palette.primary.main,
     },
     '& .MuiDataGrid-columnSeparator': {
-      // opacity: '0 !important',
-      // border: 'unset',
       display: 'none'
+    },
+    '& .MuiDataGrid-columnsContainer': {
+      border: 'unset !important',
     },
     '& .MuiDataGrid-cell:focus, & .MuiDataGrid-columnHeader:focus': {
       outline: 'none !important'
@@ -22,7 +23,7 @@ const StyledDataGrid = withStyles(theme => ({
       outline: 'none !important'
     },
     '& .MuiDataGrid-window, & .MuiDataGrid-viewport': {
-      overflow: 'unset !important',
+      // overflow: 'unset !important',
     },
     '& .MuiDataGrid-cell': {
       border: 'unset !important',
@@ -46,7 +47,17 @@ const StyledDataGrid = withStyles(theme => ({
       textAlign: 'center',
       whiteSpace: 'pre-wrap',
       lineHeight: '100%'
-    }
+    },
+
+    '& *::-webkit-scrollbar': {
+      background: 'unset',
+      height: '1px'
+    },
+
+    '& *::-webkit-scrollbar-thumb': {
+      border: 'unset !important',
+      backgroundColor: 'lightgray',
+    },
   },
   columnHeader: {
     padding: '0 !important'
